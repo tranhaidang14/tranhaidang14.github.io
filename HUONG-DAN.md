@@ -173,8 +173,9 @@ Lệnh này tạo file:
 content/posts/ten-bai-viet.md
 ```
 
-và tự chạy build. Bài mới luôn có `draft: true`, nên **chưa xuất hiện** trên
-site.
+và tự chạy build. Bài mới được xuất bản ngay (`draft: false`) nên sẽ xuất hiện
+trên site sau khi build xong. Nếu muốn giữ bài ở dạng nháp, thêm `--draft` vào
+lệnh tạo bài.
 
 ### 3.2. Sửa front matter
 
@@ -189,7 +190,7 @@ category: Analysis
 tags: ["Euler", "Series"]
 summary: "Mô tả ngắn"
 featured: false
-draft: true
+draft: false
 ---
 ```
 
@@ -200,7 +201,7 @@ Các trường:
 | `title` | Có | Tiêu đề bài viết. Có dấu `:` thì phải đặt trong ngoặc kép. |
 | `subtitle` | Không | Dòng phụ dưới tiêu đề. Để trống nếu không dùng. |
 | `date` | Nên có | Định dạng `YYYY-MM-DD`. Dùng để sắp xếp và hiển thị. |
-| `category` | Không | Nhóm bài, dùng cho bộ lọc. Mặc định `Notes`. |
+| `category` | Không | Nhóm bài, dùng cho bộ lọc. Mặc định `Ghi chú`. |
 | `tags` | Không | Mảng tag, dùng cho bộ lọc và tìm kiếm. |
 | `summary` | Không | Mô tả hiển thị ở trang chủ, archive và kết quả tìm kiếm. Nếu bỏ trống, hệ thống tự lấy 180 ký tự đầu. |
 | `featured` | Không | `true` để đưa bài lên “Bài nổi bật” ở trang chủ. Chỉ nên đặt một bài. |
@@ -252,7 +253,7 @@ Nên đặt ảnh riêng của bài trong `content/posts/figures/`. Có thể d�
 trong thư viện:
 
 ```markdown
-![Mist over Đà Lạt](content/library/photos/da-lat-mist.svg)
+![Mô tả ảnh](content/library/photos/ten-anh.jpg)
 ```
 
 Bảng:
@@ -273,23 +274,42 @@ Hộp ghi chú:
 </div>
 ```
 
+#### Chèn liên kết tới tài liệu
+
+Đặt file PDF trong `content/library/documents/`, chạy `npm run build`, rồi viết
+liên kết Markdown bình thường:
+
+```markdown
+[Mở đề khảo sát](content/library/documents/ten-tai-lieu.pdf)
+```
+
+Ấn vào liên kết, tài liệu sẽ mở trong một khung xem ngay trên bài viết — không
+rời trang. Nút **Mở trong tab mới** ở thanh trên dùng khi muốn xem toàn màn hình
+hoặc tải file về.
+
+Cũng có thể trỏ tới một mục đã có trong Thư viện:
+
+```markdown
+[Xem trong Thư viện](library.html#documents-ten-tai-lieu)
+```
+
+Mã sau dấu `#` là `id` của mục, chính là phần xuất hiện trên thanh địa chỉ khi bạn
+mở tài liệu trong Thư viện. Tên file nên viết không dấu, không dấu cách; nếu có
+dấu cách thì thay bằng `%20`.
+
 Danh sách, trích dẫn, code block đều dùng cú pháp Markdown chuẩn.
 
 ### 3.4. Xuất bản
 
-1. Đổi:
+Bài tạo bằng lệnh trên đã ở trạng thái xuất bản. Nếu bạn đã dùng `--draft` (hoặc
+tự đặt `draft: true`), đổi thành `draft: false` hoặc xóa hẳn dòng `draft` trước
+khi build.
 
-   ```yaml
-   draft: true
-   ```
-
-   thành:
+1. Kiểm tra front matter:
 
    ```yaml
    draft: false
    ```
-
-   (hoặc xóa hẳn dòng `draft`).
 
 2. Build và xem thử:
 
@@ -435,10 +455,10 @@ git push
 
 ```bash
 npm run new -- "Tên bài" --category=Analysis --tags="Tag 1, Tag 2"
-# sửa content/posts/ten-bai.md
-# đổi draft: false
+# sửa nội dung content/posts/ten-bai.md
+# thêm --draft ở lệnh trên nếu muốn tạo bản nháp
 npm start                      # xem thử
-npm run build                  # tạo lại dữ liệu
+npm run build                  # tạo lại dữ liệu (lệnh new đã tự build một lần)
 git add .
 git commit -m "Đăng bài: Tên bài"
 git push
@@ -458,7 +478,7 @@ git push
 
 ### Checklist trước khi push
 
-- [ ] `draft` đã đổi thành `false` cho bài muốn đăng.
+- [ ] Bài không còn `draft: true` nếu muốn xuất bản.
 - [ ] `npm run build` chạy không lỗi.
 - [ ] Đã xem thử ở `http://localhost:4173`.
 - [ ] Ảnh/PDF hiển thị đúng, không bị 404.
@@ -519,7 +539,7 @@ git push
 
 ### Bài viết không xuất hiện
 
-- Kiểm tra `draft` đã là `false` hoặc đã xóa chưa.
+- Nếu tạo bằng `--draft`, kiểm tra `draft` đã là `false` hoặc đã xóa chưa.
 - Kiểm tra `date` đúng định dạng `YYYY-MM-DD`.
 - Chạy `npm run build` và xem lại log: nếu file bị bỏ qua, log sẽ ghi
   `drafts ... ten-bai.md (draft)`.

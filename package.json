@@ -6,7 +6,7 @@
   "description": "A Wikipedia-inspired personal encyclopedia for mathematics, photographs, and remembered days.",
   "scripts": {
     "build": "node tools/build.mjs",
-    "new": "node tools/new-post.mjs && node tools/build.mjs",
+    "new": "node tools/new-post.mjs",
     "start": "node tools/build.mjs && node tools/serve.mjs",
     "serve": "node tools/serve.mjs"
   }

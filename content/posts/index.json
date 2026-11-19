@@ -1,313 +1,71 @@
 {
-  "generated": "2026-11-19T06:02:43.002Z",
+  "generated": "2026-11-19T06:48:59.092Z",
   "counts": {
-    "posts": 4,
-    "words": 2952,
-    "categories": 4,
-    "tags": 12
+    "posts": 1,
+    "words": 131,
+    "categories": 1,
+    "tags": 2
   },
   "categories": [
     {
-      "name": "Analysis",
-      "slug": "analysis",
-      "count": 1
-    },
-    {
-      "name": "Days",
-      "slug": "days",
-      "count": 1
-    },
-    {
-      "name": "Foundations",
-      "slug": "foundations",
-      "count": 1
-    },
-    {
-      "name": "Reading Notes",
-      "slug": "reading-notes",
+      "name": "Geometry",
+      "slug": "geometry",
       "count": 1
     }
   ],
   "tags": [
     {
-      "name": "Cantor",
-      "slug": "cantor",
+      "name": "Bất đẳng thức",
+      "slug": "bat-dang-thuc",
       "count": 1
     },
     {
-      "name": "Đà Lạt",
-      "slug": "da-lat",
-      "count": 1
-    },
-    {
-      "name": "Euler",
-      "slug": "euler",
-      "count": 1
-    },
-    {
-      "name": "Gödel",
-      "slug": "godel",
-      "count": 1
-    },
-    {
-      "name": "Hilbert",
-      "slug": "hilbert",
-      "count": 1
-    },
-    {
-      "name": "Infinity",
-      "slug": "infinity",
-      "count": 1
-    },
-    {
-      "name": "Logic",
-      "slug": "logic",
-      "count": 1
-    },
-    {
-      "name": "Memory",
-      "slug": "memory",
-      "count": 1
-    },
-    {
-      "name": "Series",
-      "slug": "series",
-      "count": 1
-    },
-    {
-      "name": "Set theory",
-      "slug": "set-theory",
-      "count": 1
-    },
-    {
-      "name": "Travel",
-      "slug": "travel",
-      "count": 1
-    },
-    {
-      "name": "Zeta function",
-      "slug": "zeta-function",
+      "name": "Tối ưu hóa hình học",
+      "slug": "toi-uu-hoa-hinh-hoc",
       "count": 1
     }
   ],
   "years": [
     {
       "name": "2026",
-      "count": 4
+      "count": 1
     }
   ],
   "posts": [
     {
-      "slug": "basel-problem",
-      "title": "The Basel Problem, and Why Euler's Proof Still Feels Like Magic",
-      "subtitle": "A stubborn sum, a product for the sine, and a guess that turned out to be true.",
-      "date": "2026-11-12",
-      "updated": "2026-11-12",
-      "dateLabel": "12 November 2026",
-      "updatedLabel": "12 November 2026",
-      "shortDate": "12 Nov",
+      "slug": "chen-diem-de-ap-dung-bat-dang-thuc-tam-giac",
+      "title": "Chèn điểm để áp dụng bất đẳng thức tam giác",
+      "subtitle": "",
+      "date": "2026-11-19",
+      "updated": "2026-11-19",
+      "dateLabel": "19 November 2026",
+      "updatedLabel": "19 November 2026",
+      "shortDate": "19 Nov",
       "year": "2026",
-      "category": "Analysis",
-      "categorySlug": "analysis",
+      "category": "Geometry",
+      "categorySlug": "geometry",
       "tags": [
-        "Euler",
-        "Series",
-        "Zeta function"
+        "Bất đẳng thức",
+        "Tối ưu hóa hình học"
       ],
       "tagSlugs": [
-        "euler",
-        "series",
-        "zeta-function"
+        "bat-dang-thuc",
+        "toi-uu-hoa-hinh-hoc"
       ],
-      "summary": "How a sum over the squares turned out to hide π, and what Euler's 1735 argument still teaches us about guessing beautifully.",
-      "featured": true,
-      "words": 785,
-      "minutes": 4,
-      "headings": [
-        {
-          "level": 2,
-          "text": "A sum without an obvious answer"
-        },
-        {
-          "level": 2,
-          "text": "Euler's audacity"
-        },
-        {
-          "level": 2,
-          "text": "Making the guess into a proof"
-        },
-        {
-          "level": 2,
-          "text": "What the identity is really saying"
-        },
-        {
-          "level": 2,
-          "text": "Further reading"
-        }
-      ],
-      "excerpt": "There is a sum that has annoyed people for nearly three centuries. It asks for the total of the reciprocals of the squares: Each term is small. The tail is smaller still. So the sum converges, and a patient person can compute it to as many decimal places as they like. What a patient person cannot do, at least not by adding, is guess what the answer is . The number is A circle has no business in a sum over the integers. That is the whole scandal of the Basel problem, and the reason it remains the best advertisement for guessing in all of mathematics. A sum without an obvious answer The problem gets its name from Basel, where the Bernoulli brothers worked on it. Jakob Bernoulli proved that the",
-      "plain": "There is a sum that has annoyed people for nearly three centuries. It asks for the total of the reciprocals of the squares: Each term is small. The tail is smaller still. So the sum converges, and a patient person can compute it to as many decimal places as they like. What a patient person cannot do, at least not by adding, is guess what the answer is . The number is A circle has no business in a sum over the integers. That is the whole scandal of the Basel problem, and the reason it remains the best advertisement for guessing in all of mathematics. A sum without an obvious answer The problem gets its name from Basel, where the Bernoulli brothers worked on it. Jakob Bernoulli proved that the series converges, which is already something: the naive comparison with the harmonic series fails, since diverges while does not. But convergence is not evaluation. For decades the best available answer was a decimal expansion and a shrug. It helps to see how slowly the sum settles. The table below compares the partial sum after terms with the limit. | | | | |---:|---:|---:| | | | | | | | | | | | | | | | | The error shrinks like , which is to say: politely, but not generously. To earn six decimal places by brute force you need about a million terms. The exact value, meanwhile, is available in a single line to anyone who can factor the sine. Euler's audacity Euler's 1735 argument begins with a fact about polynomials. If a polynomial has roots , then it factors as Now treat as though it were a polynomial of infinite degree. Its roots are , and near zero we have . Dividing by removes the root at zero, leaving This is the step that made Euler famous and, for a while, made him suspect. An infinite product is not a polynomial. The algebra of roots needs hypotheses, and in 1735 nobody had them. But suppose the product is true. Expand the right-hand side and collect the coefficient of . Every factor contributes either a or its own term, so the coefficient is On the left, the Taylor series of gives , so the coefficient of is . Equating the two: That is the entire trick. It is short enough to fit on a postcard, which is part of why it feels like magic rather than work. Making the guess into a proof The gap is real. Weierstrass closed it in the nineteenth century with the factorization theory for entire functions. The theorem says, roughly, that an entire function can be written as",
-      "url": "article.html?p=basel-problem",
-      "source": "content/posts/basel-problem.md"
-    },
-    {
-      "slug": "cantor-diagonal",
-      "title": "Cantor's Diagonal Argument, Slowly",
-      "subtitle": "A walk through the proof at the pace of a careful conversation.",
-      "date": "2026-10-28",
-      "updated": "2026-10-28",
-      "dateLabel": "28 October 2026",
-      "updatedLabel": "28 October 2026",
-      "shortDate": "28 Oct",
-      "year": "2026",
-      "category": "Foundations",
-      "categorySlug": "foundations",
-      "tags": [
-        "Cantor",
-        "Infinity",
-        "Set theory"
-      ],
-      "tagSlugs": [
-        "cantor",
-        "infinity",
-        "set-theory"
-      ],
-      "summary": "The diagonal argument is short, but its sentences are easy to say and hard to mean. This is the version I wish someone had shown me first.",
+      "summary": "Một dạng toán đòi hỏi sự thấu hiểu sâu sắc cả hình học và đại số.",
       "featured": false,
-      "words": 814,
-      "minutes": 4,
+      "words": 131,
+      "minutes": 1,
       "headings": [
         {
           "level": 2,
-          "text": "The claim"
-        },
-        {
-          "level": 2,
-          "text": "The first question: which diagonal?"
-        },
-        {
-          "level": 2,
-          "text": "The second question: what about $0.4999\\ldots = 0.5$?"
-        },
-        {
-          "level": 2,
-          "text": "The third question: why doesn't this prove that everything is uncountable?"
-        },
-        {
-          "level": 2,
-          "text": "Why I keep coming back to it"
-        },
-        {
-          "level": 2,
-          "text": "Further reading"
+          "text": "Lời giải bài toán"
         }
       ],
-      "excerpt": "Most proofs in mathematics are difficult because the ideas are difficult. Cantor's diagonal argument is different. It is four sentences long, it uses nothing more advanced than a decimal expansion, and yet it produces a conclusion that still feels like a magic trick: the real numbers cannot be listed. I have explained this proof perhaps thirty times, and the same three questions come up almost every time. This is an attempt to answer them in advance. The claim Theorem (Cantor, 1891). There is no bijection between the natural numbers and the real interval . Equivalently, the real numbers are uncountable. The proof is by contradiction. Suppose someone hands us a complete list of every real num",
-      "plain": "Most proofs in mathematics are difficult because the ideas are difficult. Cantor's diagonal argument is different. It is four sentences long, it uses nothing more advanced than a decimal expansion, and yet it produces a conclusion that still feels like a magic trick: the real numbers cannot be listed. I have explained this proof perhaps thirty times, and the same three questions come up almost every time. This is an attempt to answer them in advance. The claim Theorem (Cantor, 1891). There is no bijection between the natural numbers and the real interval . Equivalently, the real numbers are uncountable. The proof is by contradiction. Suppose someone hands us a complete list of every real number in , one per natural number: Each is a digit from to . The list is supposed to contain everything, so every real in should appear somewhere, in some row. Now build a new number by walking down the diagonal. At position , look at the -th digit of the -th row, and choose a digit that is different: There are many ways to make this choice; the only requirement is that for every . Then is a real number in . If the list was complete, must be row for some . But at position , the number has digit , while row has digit , and we chose . So is not row . Since was arbitrary, is not any row. Contradiction. The first question: which diagonal? The diagonal is not a metaphorical diagonal. It is the sequence of digits at positions — one digit from each row, each from a different column. The construction only needs to disagree once with each row, and the diagonal gives it a convenient place to do so. This is why the argument is robust. We could also walk down a staircase, use the first digit of row that has not been used before, or apply any rule that guarantees a fresh disagreement for every row. The diagonal is a bookkeeping device, not the idea itself. The second question: what about ? Decimal expansions are not unique. The number can also be written , and if the list uses one convention while the constructed number uses another, the \"different digit\" may not actually mean a different number. There are two standard repairs. The first is to use a representation with no ambiguity: write every real in base and forbid expansions ending in an infinite string of ones. The second is to avoid and in the construction, which is what the rule above does by choosing only or . Since is never or ",
-      "url": "article.html?p=cantor-diagonal",
-      "source": "content/posts/cantor-diagonal.md"
-    },
-    {
-      "slug": "da-lat-mist",
-      "title": "A Night in Đà Lạt, and the Arithmetic of Fog",
-      "subtitle": "Rain, coffee, and a proof that refused to close.",
-      "date": "2026-09-19",
-      "updated": "2026-09-19",
-      "dateLabel": "19 September 2026",
-      "updatedLabel": "19 September 2026",
-      "shortDate": "19 Sep",
-      "year": "2026",
-      "category": "Days",
-      "categorySlug": "days",
-      "tags": [
-        "Travel",
-        "Memory",
-        "Đà Lạt"
-      ],
-      "tagSlugs": [
-        "travel",
-        "memory",
-        "da-lat"
-      ],
-      "summary": "A remembered evening in the highlands, filed under days worth keeping — with a small detour into contour lines.",
-      "featured": false,
-      "words": 744,
-      "minutes": 3,
-      "headings": [
-        {
-          "level": 2,
-          "text": "The arithmetic of fog"
-        },
-        {
-          "level": 2,
-          "text": "A red roof"
-        },
-        {
-          "level": 2,
-          "text": "The proof that closed"
-        },
-        {
-          "level": 2,
-          "text": "Filed under"
-        }
-      ],
-      "excerpt": "The rain began somewhere above the valley and arrived all at once, the way a proof sometimes does: first as a suspicion, then as weather. We were sitting in a café on a slope, three of us and a notebook that had already given up on being useful. The town below was doing what Đà Lạt does in September — disappearing and reappearing, one roof at a time, behind sheets of mist. Someone had ordered cà phê sữa đá, someone else trà nóng, and I was staring at a line in my notebook that had been wrong for two days. The line was this: It is a true line. I knew it was true. I had checked it numerically, twice, and the numbers had agreed with the kind of enthusiasm that usually means I am about to discov",
-      "plain": "The rain began somewhere above the valley and arrived all at once, the way a proof sometimes does: first as a suspicion, then as weather. We were sitting in a café on a slope, three of us and a notebook that had already given up on being useful. The town below was doing what Đà Lạt does in September — disappearing and reappearing, one roof at a time, behind sheets of mist. Someone had ordered cà phê sữa đá, someone else trà nóng, and I was staring at a line in my notebook that had been wrong for two days. The line was this: It is a true line. I knew it was true. I had checked it numerically, twice, and the numbers had agreed with the kind of enthusiasm that usually means I am about to discover I have made the same mistake in both computations. What I did not have was a proof I could stand behind at a blackboard. The arithmetic of fog There is a particular texture to thinking in bad weather. The mind keeps trying to resolve the view, and the view keeps declining to be resolved. Every few minutes the fog would thin and a red roof would appear, perfectly sharp, and then the next gust would take it away again. I have heard mathematicians describe this as \"letting the problem breathe\". I have never liked the phrase, because it sounds like a technique. It is not a technique. It is what happens when you stop pushing and the problem continues without you. Minh, who teaches at the university and has no patience for mysticism, said: \"You are trying to integrate a logarithm over a singularity that isn't there. Of course it is a dilogarithm. Stop looking for a trick.\" He was right, and he was also not helping. The dilogarithm is exactly the kind of object that turns a two-line idea into a page of identities. What I wanted was the two-line idea. A red roof The rain let up around nine. The town came back in pieces: a roof, a lamppost, two people sharing an umbrella and walking too slowly for the weather. The air smelled of wet pine and gasoline. Somewhere below us a motorbike started and failed and started again. I remember thinking that the fog was a bad drawing of a contour map. A contour line joins points of equal height; a fog bank joins points of equal visibility, and the two families of curves cross each other at angles that no one has ever bothered to name. And then, because the mind is a strange machine, I thought: differentiate under the integral sign. Not the di",
-      "url": "article.html?p=da-lat-mist",
-      "source": "content/posts/da-lat-mist.md"
-    },
-    {
-      "slug": "hilbert-programme",
-      "title": "Reading Notes: Hilbert's Programme and Its Aftermath",
-      "subtitle": "Three things I had wrong about formalism, and one I am still working on.",
-      "date": "2026-08-02",
-      "updated": "2026-08-02",
-      "dateLabel": "2 August 2026",
-      "updatedLabel": "2 August 2026",
-      "shortDate": "2 Aug",
-      "year": "2026",
-      "category": "Reading Notes",
-      "categorySlug": "reading-notes",
-      "tags": [
-        "Logic",
-        "Hilbert",
-        "Gödel"
-      ],
-      "tagSlugs": [
-        "logic",
-        "hilbert",
-        "godel"
-      ],
-      "summary": "Notes from a slow reread of the Hilbert–Gödel story, with the benefit of hindsight and the disadvantage of a short attention span.",
-      "featured": false,
-      "words": 609,
-      "minutes": 3,
-      "headings": [
-        {
-          "level": 2,
-          "text": "What the programme actually wanted"
-        },
-        {
-          "level": 2,
-          "text": "What Gödel actually showed"
-        },
-        {
-          "level": 2,
-          "text": "The part I am still working on"
-        },
-        {
-          "level": 2,
-          "text": "Three sentences to keep"
-        },
-        {
-          "level": 2,
-          "text": "Further reading"
-        }
-      ],
-      "excerpt": "Every few years I reread the story of Hilbert's programme, and every time I find that I had been carrying a cartoon version of it in my head. This is an attempt to write down the corrections while they are still fresh. What the programme actually wanted The cartoon: Hilbert wanted to prove that mathematics is consistent, complete, and decidable, and then Gödel ruined it. The correction: Hilbert's programme was a research programme , not a single conjecture. It asked for finitary consistency proofs of strong formal systems, and it was motivated by a genuine philosophical problem — the problem of what it means to justify classical mathematics to someone who only trusts finite constructions. Th",
-      "plain": "Every few years I reread the story of Hilbert's programme, and every time I find that I had been carrying a cartoon version of it in my head. This is an attempt to write down the corrections while they are still fresh. What the programme actually wanted The cartoon: Hilbert wanted to prove that mathematics is consistent, complete, and decidable, and then Gödel ruined it. The correction: Hilbert's programme was a research programme , not a single conjecture. It asked for finitary consistency proofs of strong formal systems, and it was motivated by a genuine philosophical problem — the problem of what it means to justify classical mathematics to someone who only trusts finite constructions. The programme produced proof theory, and proof theory survived Gödel. It is easy to forget that Hilbert was not naive. He knew that a consistency proof has to be given in a system weaker than the one being justified, or it proves nothing. The question was whether the required finitary standpoint could be made precise without giving up too much. That is a subtle question, and \"Gödel ruined it\" is not an answer to it. What Gödel actually showed The first incompleteness theorem: any consistent, recursively axiomatised theory strong enough to represent arithmetic has a sentence such that neither nor is provable. The sentence says, in effect, \"I am not provable in this theory.\" The second: such a theory cannot prove its own consistency. The standard cartoon makes the second theorem sound like a refutation of Hilbert. But Hilbert's finitary proofs were never supposed to be carried out inside the theory. They were supposed to be carried out in a restricted fragment — and the second theorem says precisely that the fragment cannot be the whole theory. Whether a suitable fragment exists is a different question, and the answer turned out to be \"yes, for many theories, but not in the way Hilbert hoped\". A distinction worth keeping \"Cannot prove its own consistency\" and \"cannot be justified\" are not the same claim. The first is a theorem. The second is a philosophical conclusion, and it needs an argument that Gödel's theorem does not supply by itself. The part I am still working on The part I keep circling is not technical. It is this: what exactly is the epistemic gain of a consistency proof? Suppose Gentzen proves the consistency of arithmetic by transfinite induction up to . Have we ",
-      "url": "article.html?p=hilbert-programme",
-      "source": "content/posts/hilbert-programme.md"
+      "excerpt": "Những bài toán tối ưu học hình học không gian dường như luôn ẩn chứa trong mình những bất ngờ. Học xong tâm tỉ cự và tôi tưởng rằng mình đã nắm trong tay chìa khóa. Sau đó vỡ mộng với những bài toán áp dụng bất đẳng thức. Và khi đã nắm sơ những bất đẳng thức cơ bản, tôi lại bất ngờ không thể dùng chúng vào một bài toán có vẻ đơn giản dưới đây. Đề bài\\[Đề khảo sát HSG cụm 12 trường THPT Phú Thọ]: Lời giải bài toán Ghi chú Đây là một lời giải có phần dài dòng để bạn đọc hiểu được mạch tư duy của riêng bản thân tôi. Lời giải gốc có thể được tìm thấy ở trong file đề gốc .",
+      "plain": "Những bài toán tối ưu học hình học không gian dường như luôn ẩn chứa trong mình những bất ngờ. Học xong tâm tỉ cự và tôi tưởng rằng mình đã nắm trong tay chìa khóa. Sau đó vỡ mộng với những bài toán áp dụng bất đẳng thức. Và khi đã nắm sơ những bất đẳng thức cơ bản, tôi lại bất ngờ không thể dùng chúng vào một bài toán có vẻ đơn giản dưới đây. Đề bài\\[Đề khảo sát HSG cụm 12 trường THPT Phú Thọ]: Lời giải bài toán Ghi chú Đây là một lời giải có phần dài dòng để bạn đọc hiểu được mạch tư duy của riêng bản thân tôi. Lời giải gốc có thể được tìm thấy ở trong file đề gốc .",
+      "url": "article.html?p=chen-diem-de-ap-dung-bat-dang-thuc-tam-giac",
+      "source": "content/posts/chen-diem-de-ap-dung-bat-dang-thuc-tam-giac.md"
     }
   ]
 }

@@ -1131,6 +1131,27 @@ body.lightbox-open {
   background: #fff;
 }
 
+.document-viewer__actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.document-viewer__open {
+  color: #d8d8d2;
+  font-size: 0.55rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.document-viewer__open:hover,
+.document-viewer__open:focus-visible {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .lightbox__foot {
   display: flex;
   align-items: flex-start;

@@ -8,6 +8,7 @@ import {
   escapeHTML,
   getPostsIndex,
   getSite,
+  getLibraryIndex,
   formatDateLong,
   formatDateShort,
 } from "./lib.js";
@@ -91,6 +92,141 @@ function setText(element, value) {
   if (element) element.textContent = value ?? "";
 }
 
+/* -------------------------------------------------------------------------- */
+/* document viewer                                                            */
+/* -------------------------------------------------------------------------- */
+
+let documentDialog = null;
+let documentFrame = null;
+let documentOpenLink = null;
+
+function ensureDocumentViewer() {
+  if (documentDialog) return documentDialog;
+
+  documentDialog = document.createElement("dialog");
+  documentDialog.className = "lightbox document-viewer";
+  documentDialog.innerHTML = `
+    <div class="lightbox__bar">
+      <p class="lightbox__kicker" data-document-kicker></p>
+      <div class="document-viewer__actions">
+        <a class="document-viewer__open" target="_blank" rel="noopener noreferrer"></a>
+        <button class="lightbox__close" type="button"></button>
+      </div>
+    </div>
+    <div class="lightbox__body"><iframe loading="lazy"></iframe></div>
+  `;
+
+  const kicker = documentDialog.querySelector("[data-document-kicker]");
+  const close = documentDialog.querySelector(".lightbox__close");
+  documentFrame = documentDialog.querySelector("iframe");
+  documentOpenLink = documentDialog.querySelector(".document-viewer__open");
+
+  kicker.textContent = t("document.kicker");
+  documentOpenLink.textContent = t("document.openTab");
+  close.textContent = "✕";
+  close.setAttribute("aria-label", t("document.close"));
+
+  close.addEventListener("click", () => documentDialog.close());
+  documentDialog.addEventListener("click", (event) => {
+    if (event.target === documentDialog) documentDialog.close();
+  });
+  documentDialog.addEventListener("close", () => {
+    document.body.classList.remove("lightbox-open");
+    documentFrame.removeAttribute("src");
+    documentFrame.removeAttribute("title");
+  });
+
+  document.body.appendChild(documentDialog);
+  return documentDialog;
+}
+
+function openDocument(src, title) {
+  ensureDocumentViewer();
+  const label = title || t("document.kicker");
+  documentFrame.src = `${src}#view=FitH`;
+  documentFrame.title = label;
+  documentOpenLink.href = src;
+  documentOpenLink.setAttribute("aria-label", `${t("document.openTab")}: ${label}`);
+  documentDialog.showModal();
+  document.body.classList.add("lightbox-open");
+}
+
+function decodeHash(value) {
+  try {
+    return decodeURIComponent(value);
+  } catch {
+    return value;
+  }
+}
+
+function pdfTarget(link) {
+  let url;
+  try {
+    url = new URL(link.getAttribute("href"), location.href);
+  } catch {
+    return null;
+  }
+  if (url.origin !== location.origin) return null;
+  const name = decodeHash(url.pathname.split("/").pop() || "");
+  if (!/\.pdf$/i.test(name)) return null;
+  return { src: url.href, title: link.textContent.trim() || name };
+}
+
+function libraryDocumentTarget(link) {
+  let url;
+  try {
+    url = new URL(link.getAttribute("href"), location.href);
+  } catch {
+    return null;
+  }
+  if (url.origin !== location.origin || !/\/library\.html$/.test(url.pathname) || !url.hash) {
+    return null;
+  }
+  return { id: decodeHash(url.hash.slice(1)), href: url.href };
+}
+
+function initDocumentLinks(body) {
+  qsa("a[href]", body).forEach((link) => {
+    const pdf = pdfTarget(link);
+    const library = pdf ? null : libraryDocumentTarget(link);
+    if (!pdf && !library) return;
+
+    link.classList.add("document-link");
+
+    link.addEventListener("click", async (event) => {
+      if (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey
+      ) {
+        return;
+      }
+
+      if (pdf) {
+        event.preventDefault();
+        openDocument(pdf.src, pdf.title);
+        return;
+      }
+
+      event.preventDefault();
+      try {
+        const index = await getLibraryIndex();
+        const item = index.items.find((candidate) => candidate.id === library.id);
+        if (!item || item.type !== "document") {
+          location.href = library.href;
+          return;
+        }
+        openDocument(new URL(item.src, location.href).href, item.title || library.id);
+      } catch {
+        location.href = library.href;
+      }
+    });
+  });
+}
+
 function showMissing(message) {
   missingIsCustom = Boolean(message);
   if (elements.loading) elements.loading.hidden = true;
@@ -161,6 +297,9 @@ function postProcess(body) {
       /* leave malformed links alone */
     }
   });
+
+  /* Local PDFs and library documents open in a viewer instead of navigating. */
+  initDocumentLinks(body);
 
   /* Code blocks get a label and a copy button. */
   qsa("pre", body).forEach((pre) => {

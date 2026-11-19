@@ -48,23 +48,23 @@ content/library/        photos/ and documents/, plus optional meta.json
 content/site.json       name, wordmark, seal, links, license
 tools/build.mjs         index, feed, sitemap, and script generator
 tools/bundle.mjs        turns the ES modules into classic page bundles
-tools/new-post.mjs      draft scaffolder
+tools/new-post.mjs      article scaffolder
 tools/serve.mjs         local static server
 ```
 
 ## Writing an article
 
 ```bash
-npm run new -- "The title of the piece" --category=Analysis --tags="Euler, Series"
+npm run new -- "The title of the piece" --category=Geometry --tags="Euler, Series"
 ```
 
-That creates a dated Markdown file in `content/posts/` with `draft: true`, so it
-will not appear on the site yet. When the piece is ready, set `draft: false`
-(or remove the line) and rebuild:
+That creates a dated Markdown file in `content/posts/` and immediately rebuilds
+the site. New posts are published by default; add `--draft` to keep one hidden
+until you are ready. You can also set `draft: true` in the front matter and run
+`npm run build` later.
 
-```bash
-npm run build
-```
+Categories are free-form. Whatever you pass to `--category` (or write in the
+front matter) automatically becomes a new filter on the writing page.
 
 Front matter:
 
@@ -124,6 +124,25 @@ A note box is ordinary HTML inside Markdown:
 </div>
 ```
 
+### Linking to documents
+
+Link straight to a PDF with ordinary Markdown:
+
+```markdown
+[Open the exam paper](content/library/documents/example.pdf)
+```
+
+Clicking opens it in a viewer inside the article, with **Mở trong tab mới** for a
+full-window view or download. You can also point at a library entry:
+
+```markdown
+[View it in the Library](library.html#documents-example)
+```
+
+The `id` after `#` is the one shown in the address bar when you open the document
+in the Library. Run `npm run build` after adding the PDF so the index knows about
+it.
+
 Code blocks get a copy button, tables scroll on narrow screens, headings get
 anchor links and fill the contents box automatically, and external links open in
 a new tab.
@@ -139,11 +158,11 @@ relative to `content/library/`:
 
 ```json
 {
-  "photos/da-lat-mist.svg": {
-    "title": "Mist over Đà Lạt",
+  "photos/example.jpg": {
+    "title": "A photograph",
     "date": "2026-09-19",
-    "description": "Drawn from memory the morning after the rain.",
-    "tags": ["Đà Lạt", "landscape", "memory"],
+    "description": "Where and when it was taken.",
+    "tags": ["landscape", "memory"],
     "collection": "Field Notes"
   }
 }
@@ -153,7 +172,7 @@ Everything without metadata is still published, with a title derived from the
 filename and the file's modification date. Items sharing a `collection` are
 grouped onto the same shelf on the library page. Clicking a plate opens it in a
 native `<dialog>`; PDFs open in an embedded viewer, and the address bar keeps a
-deep link such as `library.html#photos-da-lat-mist`.
+deep link such as `library.html#photos-example`.
 
 ## Site identity
 
@@ -209,7 +228,7 @@ publishes the site whenever `main` is pushed.
    folder to it. (A project repository also works; see the note below.)
 2. In **Settings → Pages**, choose **GitHub Actions** as the source.
 3. Update `url`, `repo`, `email`, and `links` in `content/site.json`.
-4. Replace the sample posts, plates, and PDFs with your own.
+4. Add your own posts and library files (see above), then run `npm run build`.
 5. Push to `main`.
 
 The generated indexes, `feed.xml`, `sitemap.xml`, data scripts, and
@@ -231,5 +250,3 @@ before committing if you have changed content locally.
   still frame under `prefers-reduced-motion`.
 - The library lightbox uses the native `<dialog>` element, so Escape, focus
   trapping, and the backdrop are handled by the browser.
-
-The sample text, plates, and PDFs are demonstration content. Replace them freely.

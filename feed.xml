@@ -6,38 +6,14 @@
     <atom:link href="https://tranhaidang14.github.io/feed.xml" rel="self" type="application/rss+xml" />
     <description>Một cuốn bách khoa cá nhân về toán học, ảnh chụp, và những ngày đáng nhớ.</description>
     <language>vi</language>
-    <lastBuildDate>Thu, 19 Nov 2026 06:02:43 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 19 Nov 2026 06:48:59 GMT</lastBuildDate>
     <item>
-      <title>The Basel Problem, and Why Euler&apos;s Proof Still Feels Like Magic</title>
-      <link>https://tranhaidang14.github.io/article.html?p=basel-problem</link>
-      <guid isPermaLink="true">https://tranhaidang14.github.io/article.html?p=basel-problem</guid>
-      <pubDate>Thu, 12 Nov 2026 12:00:00 GMT</pubDate>
-      <category>Analysis</category>
-      <description>How a sum over the squares turned out to hide π, and what Euler&apos;s 1735 argument still teaches us about guessing beautifully.</description>
-    </item>
-    <item>
-      <title>Cantor&apos;s Diagonal Argument, Slowly</title>
-      <link>https://tranhaidang14.github.io/article.html?p=cantor-diagonal</link>
-      <guid isPermaLink="true">https://tranhaidang14.github.io/article.html?p=cantor-diagonal</guid>
-      <pubDate>Wed, 28 Oct 2026 12:00:00 GMT</pubDate>
-      <category>Foundations</category>
-      <description>The diagonal argument is short, but its sentences are easy to say and hard to mean. This is the version I wish someone had shown me first.</description>
-    </item>
-    <item>
-      <title>A Night in Đà Lạt, and the Arithmetic of Fog</title>
-      <link>https://tranhaidang14.github.io/article.html?p=da-lat-mist</link>
-      <guid isPermaLink="true">https://tranhaidang14.github.io/article.html?p=da-lat-mist</guid>
-      <pubDate>Sat, 19 Sep 2026 12:00:00 GMT</pubDate>
-      <category>Days</category>
-      <description>A remembered evening in the highlands, filed under days worth keeping — with a small detour into contour lines.</description>
-    </item>
-    <item>
-      <title>Reading Notes: Hilbert&apos;s Programme and Its Aftermath</title>
-      <link>https://tranhaidang14.github.io/article.html?p=hilbert-programme</link>
-      <guid isPermaLink="true">https://tranhaidang14.github.io/article.html?p=hilbert-programme</guid>
-      <pubDate>Sun, 02 Aug 2026 12:00:00 GMT</pubDate>
-      <category>Reading Notes</category>
-      <description>Notes from a slow reread of the Hilbert–Gödel story, with the benefit of hindsight and the disadvantage of a short attention span.</description>
+      <title>Chèn điểm để áp dụng bất đẳng thức tam giác</title>
+      <link>https://tranhaidang14.github.io/article.html?p=chen-diem-de-ap-dung-bat-dang-thuc-tam-giac</link>
+      <guid isPermaLink="true">https://tranhaidang14.github.io/article.html?p=chen-diem-de-ap-dung-bat-dang-thuc-tam-giac</guid>
+      <pubDate>Thu, 19 Nov 2026 12:00:00 GMT</pubDate>
+      <category>Geometry</category>
+      <description>Một dạng toán đòi hỏi sự thấu hiểu sâu sắc cả hình học và đại số.</description>
     </item>
   </channel>
 </rss>

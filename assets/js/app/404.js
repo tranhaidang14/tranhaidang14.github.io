@@ -682,6 +682,10 @@
         "library.prevItem": "Mục trước",
         "library.nextItem": "Mục sau",
         "library.defaultPlateDesc": "Một bản vẽ trong thư viện.",
+      
+        "document.kicker": "Tài liệu",
+        "document.openTab": "Mở trong tab mới",
+        "document.close": "Đóng tài liệu",
         "library.openOriginal": "Mở bản gốc ↗",
         "library.error": "Không tải được mục lục thư viện.",
       
