@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="library.title">Thư viện — Trần Hải Đăng</title>
+  <meta name="description" content="Một thư viện cá nhân gồm bản vẽ toán học, ảnh chụp và PDF." data-i18n-meta="library.description">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" type="application/rss+xml" title="Bài viết — RSS" href="feed.xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/pages.css">
+  <script defer src="content/site.js"></script>
+  <script defer src="content/posts/index.js"></script>
+  <script defer src="content/library/index.js"></script>
+  <script defer src="content/posts/sources.js"></script>
+  <script defer src="assets/js/app/library.js"></script>
+</head>
+<body data-i18n-title="library.title">
+  <a class="skip-link" href="#main" data-i18n="skip">Tới nội dung</a>
+
+  <header class="masthead">
+    <div class="wrap masthead__bar">
+      <a class="brand" href="index.html" aria-label="Trang chủ" data-i18n-aria-label="nav.home">
+        <span class="brand__seal" data-site="seal" aria-hidden="true">H</span>
+        <span class="brand__text">
+          <span class="brand__name" data-site="wordmark">Hai Dang</span>
+          <span class="brand__sub" data-i18n="brand.sub">Bách khoa cá nhân</span>
+        </span>
+      </a>
+      <nav class="nav" aria-label="Chính" data-i18n-aria-label="nav.primary">
+        <a href="writing.html" data-i18n="nav.writing">Bài viết</a>
+        <a href="library.html" aria-current="page" data-i18n="nav.library">Thư viện</a>
+        <a href="about.html" data-i18n="nav.about">Giới thiệu</a>
+        <a href="writing.html" data-random><span data-i18n="nav.random">Ngẫu nhiên</span> <span aria-hidden="true">↻</span></a>
+      </nav>
+      <form class="quick-search" role="search" action="writing.html" data-search-form>
+        <svg class="quick-search__icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="m13 13 4 4" stroke="currentColor" stroke-width="1.5"/></svg>
+        <input type="search" name="q" placeholder="Tìm trong bách khoa…" aria-label="Tìm trong bách khoa" data-i18n-placeholder="search.placeholder" data-i18n-aria-label="search.label" autocomplete="off" data-search-input>
+        <kbd aria-hidden="true">/</kbd>
+      </form>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" data-nav-toggle data-i18n="nav.menu">Mục lục</button>
+    </div>
+    <div class="mobile-nav" id="mobile-nav" hidden data-mobile-nav>
+      <div class="wrap mobile-nav__inner">
+        <form class="quick-search quick-search--mobile" role="search" action="writing.html" data-search-form>
+          <svg class="quick-search__icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="m13 13 4 4" stroke="currentColor" stroke-width="1.5"/></svg>
+          <input type="search" name="q" placeholder="Tìm trong bách khoa…" aria-label="Tìm trong bách khoa" data-i18n-placeholder="search.placeholder" data-i18n-aria-label="search.label" autocomplete="off" data-search-input>
+        </form>
+        <nav class="mobile-nav__links" aria-label="Di động" data-i18n-aria-label="nav.mobile">
+          <a href="writing.html" data-i18n="nav.writing">Bài viết</a>
+          <a href="library.html" aria-current="page" data-i18n="nav.library">Thư viện</a>
+          <a href="about.html" data-i18n="nav.about">Giới thiệu</a>
+          <a href="writing.html" data-random><span data-i18n="nav.randomPage">Trang ngẫu nhiên</span></a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <header class="page-head">
+      <div class="wrap">
+        <nav class="crumbs" aria-label="Breadcrumb">
+          <a href="index.html" data-i18n="nav.home">Trang chủ</a><span aria-hidden="true">/</span><span data-i18n="nav.library">Thư viện</span>
+        </nav>
+        <p class="eyebrow" data-i18n="library.eyebrow">Thư viện</p>
+        <h1 data-i18n="library.h1">Bản vẽ &amp; tài liệu</h1>
+        <p class="page-head__lead" data-i18n="library.lead">Một thư viện đang làm việc: bản vẽ toán học, ảnh chụp trên đường, và PDF của những ghi chú đáng giữ. Chọn một kệ, hoặc mở ngẫu nhiên một ngăn kéo.</p>
+        <p class="page-head__meta">
+          <span data-lib-count>—</span> <span data-i18n="common.items">mục</span>
+          <span class="dot" aria-hidden="true">·</span> <span data-lib-photos>—</span> <span data-i18n="common.plates">bản vẽ</span>
+          <span class="dot" aria-hidden="true">·</span> <span data-lib-docs>—</span> <span data-i18n="common.documents">tài liệu</span>
+        </p>
+      </div>
+    </header>
+
+    <div class="wrap library-page">
+      <section class="shelves" aria-label="Bộ sưu tập" data-i18n-aria-label="library.collectionsAria">
+        <p class="shelves__label" data-i18n="library.shelves">Các kệ</p>
+        <div class="shelves__row" data-shelves></div>
+      </section>
+
+      <div class="library-toolbar">
+        <div class="field field--search">
+          <label class="sr-only" for="library-q" data-i18n="library.searchLabel">Tìm trong thư viện</label>
+          <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="m13 13 4 4" stroke="currentColor" stroke-width="1.5"/></svg>
+          <input id="library-q" type="search" placeholder="Tìm tiêu đề, mô tả, thẻ…" data-i18n-placeholder="library.searchPlaceholder" autocomplete="off" data-library-q>
+          <button type="button" class="field__clear" data-library-clear aria-label="Xóa tìm kiếm" data-i18n-aria-label="library.clearSearch" hidden>✕</button>
+        </div>
+        <div class="segmented" role="group" aria-label="Loại mục" data-i18n-aria-label="library.typeAria">
+          <button type="button" data-type-filter="all" aria-pressed="true" data-i18n="common.all">Tất cả</button>
+          <button type="button" data-type-filter="photo" aria-pressed="false" data-i18n="library.typePlates">Bản vẽ</button>
+          <button type="button" data-type-filter="document" aria-pressed="false" data-i18n="library.typeDocuments">Tài liệu</button>
+        </div>
+        <label class="sort">
+          <span data-i18n="common.sort">Sắp xếp</span>
+          <select data-library-sort>
+            <option value="newest" data-i18n="common.newest">Mới nhất</option>
+            <option value="oldest" data-i18n="common.oldest">Cũ nhất</option>
+            <option value="title" data-i18n="common.titleAZ">Tiêu đề, A–Z</option>
+          </select>
+        </label>
+      </div>
+
+      <p class="results-count" data-library-count aria-live="polite" data-i18n="library.opening">Đang mở các ngăn kéo…</p>
+
+      <div class="library-grid" data-library-grid></div>
+
+      <div class="empty-state" data-library-empty hidden>
+        <p class="empty-state__mark" aria-hidden="true">▤</p>
+        <h2 data-i18n="library.emptyTitle">Ngăn kéo trống.</h2>
+        <p data-i18n="library.emptyText">Không có mục nào khớp với kệ, loại và cụm từ này.</p>
+        <button class="btn" type="button" data-library-reset data-i18n="library.reset">Đặt lại bộ lọc</button>
+      </div>
+    </div>
+  </main>
+
+  <dialog class="lightbox" id="lightbox" aria-labelledby="lightbox-title">
+    <div class="lightbox__bar">
+      <p class="lightbox__kicker" data-lb-kicker>Bản vẽ</p>
+      <button class="lightbox__close" type="button" data-lb-close aria-label="Đóng" data-i18n-aria-label="library.close">✕</button>
+    </div>
+    <div class="lightbox__body" data-lb-body></div>
+    <div class="lightbox__foot">
+      <div class="lightbox__caption">
+        <h2 id="lightbox-title" data-lb-title>—</h2>
+        <p data-lb-desc></p>
+        <p class="lightbox__meta" data-lb-meta></p>
+      </div>
+      <div class="lightbox__nav">
+        <button type="button" data-lb-prev aria-label="Mục trước" data-i18n-aria-label="library.prevItem">←</button>
+        <button type="button" data-lb-next aria-label="Mục sau" data-i18n-aria-label="library.nextItem">→</button>
+      </div>
+    </div>
+  </dialog>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer__ornament" aria-hidden="true">❦</div>
+      <p class="footer__note">
+        <span data-i18n="footer.keptBy">Một cuốn bách khoa cá nhân do</span> <a href="about.html" data-site="name">Trần Hải Đăng</a>.
+        <span data-i18n="footer.license">Văn bản theo</span> <a data-site-license-link href="https://creativecommons.org/licenses/by-sa/4.0/"><span data-site="license">CC BY-SA 4.0</span></a>;
+        <span data-i18n="footer.photos">ảnh và bản vẽ thuộc về tác giả.</span>
+      </p>
+      <p class="footer__note footer__note--last"><span data-i18n="footer.lastEdited">Trang này được sửa lần cuối vào</span> <span data-last-edited>Tháng 11, 2026</span>.</p>
+      <nav class="footer__nav footer__nav--pages" aria-label="Chân trang" data-i18n-aria-label="nav.footer">
+        <a href="index.html" data-i18n="nav.home">Trang chủ</a>
+        <a href="writing.html" data-i18n="nav.writing">Bài viết</a>
+        <a href="library.html" data-i18n="nav.library">Thư viện</a>
+        <a href="about.html" data-i18n="nav.about">Giới thiệu</a>
+        <a href="feed.xml" data-i18n="common.rss">RSS</a>
+      </nav>
+      <nav class="footer__nav footer__nav--elsewhere" aria-label="Nơi khác" data-i18n-aria-label="nav.elsewhere" data-site-links></nav>
+      <p class="footer__colophon" data-i18n="footer.colophon">Trình bày bằng EB Garamond &amp; UnifrakturMaguntia · HTML, CSS &amp; JavaScript thuần · Lưu trữ trên GitHub Pages</p>
+    </div>
+  </footer>
+</body>
+</html>

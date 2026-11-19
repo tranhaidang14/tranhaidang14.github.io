@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title data-i18n="about.title">Giới thiệu — Trần Hải Đăng</title>
+    <meta
+      name="description"
+      content="Về người giữ cuốn bách khoa cá nhân này và cách nó được làm ra."
+      data-i18n-meta="about.description"
+    />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Bài viết — RSS"
+      href="feed.xml"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=UnifrakturMaguntia&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/pages.css" />
+    <script defer src="content/site.js"></script>
+    <script defer src="content/posts/index.js"></script>
+    <script defer src="content/library/index.js"></script>
+    <script defer src="content/posts/sources.js"></script>
+    <script defer src="assets/js/app/about.js"></script>
+  </head>
+  <body data-i18n-title="about.title">
+    <a class="skip-link" href="#main" data-i18n="skip">Tới nội dung</a>
+
+    <header class="masthead">
+      <div class="wrap masthead__bar">
+        <a
+          class="brand"
+          href="index.html"
+          aria-label="Trang chủ"
+          data-i18n-aria-label="nav.home"
+        >
+          <span class="brand__seal" data-site="seal" aria-hidden="true">H</span>
+          <span class="brand__text">
+            <span class="brand__name" data-site="wordmark">Hai Dang</span>
+            <span class="brand__sub" data-i18n="brand.sub"
+              >Bách khoa cá nhân</span
+            >
+          </span>
+        </a>
+        <nav class="nav" aria-label="Chính" data-i18n-aria-label="nav.primary">
+          <a href="writing.html" data-i18n="nav.writing">Bài viết</a>
+          <a href="library.html" data-i18n="nav.library">Thư viện</a>
+          <a href="about.html" aria-current="page" data-i18n="nav.about"
+            >Giới thiệu</a
+          >
+          <a href="writing.html" data-random
+            ><span data-i18n="nav.random">Ngẫu nhiên</span>
+            <span aria-hidden="true">↻</span></a
+          >
+        </nav>
+        <form
+          class="quick-search"
+          role="search"
+          action="writing.html"
+          data-search-form
+        >
+          <svg
+            class="quick-search__icon"
+            viewBox="0 0 20 20"
+            aria-hidden="true"
+          >
+            <circle
+              cx="8.5"
+              cy="8.5"
+              r="5.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            />
+            <path d="m13 13 4 4" stroke="currentColor" stroke-width="1.5" />
+          </svg>
+          <input
+            type="search"
+            name="q"
+            placeholder="Tìm trong bách khoa…"
+            aria-label="Tìm trong bách khoa"
+            data-i18n-placeholder="search.placeholder"
+            data-i18n-aria-label="search.label"
+            autocomplete="off"
+            data-search-input
+          />
+          <kbd aria-hidden="true">/</kbd>
+        </form>
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="mobile-nav"
+          data-nav-toggle
+          data-i18n="nav.menu"
+        >
+          Mục lục
+        </button>
+      </div>
+      <div class="mobile-nav" id="mobile-nav" hidden data-mobile-nav>
+        <div class="wrap mobile-nav__inner">
+          <form
+            class="quick-search quick-search--mobile"
+            role="search"
+            action="writing.html"
+            data-search-form
+          >
+            <svg
+              class="quick-search__icon"
+              viewBox="0 0 20 20"
+              aria-hidden="true"
+            >
+              <circle
+                cx="8.5"
+                cy="8.5"
+                r="5.5"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+              <path d="m13 13 4 4" stroke="currentColor" stroke-width="1.5" />
+            </svg>
+            <input
+              type="search"
+              name="q"
+              placeholder="Tìm trong bách khoa…"
+              aria-label="Tìm trong bách khoa"
+              data-i18n-placeholder="search.placeholder"
+              data-i18n-aria-label="search.label"
+              autocomplete="off"
+              data-search-input
+            />
+          </form>
+          <nav
+            class="mobile-nav__links"
+            aria-label="Di động"
+            data-i18n-aria-label="nav.mobile"
+          >
+            <a href="writing.html" data-i18n="nav.writing">Bài viết</a>
+            <a href="library.html" data-i18n="nav.library">Thư viện</a>
+            <a href="about.html" aria-current="page" data-i18n="nav.about"
+              >Giới thiệu</a
+            >
+            <a href="writing.html" data-random
+              ><span data-i18n="nav.randomPage">Trang ngẫu nhiên</span></a
+            >
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <header class="page-head page-head--user">
+        <div class="wrap">
+          <nav class="crumbs" aria-label="Breadcrumb">
+            <a href="index.html" data-i18n="nav.home">Trang chủ</a
+            ><span aria-hidden="true">/</span
+            ><span data-i18n="nav.about">Giới thiệu</span>
+          </nav>
+          <p class="eyebrow" data-i18n="about.eyebrow">Trang cá nhân</p>
+          <h1><span data-site="name">Trần Hải Đăng</span></h1>
+          <p class="page-head__lead" data-i18n="about.lead"></p>
+          <p class="page-head__meta">
+            <a href="mailto:tranhaidangg2@gmail.com" data-site-email
+              >tranhaidangg2@gmail.com</a
+            >
+            <span class="dot" aria-hidden="true">·</span>
+            <span>Việt Nam</span>
+            <span class="dot" aria-hidden="true">·</span>
+            <span
+              ><span data-i18n="about.since">Viết từ</span>
+              <span data-site="since">2026</span></span
+            >
+          </p>
+        </div>
+      </header>
+
+      <div class="wrap about-layout">
+        <article class="prose about-prose">
+          <p data-i18n="about.p1">
+            Tôi là Hải Đăng. Tôi sống vì điều gì? Đó là một câu hỏi lớn. Nhưng
+            tôi đang sống bằng cách nào? Có vẻ là dễ dàng hơn đôi chút. Tôi
+            sống, bằng cách học.
+          </p>
+
+          <h2 id="what-this-is" data-i18n="about.whatHeading">Nơi này là gì</h2>
+          <p data-i18n="about.p2">
+            Nơi tôi cất giữ bất cứ thứ gì mình muốn, để tôi không quên, và để
+            tôi có thể nhìn nhận rằng bản thân đã đi một quãng đường rất xa mỗi
+            khi mở trang này lên.
+          </p>
+          <p data-i18n="about.p3">
+            Thiết kế vay mượn từ Wikipedia, và font Gothic là một câu đùa trang
+            nghiêm về độ nghiêm túc mỗi khi tôi cầm bút.
+          </p>
+
+          <h2 id="the-library" data-i18n="about.libraryHeading">Thư viện</h2>
+          <p data-i18n="about.p4">
+            Tôi quăng chúng lên để bạn đọc có thể biết rằng tôi có chúng, và tôi
+            cũng vậy. Khả năng cao là các bạn sẽ không tìm chúng ở đây, nếu bạn
+            thật sự cần.
+          </p>
+
+          <h2 id="colophon" data-i18n="about.colophonHeading">Lời bạt</h2>
+          <dl class="colophon">
+            <div>
+              <dt data-i18n="about.typefaces">Phông chữ</dt>
+              <dd data-i18n="about.typefacesText">
+                EB Garamond cho văn bản và tiêu đề; UnifrakturMaguntia cho nhãn
+                hiệu và hoa văn.
+              </dd>
+            </div>
+            <div>
+              <dt data-i18n="about.mathematics">Toán học</dt>
+              <dd>
+                <span data-i18n="about.mathematicsText"
+                  >LaTeX trong Markdown, hiển thị bằng KaTeX. Nội tuyến
+                  với</span
+                >
+                <code>$…$</code>,
+                <span data-i18n="about.mathematicsText2">khối với</span>
+                <code>$$…$$</code>.
+              </dd>
+            </div>
+            <div>
+              <dt data-i18n="about.software">Phần mềm</dt>
+              <dd data-i18n="about.softwareText">
+                HTML, CSS và JavaScript thuần. Marked cho Markdown. Không
+                framework, không cơ sở dữ liệu, không theo dõi.
+              </dd>
+            </div>
+            <div>
+              <dt data-i18n="about.hosting">Lưu trữ</dt>
+              <dd data-i18n="about.hostingText">
+                GitHub Pages, dựng từ một kho tệp vẫn còn dễ hiểu sau hai mươi
+                năm.
+              </dd>
+            </div>
+            <div>
+              <dt data-i18n="about.editing">Biên tập</dt>
+              <dd data-i18n="about.editingText">
+                Mỗi bài một tệp Markdown, mỗi kệ thư viện một thư mục. Dựng lại
+                bằng một lệnh.
+              </dd>
+            </div>
+            <div>
+              <dt data-i18n="about.license">Giấy phép</dt>
+              <dd>
+                <span data-i18n="about.licenseLead">Văn bản theo</span>
+                <a
+                  data-site-license-link
+                  href="https://creativecommons.org/licenses/by-sa/4.0/"
+                  ><span data-site="license">CC BY-SA 4.0</span></a
+                >;
+                <span data-i18n="about.licenseTail"
+                  >ảnh và bản vẽ thuộc về tôi.</span
+                >
+              </dd>
+            </div>
+          </dl>
+
+          <h2 id="elsewhere" data-i18n="about.elsewhereHeading">Nơi khác</h2>
+          <p>
+            <span data-i18n="about.p5"
+              >Cách tốt nhất để liên lạc với tôi là viết thư, mà ở thế kỷ này
+              nghĩa là email:</span
+            >
+            <a data-site-email href="mailto:tranhaidangg2@gmail.com"
+              >tranhaidangg2@gmail.com</a
+            >.
+            <span data-i18n="about.p5Tail"
+              >Tôi trả lời chậm nhưng rất vui khi nhận được thư.</span
+            >
+          </p>
+          <p data-i18n="about.p6">
+            Nếu bạn tìm thấy lỗi, một phương trình hỏng, hoặc một chứng minh hay
+            hơn, xin hãy cho tôi biết. Chỉnh sửa là bình luận duy nhất trang này
+            nhận.
+          </p>
+
+          <div class="about-quote">
+            <p data-i18n="about.quote">
+              “Một chứng minh là câu chuyện được kể cẩn thận đến mức không thể
+              kể theo cách khác.”
+            </p>
+            <p class="about-quote__source" data-i18n="about.quoteSource">
+              — một ghi chú bên lề, ngày đã quên
+            </p>
+          </div>
+        </article>
+
+        <aside
+          class="about-side"
+          aria-label="Về người dùng này"
+          data-i18n-aria-label="about.infoAria"
+        >
+          <div class="infobox">
+            <div class="infobox__title" data-i18n="about.infoboxTitle">
+              H. Đăng
+            </div>
+            <div class="infobox__sub" data-i18n="about.infoboxSub">
+              Người giữ cuốn bách khoa này
+            </div>
+            <div class="infobox__row">
+              <span data-i18n="about.field">Lĩnh vực</span
+              ><span data-i18n="about.fieldValue">Toán học, triết học</span>
+            </div>
+            <div class="infobox__row">
+              <span data-i18n="about.based">Nơi ở</span
+              ><span data-i18n="about.basedValue">Việt Nam</span>
+            </div>
+            <div class="infobox__row">
+              <span data-i18n="about.since">Viết từ</span
+              ><span data-site="since">2026</span>
+            </div>
+            <div class="infobox__row">
+              <span data-i18n="about.entries">Bài viết</span
+              ><span data-about-posts>—</span>
+            </div>
+            <div class="infobox__row">
+              <span data-i18n="about.library">Thư viện</span
+              ><span data-about-library>—</span>
+            </div>
+            <div class="infobox__row">
+              <span data-i18n="about.email">Email</span
+              ><span
+                ><a data-site-email href="mailto:tranhaidangg2@gmail.com"
+                  >tranhaidangg2@gmail.com</a
+                ></span
+              >
+            </div>
+            <div class="infobox__foot">
+              <a href="feed.xml" data-i18n="common.rssFeed">Dòng RSS</a> ·
+              <a href="writing.html" data-random
+                ><span data-i18n="nav.randomPage">Trang ngẫu nhiên</span></a
+              >
+            </div>
+          </div>
+
+          <div class="userboxes">
+            <div class="userbox">
+              <span class="userbox__icon" aria-hidden="true">∑</span>
+              <p data-i18n="about.userbox1">
+                Người dùng này học toán và không biết cách mọi người sống, vì có
+                vẻ mọi người cũng không hiểu thứ người dùng này sống sót vì.
+              </p>
+            </div>
+            <div class="userbox">
+              <span class="userbox__icon" aria-hidden="true">∫</span>
+              <p data-i18n="about.userbox2">
+                Người dùng này thích những ký hiệu phức tạp, vì chúng trông đẹp
+                và vì chưa hiểu chúng.
+              </p>
+            </div>
+            <div class="userbox">
+              <span class="userbox__icon" aria-hidden="true">∴</span>
+              <p data-i18n="about.userbox3">
+                Người dùng này không tôn trọng những con đường tắt, nhưng vẫn sẽ
+                đi đường tắt vì cuộc chơi không đồng tình với nhận định ấy.
+              </p>
+            </div>
+            <div class="userbox">
+              <span class="userbox__icon" aria-hidden="true">§</span>
+              <p data-i18n="about.userbox4">Người dùng này thích chụp ảnh.</p>
+            </div>
+            <div class="userbox">
+              <span class="userbox__icon" aria-hidden="true">¶</span>
+              <p data-i18n="about.userbox5">
+                Người dùng này thích thú những trang giấy trắng mực đen, nhưng
+                sẽ đau mắt vì chúng.
+              </p>
+            </div>
+            <div class="userbox">
+              <span class="userbox__icon" aria-hidden="true">↻</span>
+              <p data-i18n="about.userbox6">
+                Người dùng này đã bấm nút trang ngẫu nhiên nhiều hơn một lần.
+              </p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap">
+        <div class="footer__ornament" aria-hidden="true">❦</div>
+        <p class="footer__note">
+          <span data-i18n="footer.keptBy">Một cuốn bách khoa cá nhân do</span>
+          <a href="about.html" data-site="name">Trần Hải Đăng</a>.
+          <span data-i18n="footer.license">Văn bản theo</span>
+          <a
+            data-site-license-link
+            href="https://creativecommons.org/licenses/by-sa/4.0/"
+            ><span data-site="license">CC BY-SA 4.0</span></a
+          >;
+          <span data-i18n="footer.photos">ảnh và bản vẽ thuộc về tác giả.</span>
+        </p>
+        <p class="footer__note footer__note--last">
+          <span data-i18n="footer.lastEdited"
+            >Trang này được sửa lần cuối vào</span
+          >
+          <span data-last-edited>Tháng 11, 2026</span>.
+        </p>
+        <nav
+          class="footer__nav footer__nav--pages"
+          aria-label="Chân trang"
+          data-i18n-aria-label="nav.footer"
+        >
+          <a href="index.html" data-i18n="nav.home">Trang chủ</a>
+          <a href="writing.html" data-i18n="nav.writing">Bài viết</a>
+          <a href="library.html" data-i18n="nav.library">Thư viện</a>
+          <a href="about.html" data-i18n="nav.about">Giới thiệu</a>
+          <a href="feed.xml" data-i18n="common.rss">RSS</a>
+        </nav>
+        <nav
+          class="footer__nav footer__nav--elsewhere"
+          aria-label="Nơi khác"
+          data-i18n-aria-label="nav.elsewhere"
+          data-site-links
+        ></nav>
+        <p class="footer__colophon" data-i18n="footer.colophon">
+          Trình bày bằng EB Garamond &amp; UnifrakturMaguntia · HTML, CSS &amp;
+          JavaScript thuần · Lưu trữ trên GitHub Pages
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

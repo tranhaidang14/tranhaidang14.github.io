@@ -1,0 +1,51 @@
+{
+  "photos/lissajous.svg": {
+    "title": "Lissajous, 3:2",
+    "date": "2026-11-05",
+    "description": "Three phases of the curve x = sin 3t, y = sin 2t, drawn with a single parametric rule. The red point is the origin of the parameter.",
+    "tags": ["curves", "parametric", "plates"],
+    "collection": "Mathematical Plates"
+  },
+  "photos/harmonograph.svg": {
+    "title": "A Damped Harmonograph",
+    "date": "2026-10-21",
+    "description": "What a harmonograph draws when the paper is allowed to keep moving after the hand has stopped: a family of curves decaying toward the centre.",
+    "tags": ["curves", "damping", "plates"],
+    "collection": "Mathematical Plates"
+  },
+  "photos/rose-curve.svg": {
+    "title": "Rose, Fourteen Petals",
+    "date": "2026-10-03",
+    "description": "The polar curve r = cos(7θ/3), with two faint rotations behind it. Fourteen petals, no two of them quite the same distance from the eye.",
+    "tags": ["polar", "curves", "plates"],
+    "collection": "Mathematical Plates"
+  },
+  "photos/phyllotaxis.svg": {
+    "title": "Phyllotaxis, Golden Angle",
+    "date": "2026-09-24",
+    "description": "One thousand and one hundred seeds placed at successive multiples of 137.507 degrees. The marked seeds are every eighty-ninth, for no reason except that it is beautiful.",
+    "tags": ["golden angle", "patterns", "plates"],
+    "collection": "Mathematical Plates"
+  },
+  "photos/da-lat-mist.svg": {
+    "title": "Mist over Đà Lạt",
+    "date": "2026-09-19",
+    "description": "Drawn from memory the morning after the rain. The contour lines are approximate; the fog is not.",
+    "tags": ["Đà Lạt", "landscape", "memory"],
+    "collection": "Field Notes"
+  },
+  "documents/basel-notes.pdf": {
+    "title": "Notes on the Basel Problem",
+    "date": "2026-11-14",
+    "description": "Two pages of working notes: the sine product, the coefficient comparison, and the small matter of rigour that Euler left for Weierstrass.",
+    "tags": ["Euler", "analysis", "notes"],
+    "collection": "Working Papers"
+  },
+  "documents/winter-reading-list.pdf": {
+    "title": "A Reading List for Winter",
+    "date": "2026-08-30",
+    "description": "Six books, one notebook, and no particular hurry. Filed under reading, not under resolutions.",
+    "tags": ["reading", "lists"],
+    "collection": "Working Papers"
+  }
+}

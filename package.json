@@ -1,0 +1,13 @@
+{
+  "name": "personal-encyclopedia",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A Wikipedia-inspired personal encyclopedia for mathematics, photographs, and remembered days.",
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "new": "node tools/new-post.mjs && node tools/build.mjs",
+    "start": "node tools/build.mjs && node tools/serve.mjs",
+    "serve": "node tools/serve.mjs"
+  }
+}
