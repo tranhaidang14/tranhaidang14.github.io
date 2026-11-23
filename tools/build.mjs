@@ -8,7 +8,7 @@
  *
  * No dependencies. Run with: npm run build
  */
-import { readFile, writeFile, readdir, stat } from "node:fs/promises";
+import { readFile, writeFile, readdir, stat, open, unlink } from "node:fs/promises";
 import path from "node:path";
 import { bundleScripts, BUNDLE_ENTRIES } from "./bundle.mjs";
 
@@ -69,10 +69,60 @@ function escapeXML(value) {
 
 function stripQuotes(value) {
   const v = value.trim();
-  if ((v.startsWith('"') && v.endsWith('"')) || (v.startsWith("'") && v.endsWith("'"))) {
-    return v.slice(1, -1);
+  if (v.length >= 2 && v.startsWith('"') && v.endsWith('"')) {
+    try {
+      return JSON.parse(v);
+    } catch {
+      return v.slice(1, -1);
+    }
+  }
+  if (v.length >= 2 && v.startsWith("'") && v.endsWith("'")) {
+    return v.slice(1, -1).replace(/''/g, "'");
   }
   return v;
+}
+
+function splitInlineList(inner) {
+  const parts = [];
+  let current = "";
+  let quote = null;
+
+  for (let i = 0; i < inner.length; i += 1) {
+    const char = inner[i];
+
+    if (quote) {
+      current += char;
+      if (quote === '"' && char === "\\" && i + 1 < inner.length) {
+        current += inner[i + 1];
+        i += 1;
+        continue;
+      }
+      if (char === quote) {
+        if (quote === "'" && inner[i + 1] === "'") {
+          current += inner[i + 1];
+          i += 1;
+          continue;
+        }
+        quote = null;
+      }
+      continue;
+    }
+
+    if (char === '"' || char === "'") {
+      quote = char;
+      current += char;
+      continue;
+    }
+    if (char === ",") {
+      parts.push(current);
+      current = "";
+      continue;
+    }
+    current += char;
+  }
+  parts.push(current);
+
+  return parts.map(stripQuotes).filter((item) => item !== "");
 }
 
 /* -------------------------------------------------------------------------- */
@@ -112,9 +162,7 @@ function parseFrontMatter(raw) {
 
     if (value.startsWith("[") && value.endsWith("]")) {
       const inner = value.slice(1, -1).trim();
-      data[key] = inner
-        ? inner.split(",").map((item) => stripQuotes(item)).filter(Boolean)
-        : [];
+      data[key] = inner ? splitInlineList(inner) : [];
     } else if (/^(true|false)$/i.test(value)) {
       data[key] = value.toLowerCase() === "true";
     } else if (/^\d+(\.\d+)?$/.test(value)) {
@@ -395,7 +443,11 @@ async function buildLibrary() {
     const stem = path.basename(rel, ext);
     const fallbackTitle = stem
       .replace(/[-_]+/g, " ")
-      .replace(/\b\w/g, (char) => char.toUpperCase());
+      .trim()
+      .replace(/\s+/g, " ")
+      .split(" ")
+      .map((word) => (word ? word[0].toLocaleUpperCase("vi") + word.slice(1) : word))
+      .join(" ");
     const entry = meta[rel] || meta[path.basename(rel)] || {};
 
     const date = toISODate(entry.date, info.mtime.toISOString().slice(0, 10));
@@ -552,7 +604,48 @@ async function main() {
   console.log("");
 }
 
-main().catch((error) => {
-  console.error("\nBuild failed:", error.message, "\n");
-  process.exitCode = 1;
-});
+/* A small lock keeps a manual build and the dev-server watcher from writing the
+ * same indexes at the same time. */
+async function acquireBuildLock() {
+  const lockPath = path.join(ROOT, ".build.lock");
+  const started = Date.now();
+
+  while (true) {
+    try {
+      const handle = await open(lockPath, "wx");
+      await handle.writeFile(String(process.pid));
+      return handle;
+    } catch (error) {
+      if (error.code !== "EEXIST") throw error;
+
+      try {
+        const info = await stat(lockPath);
+        if (Date.now() - info.mtimeMs > 30_000) {
+          await unlink(lockPath).catch(() => {});
+          continue;
+        }
+      } catch {
+        /* The other build may have just released it. */
+      }
+
+      if (Date.now() - started > 30_000) {
+        throw new Error("Another build is still running. Remove .build.lock if it is stale.");
+      }
+      await new Promise((resolve) => setTimeout(resolve, 100));
+    }
+  }
+}
+
+async function releaseBuildLock(handle) {
+  await handle.close().catch(() => {});
+  await unlink(path.join(ROOT, ".build.lock")).catch(() => {});
+}
+
+const buildLock = await acquireBuildLock();
+
+main()
+  .catch((error) => {
+    console.error("\nBuild failed:", error.message, "\n");
+    process.exitCode = 1;
+  })
+  .finally(() => releaseBuildLock(buildLock));

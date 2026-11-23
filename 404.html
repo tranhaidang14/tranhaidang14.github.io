@@ -3,6 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    /* GitHub Pages serves this file for unknown paths, where relative URLs
+       would resolve against the missing folder. Root them when served. */
+    if (location.protocol === "http:" || location.protocol === "https:") {
+      document.write('<base href="/">');
+    }
+  </script>
   <title data-i18n="error.title">Không tìm thấy trang — Trần Hải Đăng</title>
   <meta name="robots" content="noindex">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -18,6 +25,21 @@
 </head>
 <body data-i18n-title="error.title">
   <a class="skip-link" href="#main" data-i18n="skip">Tới nội dung</a>
+  <noscript><p class="no-script">Trang này cần JavaScript để hiển thị nội dung. Vui lòng bật JavaScript.</p></noscript>
+  <script>
+    (function () {
+      var skip = document.querySelector(".skip-link");
+      if (!skip || !document.querySelector("base")) return;
+      skip.addEventListener("click", function (event) {
+        event.preventDefault();
+        var main = document.getElementById("main");
+        if (!main) return;
+        main.tabIndex = -1;
+        main.scrollIntoView();
+        main.focus({ preventScroll: true });
+      });
+    })();
+  </script>
 
   <header class="masthead">
     <div class="wrap masthead__bar">

@@ -19,8 +19,20 @@ npm start
 ```
 
 This scans the content, writes the JSON indexes, and serves the site at
-<http://localhost:4173>. `npm run serve` serves without rebuilding, and
-`npm run build` regenerates the indexes, feed, sitemap, and browser scripts.
+<http://localhost:4173>. While the server runs, edits under `content/` trigger an
+automatic rebuild — just reload the page. `npm run serve` does the same without
+the initial build, and `npm run build` regenerates everything by hand. Set
+`NO_WATCH=1` to turn the watcher off.
+
+To work on the site and the metadata dashboard at the same time:
+
+```bash
+npm run dev
+```
+
+This builds once, starts both servers, and prints both links (site on port 4173,
+dashboard on 4174). Ctrl+C stops both. Use `SITE_PORT` and `DASHBOARD_PORT` to
+choose different ports.
 
 The pages also open directly from disk (`index.html` via `file://`): the build
 writes classic script bundles and data files so no local server is required.
@@ -50,6 +62,8 @@ tools/build.mjs         index, feed, sitemap, and script generator
 tools/bundle.mjs        turns the ES modules into classic page bundles
 tools/new-post.mjs      article scaffolder
 tools/serve.mjs         local static server
+tools/dev.mjs           runs the site and dashboard together
+dashboard/              local-only metadata editor (never deployed)
 ```
 
 ## Writing an article
@@ -86,8 +100,12 @@ fallback. The newest `featured: true` entry becomes the front-page feature.
 
 ### Mathematics
 
-Inline mathematics uses `$...$`; display mathematics uses `$$...$$`. A few
-macros are predefined in `assets/js/article.js`:
+Inline mathematics uses `$...$`; display mathematics uses `$$...$$`. Display
+blocks may contain multi-line environments such as `\begin{align}`: `&` marks
+the alignment point and `\\` starts a new row. Use `align*` (or `aligned`) to
+omit the row numbers. Display math is set aside before Markdown parsing, so
+`\\`, `&`, and `_` reach KaTeX unchanged. A few macros are predefined in
+`assets/js/article.js`:
 
 | Macro | Renders |
 | --- | --- |
@@ -114,6 +132,14 @@ Images written as normal Markdown become plates with captions:
 ```markdown
 ![The caption that will appear under the plate](content/library/photos/plate.svg)
 ```
+
+Leave a blank line before and after the image. Without it — especially directly
+after an HTML block such as `</div>` — Markdown treats the line as raw HTML and
+shows the `![...](...)` syntax as text instead of rendering the image.
+
+Clicking a plate opens it larger in an overlay; use **Mở trong tab mới** there to
+open the original file. If the image is wrapped in a link to a larger image, that
+link target is used as the full-size version.
 
 A note box is ordinary HTML inside Markdown:
 
@@ -173,6 +199,26 @@ filename and the file's modification date. Items sharing a `collection` are
 grouped onto the same shelf on the library page. Clicking a plate opens it in a
 native `<dialog>`; PDFs open in an embedded viewer, and the address bar keeps a
 deep link such as `library.html#photos-example`.
+
+## Local metadata dashboard
+
+A small, local-only editor is included for the parts you change most often:
+front matter in `content/posts/*.md` and `content/library/meta.json`.
+
+```bash
+npm run dashboard
+```
+
+Open <http://127.0.0.1:4174>. It binds to localhost only and rebuilds the site
+after each change. From there you can create a new post scaffold, import photos
+and PDFs into the library, edit their metadata, and delete posts or library files
+(with confirmation). It never edits Markdown bodies: new posts contain only front
+matter, ready for you to write in your Markdown editor. If the site is already
+running with `npm start`, just reload the page. See `dashboard/README.md` for
+configuration and for moving the dashboard to a different folder or repository.
+
+The dashboard is not part of `_site/`, and the GitHub Pages workflow does not
+copy it, so it stays off the public site.
 
 ## Site identity
 

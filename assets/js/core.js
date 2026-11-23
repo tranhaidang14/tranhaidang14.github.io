@@ -375,6 +375,46 @@ function initRandom() {
 }
 
 /* -------------------------------------------------------------------------- */
+/* back to top                                                                */
+/* -------------------------------------------------------------------------- */
+
+function initBackToTop() {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "to-top";
+  button.hidden = true;
+  button.innerHTML = '<span aria-hidden="true">↑</span>';
+  button.setAttribute("aria-label", t("common.toTop"));
+  button.title = t("common.toTop");
+
+  document.body.appendChild(button);
+
+  let scheduled = false;
+  const update = () => {
+    scheduled = false;
+    button.hidden = window.scrollY < 600;
+  };
+  const onScroll = () => {
+    if (scheduled) return;
+    scheduled = true;
+    window.requestAnimationFrame(update);
+  };
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  update();
+
+  button.addEventListener("click", () => {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+  });
+
+  onLanguageChange(() => {
+    button.setAttribute("aria-label", t("common.toTop"));
+    button.title = t("common.toTop");
+  });
+}
+
+/* -------------------------------------------------------------------------- */
 /* init                                                                       */
 /* -------------------------------------------------------------------------- */
 
@@ -383,6 +423,7 @@ async function init() {
   initNavigation();
   initSearch();
   initRandom();
+  initBackToTop();
 
   onLanguageChange(() => {
     applySiteStats();

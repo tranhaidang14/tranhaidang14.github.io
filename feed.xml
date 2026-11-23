@@ -6,14 +6,7 @@
     <atom:link href="https://tranhaidang14.github.io/feed.xml" rel="self" type="application/rss+xml" />
     <description>Một cuốn bách khoa cá nhân về toán học, ảnh chụp, và những ngày đáng nhớ.</description>
     <language>vi</language>
-    <lastBuildDate>Thu, 19 Nov 2026 06:48:59 GMT</lastBuildDate>
-    <item>
-      <title>Chèn điểm để áp dụng bất đẳng thức tam giác</title>
-      <link>https://tranhaidang14.github.io/article.html?p=chen-diem-de-ap-dung-bat-dang-thuc-tam-giac</link>
-      <guid isPermaLink="true">https://tranhaidang14.github.io/article.html?p=chen-diem-de-ap-dung-bat-dang-thuc-tam-giac</guid>
-      <pubDate>Thu, 19 Nov 2026 12:00:00 GMT</pubDate>
-      <category>Geometry</category>
-      <description>Một dạng toán đòi hỏi sự thấu hiểu sâu sắc cả hình học và đại số.</description>
-    </item>
+    <lastBuildDate>Mon, 23 Nov 2026 05:24:05 GMT</lastBuildDate>
+
   </channel>
 </rss>

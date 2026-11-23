@@ -22,12 +22,44 @@ npm start
 
 Mở <http://localhost:4173>.
 
+- `npm run dev` = build rồi chạy **cả site và dashboard**, in ra hai link cùng lúc.
 - `npm start` = build nội dung rồi chạy server local.
 - `npm run build` = chỉ build lại index, RSS, sitemap và script.
-- `npm run serve` = chạy server mà không build lại.
+- `npm run serve` = chạy server và theo dõi thay đổi, không build lần đầu.
 
-Sau khi sửa nội dung, chạy lại `npm start` (hoặc `npm run build`) để thấy thay
-đổi. Trình duyệt có thể cần hard refresh: **Ctrl + Shift + R**.
+Khi server đang chạy, mọi thay đổi trong `content/` (bài viết, ảnh, PDF,
+`meta.json`, `site.json`) sẽ tự động build lại. Bạn chỉ cần tải lại trang đang
+đọc — không cần khởi động lại server hay chạy `npm run build`. Muốn tắt tính
+năng theo dõi: `NO_WATCH=1 npm start`.
+
+Muốn mở cả site và dashboard cùng lúc, dùng `npm run dev`: dashboard ở cổng 4174,
+site ở cổng 4173, cả hai link được in ra ngay. Ctrl+C dừng cả hai.
+
+### Bảng điều khiển metadata (chỉ trên máy)
+
+Nếu chỉ muốn sửa tiêu đề, ngày, nhóm, thẻ, mô tả… mà không mở file Markdown,
+chạy thêm một cửa sổ terminal:
+
+```bash
+npm run dashboard
+```
+
+Mở <http://127.0.0.1:4174>. Dashboard giúp bạn:
+
+- sửa front matter ở đầu các file trong `content/posts/`;
+- sửa `content/library/meta.json` cho ảnh và PDF;
+- tạo bài viết mới (chỉ có front matter, mặc định là bản nháp — bạn viết nội
+  dung tiếp bằng ứng dụng Markdown);
+- nhập ảnh/PDF vào `content/library/` (chọn được nhiều tệp);
+- xóa bài viết hoặc tệp thư viện, luôn hỏi xác nhận trước.
+
+Nó **không sửa nội dung bài viết, ảnh hay PDF**. Sau mỗi thao tác, dashboard tự
+build lại site; nếu site đang chạy bằng `npm start`, chỉ cần tải lại trang.
+Dashboard chỉ nghe trên `127.0.0.1`, không được deploy lên GitHub Pages. Chi
+tiết và cách chuyển sang thư mục/repo khác: xem `dashboard/README.md`.
+
+Cách nhanh nhất để mở cả hai: chạy `npm run dev` ở thư mục gốc — dashboard và
+site cùng khởi động, hai link được in ra một lần.
 
 ---
 
@@ -235,6 +267,23 @@ $$
 $$
 ```
 
+Công thức nhiều dòng dùng `\begin{align}` (hoặc `align*` nếu không muốn đánh
+số). Dấu `&` đặt điểm căn lề, `\\` xuống dòng:
+
+```latex
+$$
+\begin{align}
+MA + MB &\geq AB \\
+MC + MD &\geq CD
+\end{align}
+$$
+```
+
+`align` tự đánh số từng dòng; `align*` thì không. Nếu chỉ cần căn lề mà không
+đánh số, có thể dùng `aligned` bên trong `$$...$$`. Khối `$$...$$` và `\[...\]`
+được giữ nguyên trước khi Markdown xử lý, nên `\\`, `&` và `_` trong công thức
+không bị Markdown ăn mất.
+
 Tiêu đề mục (tự sinh mục lục bên cạnh bài):
 
 ```markdown
@@ -249,12 +298,20 @@ Tiêu đề mục (tự sinh mục lục bên cạnh bài):
 ![Chú thích ảnh](content/posts/figures/ten-anh.svg)
 ```
 
+Luôn để **một dòng trống trước và sau ảnh**. Nếu ảnh nằm ngay sau một khối HTML
+như `</div>` mà không có dòng trống, Markdown coi cả đoạn là HTML thô và hiện
+nguyên cú pháp `![...](...)` thành chữ thay vì hiển thị ảnh.
+
 Nên đặt ảnh riêng của bài trong `content/posts/figures/`. Có thể dùng lại ảnh
 trong thư viện:
 
 ```markdown
 ![Mô tả ảnh](content/library/photos/ten-anh.jpg)
 ```
+
+Ấn vào ảnh trong bài để mở ảnh lớn hơn trong một lớp phủ; nút **Mở trong tab
+mới** mở file gốc. Nếu ảnh được bọc trong một liên kết tới ảnh lớn hơn, hệ thống
+dùng chính liên kết đó làm ảnh đầy đủ.
 
 Bảng:
 
@@ -305,6 +362,11 @@ Bài tạo bằng lệnh trên đã ở trạng thái xuất bản. Nếu bạn 
 tự đặt `draft: true`), đổi thành `draft: false` hoặc xóa hẳn dòng `draft` trước
 khi build.
 
+Có thể tạo nhanh phần front matter bằng dashboard: tab **Bài viết** → **Bài viết
+mới**, điền tiêu đề/ngày/nhóm/thẻ rồi bấm **Tạo bài viết**. Dashboard tạo file
+`.md` (mặc định `draft: true`) và build lại site; sau đó mở file bằng ứng dụng
+Markdown để viết nội dung.
+
 1. Kiểm tra front matter:
 
    ```yaml
@@ -337,6 +399,9 @@ Sau khi Actions chạy xong, bài sẽ có trên site thật.
 - **Xóa hẳn:** xóa file `.md`, chạy `npm run build`, commit và push. RSS,
   sitemap và các bộ lọc sẽ tự cập nhật.
 
+Trong dashboard, hai việc này cũng làm được: sửa `draft` rồi lưu, hoặc bấm
+**Xóa bài viết** và xác nhận. Dashboard tự build lại sau đó.
+
 Nếu chỉ muốn xem trước một bài nháp mà không muốn đăng, tạm đổi `draft: false`,
 chạy `npm start`, xem xong thì đổi lại `draft: true` **và chạy `npm run build`**
 trước khi commit.
@@ -351,6 +416,10 @@ Thư viện nhận hai loại file:
 - **Tài liệu:** `.pdf`
 
 ### 4.1. Copy file vào đúng thư mục
+
+Cách nhanh: mở dashboard (`npm run dashboard`), sang tab **Thư viện**, bấm
+**Nhập ảnh hoặc PDF** và chọn tệp. Dashboard tự đặt file vào đúng thư mục và
+tạo mục metadata. Phần dưới là cách làm thủ công tương đương.
 
 ```text
 content/library/photos/       ảnh
@@ -446,6 +515,9 @@ git push
 1. Xóa file ảnh/PDF.
 2. Xóa mục tương ứng trong `meta.json` (không bắt buộc, nhưng nên dọn).
 3. Chạy `npm run build`, commit và push.
+
+Trong dashboard, chọn tệp ở tab **Thư viện** rồi bấm **Xóa tệp**: dashboard xóa
+cả file lẫn mục metadata và build lại site.
 
 ---
 
@@ -589,9 +661,11 @@ Vì vậy:
 ## 8. Tóm tắt lệnh
 
 ```bash
+npm run dev                                # chạy cả site (4173) và dashboard (4174)
 npm start                                  # build + chạy local
 npm run build                              # build lại dữ liệu và bundle
-npm run serve                              # chạy local, không build
+npm run serve                              # chạy local và theo dõi content/
+npm run dashboard                          # sửa metadata trên máy (cổng 4174)
 
 npm run new -- "Tên bài" --category=Analysis --tags="A, B"
 

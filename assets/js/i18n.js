@@ -45,6 +45,7 @@ const STRINGS = {
   "common.rssFeed": "Dòng RSS",
   "common.loadingIndex": "Đang đọc mục lục…",
   "common.lastEdited": "Sửa lần cuối",
+  "common.toTop": "Lên đầu trang",
 
   "footer.keptBy": "Một cuốn bách khoa cá nhân do",
   "footer.license": "Văn bản theo",
@@ -155,9 +156,11 @@ const STRINGS = {
   "library.nextItem": "Mục sau",
   "library.defaultPlateDesc": "Một bản vẽ trong thư viện.",
 
-  "document.kicker": "Tài liệu",
-  "document.openTab": "Mở trong tab mới",
-  "document.close": "Đóng tài liệu",
+  "viewer.imageKicker": "Hình ảnh",
+  "viewer.documentKicker": "Tài liệu",
+  "viewer.openTab": "Mở trong tab mới",
+  "viewer.close": "Đóng",
+  "viewer.openImage": "Xem ảnh lớn hơn",
   "library.openOriginal": "Mở bản gốc ↗",
   "library.error": "Không tải được mục lục thư viện.",
 

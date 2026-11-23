@@ -3,16 +3,26 @@
  * serve.mjs — a tiny zero-dependency static server for local preview.
  *
  *   npm start        (builds first, then serves)
- *   npm run serve    (serves without rebuilding)
+ *   npm run serve    (serves and watches content without the initial build)
+ *
+ * While the server runs, edits to content/ trigger a rebuild automatically;
+ * reload the page to see them. Set NO_WATCH=1 to disable the watcher.
  *
  * Open http://localhost:4173
  */
 import { createServer } from "node:http";
 import { readFile, stat } from "node:fs/promises";
+import { watch } from "node:fs";
+import { spawn } from "node:child_process";
 import path from "node:path";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const PORT = Number(process.env.PORT) || 4173;
+
+const GENERATED_CONTENT = new Set(["index.json", "index.js", "sources.js", "site.js"]);
+const REBUILD_EXT = new Set([
+  ".md", ".json", ".svg", ".jpg", ".jpeg", ".png", ".webp", ".avif", ".gif", ".pdf",
+]);
 
 const MIME = {
   ".html": "text/html; charset=utf-8",
@@ -97,7 +107,68 @@ server.listen(PORT, () => {
 
   Press Ctrl+C to stop.
 `);
+
+  watchContent();
 });
+
+let buildRunning = false;
+let buildQueued = false;
+
+function needsRebuild(filename) {
+  if (!filename) return true;
+  const base = path.basename(String(filename)).toLowerCase();
+  if (GENERATED_CONTENT.has(base) || base.startsWith(".")) return false;
+  return REBUILD_EXT.has(path.extname(base));
+}
+
+function rebuild() {
+  if (buildRunning) {
+    buildQueued = true;
+    return;
+  }
+
+  buildRunning = true;
+  console.log("\n  Content changed — rebuilding…");
+
+  const child = spawn(process.execPath, [path.join(ROOT, "tools", "build.mjs")], {
+    cwd: ROOT,
+    stdio: "inherit",
+  });
+
+  child.on("exit", (code) => {
+    buildRunning = false;
+    if (code !== 0) {
+      console.log("  Build failed. Fix the error and save again.\n");
+    } else {
+      console.log("  Reload the page to see the change.\n");
+    }
+    if (buildQueued) {
+      buildQueued = false;
+      rebuild();
+    }
+  });
+}
+
+function watchContent() {
+  if (process.env.NO_WATCH === "1") return;
+
+  let timer = null;
+  try {
+    const watcher = watch(path.join(ROOT, "content"), { recursive: true }, (_event, filename) => {
+      if (!needsRebuild(filename)) return;
+      clearTimeout(timer);
+      timer = setTimeout(rebuild, 180);
+    });
+
+    watcher.on("error", (error) => {
+      console.warn("  Content watch stopped:", error.message);
+    });
+
+    console.log("  Watching content/ — edit a file, then reload the page.\n");
+  } catch (error) {
+    console.warn("  Could not watch content/:", error.message, "\n");
+  }
+}
 
 server.on("error", (error) => {
   if (error.code === "EADDRINUSE") {

@@ -1,0 +1,10 @@
+{
+  "name": "tranhaidang-dashboard",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Bảng điều khiển metadata chạy trên máy cho site bách khoa cá nhân.",
+  "scripts": {
+    "start": "node server.mjs"
+  }
+}

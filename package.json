@@ -8,6 +8,8 @@
     "build": "node tools/build.mjs",
     "new": "node tools/new-post.mjs",
     "start": "node tools/build.mjs && node tools/serve.mjs",
-    "serve": "node tools/serve.mjs"
+    "dev": "node tools/dev.mjs",
+    "serve": "node tools/serve.mjs",
+    "dashboard": "node dashboard/server.mjs"
   }
 }

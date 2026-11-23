@@ -1,71 +1,13 @@
 {
-  "generated": "2026-11-19T06:48:59.092Z",
+  "generated": "2026-11-23T05:24:05.074Z",
   "counts": {
-    "posts": 1,
-    "words": 131,
-    "categories": 1,
-    "tags": 2
+    "posts": 0,
+    "words": 0,
+    "categories": 0,
+    "tags": 0
   },
-  "categories": [
-    {
-      "name": "Geometry",
-      "slug": "geometry",
-      "count": 1
-    }
-  ],
-  "tags": [
-    {
-      "name": "Bất đẳng thức",
-      "slug": "bat-dang-thuc",
-      "count": 1
-    },
-    {
-      "name": "Tối ưu hóa hình học",
-      "slug": "toi-uu-hoa-hinh-hoc",
-      "count": 1
-    }
-  ],
-  "years": [
-    {
-      "name": "2026",
-      "count": 1
-    }
-  ],
-  "posts": [
-    {
-      "slug": "chen-diem-de-ap-dung-bat-dang-thuc-tam-giac",
-      "title": "Chèn điểm để áp dụng bất đẳng thức tam giác",
-      "subtitle": "",
-      "date": "2026-11-19",
-      "updated": "2026-11-19",
-      "dateLabel": "19 November 2026",
-      "updatedLabel": "19 November 2026",
-      "shortDate": "19 Nov",
-      "year": "2026",
-      "category": "Geometry",
-      "categorySlug": "geometry",
-      "tags": [
-        "Bất đẳng thức",
-        "Tối ưu hóa hình học"
-      ],
-      "tagSlugs": [
-        "bat-dang-thuc",
-        "toi-uu-hoa-hinh-hoc"
-      ],
-      "summary": "Một dạng toán đòi hỏi sự thấu hiểu sâu sắc cả hình học và đại số.",
-      "featured": false,
-      "words": 131,
-      "minutes": 1,
-      "headings": [
-        {
-          "level": 2,
-          "text": "Lời giải bài toán"
-        }
-      ],
-      "excerpt": "Những bài toán tối ưu học hình học không gian dường như luôn ẩn chứa trong mình những bất ngờ. Học xong tâm tỉ cự và tôi tưởng rằng mình đã nắm trong tay chìa khóa. Sau đó vỡ mộng với những bài toán áp dụng bất đẳng thức. Và khi đã nắm sơ những bất đẳng thức cơ bản, tôi lại bất ngờ không thể dùng chúng vào một bài toán có vẻ đơn giản dưới đây. Đề bài\\[Đề khảo sát HSG cụm 12 trường THPT Phú Thọ]: Lời giải bài toán Ghi chú Đây là một lời giải có phần dài dòng để bạn đọc hiểu được mạch tư duy của riêng bản thân tôi. Lời giải gốc có thể được tìm thấy ở trong file đề gốc .",
-      "plain": "Những bài toán tối ưu học hình học không gian dường như luôn ẩn chứa trong mình những bất ngờ. Học xong tâm tỉ cự và tôi tưởng rằng mình đã nắm trong tay chìa khóa. Sau đó vỡ mộng với những bài toán áp dụng bất đẳng thức. Và khi đã nắm sơ những bất đẳng thức cơ bản, tôi lại bất ngờ không thể dùng chúng vào một bài toán có vẻ đơn giản dưới đây. Đề bài\\[Đề khảo sát HSG cụm 12 trường THPT Phú Thọ]: Lời giải bài toán Ghi chú Đây là một lời giải có phần dài dòng để bạn đọc hiểu được mạch tư duy của riêng bản thân tôi. Lời giải gốc có thể được tìm thấy ở trong file đề gốc .",
-      "url": "article.html?p=chen-diem-de-ap-dung-bat-dang-thuc-tam-giac",
-      "source": "content/posts/chen-diem-de-ap-dung-bat-dang-thuc-tam-giac.md"
-    }
-  ]
+  "categories": [],
+  "tags": [],
+  "years": [],
+  "posts": []
 }

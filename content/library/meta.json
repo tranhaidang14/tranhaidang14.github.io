@@ -1,9 +1,42 @@
 {
-"documents/PhuThoHSGLan1.pdf": {
-    "title": "Đề khảo sát HSG tỉnh Phú Thọ(cụm 12 trường) lần 1 năm 2026",
-    "date": "2026-11-20",
-    "description": "Đề bài thi, thời gian 120 phút, có lời giải",
-    "tags": ["HSG", "Đề thi"],
-    "collection": "Đề bài"
+  "photos/21.jpg": {
+    "title": "Bài toán mở đầu - Tọa độ cực",
+    "date": "2026-11-21",
+    "collection": "Câu hỏi lẻ"
+  },
+  "photos/Đường tròn lượng giác.jpg": {
+    "title": "Đường tròn lượng hiác",
+    "date": "2026-11-21",
+    "collection": "Hình vẽ"
+  },
+  "photos/ĐTLG.jpg": {
+    "title": "Đường tròn lượng giác",
+    "date": "2026-11-21",
+    "collection": "Hình vẽ"
+  },
+  "photos/polar_graph.webp": {
+    "title": "Hệ tọa độ cực",
+    "date": "2026-11-21",
+    "collection": "Hình vẽ"
+  },
+  "photos/polar_graph.png": {
+    "title": "Hệ tọa độ cực",
+    "date": "2026-11-21",
+    "collection": "Hình vẽ"
+  },
+  "photos/Cungtron.png": {
+    "title": "Cung tròn vi phân",
+    "date": "2026-11-22",
+    "collection": "Hình vẽ"
+  },
+  "photos/Đthquatam.jpg": {
+    "title": "Đường thẳng qua tâm",
+    "date": "2026-11-22",
+    "collection": "Hình vẽ"
+  },
+  "photos/BTMD.jpg": {
+    "title": "Bài toán mở đầu - đặt trục",
+    "date": "2026-11-22",
+    "collection": "Hình vẽ"
   }
 }

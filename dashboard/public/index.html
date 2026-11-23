@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Bảng điều khiển metadata</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header class="masthead">
+      <div class="masthead__inner">
+        <div>
+          <p class="eyebrow">Chỉ chạy trên máy · không đưa lên mạng</p>
+          <h1>Bảng điều khiển nội dung</h1>
+          <p class="site-name" id="site-name">Đang tải…</p>
+        </div>
+        <div class="masthead__actions">
+          <a class="button button--ghost" id="preview-link" href="#" target="_blank" rel="noreferrer" hidden>Mở site ↗</a>
+          <button class="button button--ghost" id="reload-button" type="button">Tải lại</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="shell">
+      <div class="toolbar">
+        <nav class="tabs" aria-label="Phần quản lý">
+          <button
+            class="tab is-active"
+            id="tab-posts"
+            type="button"
+            data-tab="posts"
+            role="tab"
+            aria-selected="true"
+            aria-controls="posts-panel"
+          >
+            Bài viết <span class="count" id="post-count">0</span>
+          </button>
+          <button
+            class="tab"
+            id="tab-library"
+            type="button"
+            data-tab="library"
+            role="tab"
+            aria-selected="false"
+            aria-controls="library-panel"
+          >
+            Thư viện <span class="count" id="library-count">0</span>
+          </button>
+        </nav>
+        <p class="toolbar__note" id="status-note">Tạo, sửa, nhập và xóa nội dung — mọi thao tác xóa đều có xác nhận.</p>
+      </div>
+
+      <p class="alert" id="meta-alert" hidden></p>
+
+      <section id="posts-panel" class="panel" role="tabpanel" aria-labelledby="tab-posts">
+        <div class="split">
+          <aside class="list-pane" aria-label="Danh sách bài viết">
+            <button class="button button--primary button--block" id="new-post-button" type="button">Bài viết mới</button>
+            <label class="search">
+              <span class="sr-only">Tìm bài viết</span>
+              <input id="post-search" type="search" placeholder="Tìm theo tiêu đề, nhóm, thẻ…" autocomplete="off">
+            </label>
+            <ul class="item-list" id="post-list"></ul>
+            <p class="empty-list" id="post-empty" hidden>Không có bài viết phù hợp.</p>
+          </aside>
+          <div class="editor-pane" id="post-editor"></div>
+        </div>
+      </section>
+
+      <section id="library-panel" class="panel" role="tabpanel" aria-labelledby="tab-library" hidden>
+        <div class="split">
+          <aside class="list-pane" aria-label="Danh sách tệp thư viện">
+            <button class="button button--primary button--block" id="upload-button" type="button">Nhập ảnh hoặc PDF</button>
+            <input
+              id="library-upload"
+              type="file"
+              accept=".jpg,.jpeg,.png,.webp,.avif,.gif,.svg,.pdf"
+              multiple
+              hidden
+            >
+            <p class="upload-status" id="upload-status" hidden></p>
+            <label class="search">
+              <span class="sr-only">Tìm tệp</span>
+              <input id="library-search" type="search" placeholder="Tìm theo tiêu đề, bộ sưu tập, thẻ…" autocomplete="off">
+            </label>
+            <div class="filters" role="group" aria-label="Lọc loại tệp">
+              <button class="chip is-active" type="button" data-library-type="all">Tất cả</button>
+              <button class="chip" type="button" data-library-type="photo">Ảnh</button>
+              <button class="chip" type="button" data-library-type="document">PDF</button>
+            </div>
+            <ul class="item-list" id="library-list"></ul>
+            <p class="empty-list" id="library-empty" hidden>Không có tệp phù hợp.</p>
+          </aside>
+          <div class="editor-pane" id="library-editor"></div>
+        </div>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+    <datalist id="category-options"></datalist>
+    <datalist id="collection-options"></datalist>
+
+    <script src="app.js"></script>
+  </body>
+</html>

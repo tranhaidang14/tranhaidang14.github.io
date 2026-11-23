@@ -370,6 +370,46 @@
       }
       
       /* -------------------------------------------------------------------------- */
+      /* back to top                                                                */
+      /* -------------------------------------------------------------------------- */
+      
+      function initBackToTop() {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "to-top";
+        button.hidden = true;
+        button.innerHTML = '<span aria-hidden="true">↑</span>';
+        button.setAttribute("aria-label", t("common.toTop"));
+        button.title = t("common.toTop");
+      
+        document.body.appendChild(button);
+      
+        let scheduled = false;
+        const update = () => {
+          scheduled = false;
+          button.hidden = window.scrollY < 600;
+        };
+        const onScroll = () => {
+          if (scheduled) return;
+          scheduled = true;
+          window.requestAnimationFrame(update);
+        };
+      
+        window.addEventListener("scroll", onScroll, { passive: true });
+        update();
+      
+        button.addEventListener("click", () => {
+          const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+          window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+        });
+      
+        onLanguageChange(() => {
+          button.setAttribute("aria-label", t("common.toTop"));
+          button.title = t("common.toTop");
+        });
+      }
+      
+      /* -------------------------------------------------------------------------- */
       /* init                                                                       */
       /* -------------------------------------------------------------------------- */
       
@@ -378,6 +418,7 @@
         initNavigation();
         initSearch();
         initRandom();
+        initBackToTop();
       
         onLanguageChange(() => {
           applySiteStats();
@@ -573,6 +614,7 @@
         "common.rssFeed": "Dòng RSS",
         "common.loadingIndex": "Đang đọc mục lục…",
         "common.lastEdited": "Sửa lần cuối",
+        "common.toTop": "Lên đầu trang",
       
         "footer.keptBy": "Một cuốn bách khoa cá nhân do",
         "footer.license": "Văn bản theo",
@@ -683,9 +725,11 @@
         "library.nextItem": "Mục sau",
         "library.defaultPlateDesc": "Một bản vẽ trong thư viện.",
       
-        "document.kicker": "Tài liệu",
-        "document.openTab": "Mở trong tab mới",
-        "document.close": "Đóng tài liệu",
+        "viewer.imageKicker": "Hình ảnh",
+        "viewer.documentKicker": "Tài liệu",
+        "viewer.openTab": "Mở trong tab mới",
+        "viewer.close": "Đóng",
+        "viewer.openImage": "Xem ảnh lớn hơn",
         "library.openOriginal": "Mở bản gốc ↗",
         "library.error": "Không tải được mục lục thư viện.",
       
@@ -996,62 +1040,157 @@
       }
       
       /* -------------------------------------------------------------------------- */
-      /* document viewer                                                            */
+      /* media viewer                                                               */
       /* -------------------------------------------------------------------------- */
       
-      let documentDialog = null;
-      let documentFrame = null;
-      let documentOpenLink = null;
+      let mediaDialog = null;
+      let mediaFrame = null;
+      let mediaImage = null;
+      let mediaKicker = null;
+      let mediaOpenLink = null;
       
-      function ensureDocumentViewer() {
-        if (documentDialog) return documentDialog;
+      function ensureMediaViewer() {
+        if (mediaDialog) return mediaDialog;
       
-        documentDialog = document.createElement("dialog");
-        documentDialog.className = "lightbox document-viewer";
-        documentDialog.innerHTML = `
+        mediaDialog = document.createElement("dialog");
+        mediaDialog.className = "lightbox media-viewer";
+        mediaDialog.innerHTML = `
           <div class="lightbox__bar">
-            <p class="lightbox__kicker" data-document-kicker></p>
-            <div class="document-viewer__actions">
-              <a class="document-viewer__open" target="_blank" rel="noopener noreferrer"></a>
+            <p class="lightbox__kicker" data-media-kicker></p>
+            <div class="media-viewer__actions">
+              <a class="media-viewer__open" target="_blank" rel="noopener noreferrer"></a>
               <button class="lightbox__close" type="button"></button>
             </div>
           </div>
-          <div class="lightbox__body"><iframe loading="lazy"></iframe></div>
+          <div class="lightbox__body">
+            <iframe loading="lazy" hidden></iframe>
+            <img decoding="async" hidden alt="">
+          </div>
         `;
       
-        const kicker = documentDialog.querySelector("[data-document-kicker]");
-        const close = documentDialog.querySelector(".lightbox__close");
-        documentFrame = documentDialog.querySelector("iframe");
-        documentOpenLink = documentDialog.querySelector(".document-viewer__open");
+        const close = mediaDialog.querySelector(".lightbox__close");
+        mediaKicker = mediaDialog.querySelector("[data-media-kicker]");
+        mediaFrame = mediaDialog.querySelector("iframe");
+        mediaImage = mediaDialog.querySelector("img");
+        mediaOpenLink = mediaDialog.querySelector(".media-viewer__open");
       
-        kicker.textContent = t("document.kicker");
-        documentOpenLink.textContent = t("document.openTab");
+        mediaOpenLink.textContent = t("viewer.openTab");
         close.textContent = "✕";
-        close.setAttribute("aria-label", t("document.close"));
+        close.setAttribute("aria-label", t("viewer.close"));
       
-        close.addEventListener("click", () => documentDialog.close());
-        documentDialog.addEventListener("click", (event) => {
-          if (event.target === documentDialog) documentDialog.close();
+        close.addEventListener("click", () => mediaDialog.close());
+        mediaDialog.addEventListener("click", (event) => {
+          if (event.target === mediaDialog) mediaDialog.close();
         });
-        documentDialog.addEventListener("close", () => {
+        mediaDialog.addEventListener("close", () => {
           document.body.classList.remove("lightbox-open");
-          documentFrame.removeAttribute("src");
-          documentFrame.removeAttribute("title");
+          mediaFrame.removeAttribute("src");
+          mediaFrame.removeAttribute("title");
+          mediaImage.removeAttribute("src");
+          mediaImage.alt = "";
         });
       
-        document.body.appendChild(documentDialog);
-        return documentDialog;
+        document.body.appendChild(mediaDialog);
+        return mediaDialog;
+      }
+      
+      function showMedia({ src, title, type }) {
+        ensureMediaViewer();
+        const isImage = type === "image";
+        const label = title || t(isImage ? "viewer.imageKicker" : "viewer.documentKicker");
+      
+        mediaKicker.textContent = t(isImage ? "viewer.imageKicker" : "viewer.documentKicker");
+        mediaOpenLink.href = src;
+        mediaOpenLink.setAttribute("aria-label", `${t("viewer.openTab")}: ${label}`);
+      
+        if (isImage) {
+          mediaFrame.hidden = true;
+          mediaFrame.removeAttribute("src");
+          mediaFrame.removeAttribute("title");
+          mediaImage.hidden = false;
+          mediaImage.src = src;
+          mediaImage.alt = label;
+        } else {
+          mediaImage.hidden = true;
+          mediaImage.removeAttribute("src");
+          mediaImage.alt = "";
+          mediaFrame.hidden = false;
+          mediaFrame.src = `${src}#view=FitH`;
+          mediaFrame.title = label;
+        }
+      
+        mediaDialog.showModal();
+        document.body.classList.add("lightbox-open");
       }
       
       function openDocument(src, title) {
-        ensureDocumentViewer();
-        const label = title || t("document.kicker");
-        documentFrame.src = `${src}#view=FitH`;
-        documentFrame.title = label;
-        documentOpenLink.href = src;
-        documentOpenLink.setAttribute("aria-label", `${t("document.openTab")}: ${label}`);
-        documentDialog.showModal();
-        document.body.classList.add("lightbox-open");
+        showMedia({ src, title, type: "document" });
+      }
+      
+      function openImage(src, title) {
+        showMedia({ src, title, type: "image" });
+      }
+      
+      function modifierPressed(event) {
+        return event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
+      }
+      
+      function imageHref(link) {
+        try {
+          const url = new URL(link.getAttribute("href"), location.href);
+          return /\.(png|jpe?g|gif|webp|avif|svg)$/i.test(url.pathname) ? url.href : null;
+        } catch {
+          return null;
+        }
+      }
+      
+      function imageCaption(image) {
+        return (
+          image.closest("figure")?.querySelector("figcaption")?.textContent.trim() ||
+          image.getAttribute("alt")?.trim() ||
+          image.getAttribute("title")?.trim() ||
+          t("viewer.imageKicker")
+        );
+      }
+      
+      function initImageLinks(body) {
+        qsa("img", body).forEach((image) => {
+          if (image.dataset.mediaReady) return;
+          image.dataset.mediaReady = "true";
+      
+          const anchor = image.closest("a");
+          const view = () =>
+            openImage(
+              anchor ? imageHref(anchor) || image.currentSrc || image.src : image.currentSrc || image.src,
+              imageCaption(image)
+            );
+      
+          if (anchor) {
+            anchor.classList.add("image-link");
+            anchor.addEventListener("click", (event) => {
+              if (event.defaultPrevented || event.button !== 0 || modifierPressed(event)) return;
+              event.preventDefault();
+              view();
+            });
+            return;
+          }
+      
+          image.classList.add("is-zoomable");
+          image.tabIndex = 0;
+          image.setAttribute("role", "button");
+          image.setAttribute("aria-label", `${t("viewer.openImage")}: ${imageCaption(image)}`);
+      
+          image.addEventListener("click", (event) => {
+            if (event.defaultPrevented || event.button !== 0 || modifierPressed(event)) return;
+            view();
+          });
+      
+          image.addEventListener("keydown", (event) => {
+            if (event.key !== "Enter" && event.key !== " ") return;
+            event.preventDefault();
+            view();
+          });
+        });
       }
       
       function decodeHash(value) {
@@ -1097,16 +1236,7 @@
           link.classList.add("document-link");
       
           link.addEventListener("click", async (event) => {
-            if (
-              event.defaultPrevented ||
-              event.button !== 0 ||
-              event.metaKey ||
-              event.ctrlKey ||
-              event.shiftKey ||
-              event.altKey
-            ) {
-              return;
-            }
+            if (event.defaultPrevented || event.button !== 0 || modifierPressed(event)) return;
       
             if (pdf) {
               event.preventDefault();
@@ -1200,6 +1330,9 @@
             /* leave malformed links alone */
           }
         });
+      
+        /* Images open a larger overlay when clicked. */
+        initImageLinks(body);
       
         /* Local PDFs and library documents open in a viewer instead of navigating. */
         initDocumentLinks(body);
@@ -1395,6 +1528,55 @@
         }
       }
       
+      /* -------------------------------------------------------------------------- */
+      /* display math protection                                                    */
+      /* -------------------------------------------------------------------------- */
+      
+      /* Markdown treats a doubled backslash as an escape and turns the newline after
+       * it into a space. In display math that eats the LaTeX row break, so an
+       * \begin{align} collapses onto one line. Inline math has the same problem with
+       * escaped punctuation: Markdown turns "\{" into "{", "\," into ",", and so on,
+       * so KaTeX silently loses the literal braces. Stash every math span before
+       * Markdown runs and put the untouched TeX back afterwards. */
+      const MATH_PLACEHOLDER = "ENCYCLOPEDIAMATHPLACEHOLDER";
+      
+      function mathToken(blocks, tex) {
+        const token = `${MATH_PLACEHOLDER}${blocks.length}END`;
+        blocks.push({ token, tex });
+        return token;
+      }
+      
+      function protectMath(markdown) {
+        const blocks = [];
+        let text = String(markdown);
+      
+        /* Display math first, so its contents are never mistaken for inline math. */
+        text = text.replace(/\$\$([\s\S]*?)\$\$|\\\[([\s\S]*?)\\\]/g, (match) =>
+          mathToken(blocks, match)
+        );
+      
+        text = text.replace(/\\\(([\s\S]*?)\\\)/g, (match) => mathToken(blocks, match));
+      
+        /* Inline $...$; skip empty spans and currency-style "$5 and $10" matches. */
+        text = text.replace(/(^|[^\\$])\$((?:\\.|[^$\n])+?)\$(?!\$)/g, (match, prefix, tex) => {
+          if (!tex.trim() || /^\s|\s$/.test(tex)) return match;
+          return `${prefix}${mathToken(blocks, `$${tex}$`)}`;
+        });
+      
+        return { text, blocks };
+      }
+      
+      function restoreMath(html, blocks) {
+        if (!blocks.length) return html;
+        let output = html;
+        for (const { token, tex } of blocks) {
+          /* A function replacement keeps "$" sequences in the TeX literal; a string
+           * replacement would treat "$$" as a special replacement pattern. */
+          output = output.replace(token, () => escapeHTML(tex));
+        }
+        return output;
+      }
+      
       function initProgress(body) {
         const header = qs(".masthead");
         if (elements.progress && header) {
@@ -1548,11 +1730,33 @@
         setMeta("property", "article:published_time", post.date);
       
         if (site?.url) {
+          const canonicalUrl = `${site.url.replace(/\/+$/, "")}/${post.url}`;
           const canonical = document.createElement("link");
           canonical.rel = "canonical";
-          canonical.href = `${site.url.replace(/\/+$/, "")}/${post.url}`;
+          canonical.href = canonicalUrl;
           document.head.appendChild(canonical);
+      
+          const structured = document.createElement("script");
+          structured.type = "application/ld+json";
+          structured.textContent = JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            headline: post.title,
+            description: post.summary,
+            datePublished: post.date,
+            dateModified: post.date,
+            inLanguage: "vi",
+            author: { "@type": "Person", name: site.name },
+            publisher: { "@type": "Person", name: site.name },
+            url: canonicalUrl,
+            mainEntityOfPage: canonicalUrl,
+            keywords: post.tags.join(", "),
+          });
+          document.head.appendChild(structured);
         }
+      
+        setMeta("property", "og:site_name", site?.name);
+        setMeta("property", "og:locale", "vi_VN");
       
         setText(elements.title, post.title);
         if (elements.subtitle) {
@@ -1570,14 +1774,25 @@
       
         await waitFor(() => window.marked && typeof window.marked.parse === "function", 5000).catch(() => {});
       
+        const math = protectMath(markdown);
         const html = window.marked
-          ? window.marked.parse(markdown, { gfm: true, breaks: false })
+          ? restoreMath(
+              window.marked.parse(math.text, { gfm: true, breaks: false }),
+              math.blocks
+            )
           : `<p class="note"><span class="note__title">${t("article.markdownUnavailable")}</span>${t("article.markdownFallback")}</p><pre>${escapeHTML(markdown)}</pre>`;
       
         elements.body.innerHTML = html;
         postProcess(elements.body);
       
         const headings = buildContents(elements.body);
+      
+        /* On phones the contents box would push the article off-screen. */
+        const tocBox = qs(".toc-box");
+        if (tocBox && window.matchMedia("(max-width: 860px)").matches) {
+          tocBox.open = false;
+        }
+      
         renderInfobox(post, site);
         renderRelated(post, index);
         renderPager(post, index);
