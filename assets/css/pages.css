@@ -165,12 +165,16 @@
 }
 
 .toc li {
-  counter-increment: toc;
   position: relative;
   margin: 0 0 6px;
   padding-right: 2px;
   font-size: 0.73rem;
   line-height: 1.35;
+}
+
+.toc li:not(.toc--h3) {
+  /* Only top-level headings take a number; h3 items stay as bullets. */
+  counter-increment: toc;
 }
 
 .toc li::before {

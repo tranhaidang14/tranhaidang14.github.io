@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-23T05:24:05.088Z",
+  "generated": "2026-11-23T06:30:15.987Z",
   "counts": {
     "total": 6,
     "photos": 6,
@@ -30,7 +30,6 @@
       "description": "",
       "tags": [],
       "collection": "Hình vẽ",
-      "ratio": 1.850974930362117,
       "ext": "JPG"
     },
     {
@@ -45,7 +44,7 @@
       "description": "",
       "tags": [],
       "collection": "Hình vẽ",
-      "ratio": 2.1191876002137895,
+      "ratio": 2.357142857142857,
       "ext": "PNG"
     },
     {
@@ -60,7 +59,7 @@
       "description": "",
       "tags": [],
       "collection": "Hình vẽ",
-      "ratio": 0.9491017964071856,
+      "ratio": 0.8055555555555556,
       "ext": "JPG"
     },
     {
@@ -90,7 +89,6 @@
       "description": "",
       "tags": [],
       "collection": "Hình vẽ",
-      "ratio": 1.1494252873563218,
       "ext": "JPG"
     },
     {
@@ -105,7 +103,7 @@
       "description": "",
       "tags": [],
       "collection": "Hình vẽ",
-      "ratio": 1.0543130990415335,
+      "ratio": 0.8055555555555556,
       "ext": "PNG"
     }
   ]

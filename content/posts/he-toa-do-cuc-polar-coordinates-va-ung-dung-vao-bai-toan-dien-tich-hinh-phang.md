@@ -1,11 +1,13 @@
 ---
-title: "Hệ tọa độ cực(Polar Coordinates) và ứng dụng vào bài toán diện tích hình phẳng"
+title: Hệ tọa độ cực(Polar Coordinates) và ứng dụng vào bài toán diện tích hình phẳng
 date: 2026-11-21
-category: "Giải tích"
-tags: ["Hình học giải tích", "Nguyên hàm - tích phân"]
-summary: "Đây là một dạng kiến thức khá đặc thù mà chỉ áp dụng được cho một số bài đặc biệt. Tuy nhiên, nếu thành thạo nó sẽ là một công cụ đắc lực giảm đi nhiều phần sai xót cho những bài toán tưởng chừng phức tạp."
+category: Giải tích
+tags:
+  - Hình học giải tích
+  - Nguyên hàm - tích phân
+summary: Đây là một dạng kiến thức khá đặc thù mà chỉ áp dụng được cho một số bài đặc biệt. Tuy nhiên, nếu thành thạo nó sẽ là một công cụ đắc lực giảm đi nhiều phần sai xót cho những bài toán tưởng chừng phức tạp.
 featured: false
-draft: true
+draft: false
 ---
 <div class="note">
 <p class="note__title">Kiến thức cần biết</p>
@@ -74,7 +76,7 @@ $$
 
 <div class="note">
 <p class="note__title">Đường thẳng qua cực</p>
-<p>$$\theta = a$$ với a là hệ số góc của đường thẳng</p>
+<p>$$\theta = \alpha$$ với $\alpha$ là hệ số góc của đường thẳng</p>
 </div>
 <div class="note">
 <p class="note__title">Đường tròn tâm cực</p>
@@ -107,3 +109,30 @@ Nếu diện tích mỗi hình chữ nhật nhỏ là $f(x)dx$, tức chiều ca
 Đặt hình vào hệ tọa độ cực:
 
 ![Hình vẽ](content/library/photos/BTMD.jpg)
+
+Vì tính đối xứng, ta chỉ cần tìm phần diện tích giới hạn bởi $(L)$ và hai tia $Ox, OC$(rồi nhân lên 8).
+
+Xét điểm $M(r; \theta) (r = OM)$ có tọa độ tương ứng trong hệ chữ nhật là $M(r\cos\theta; r\sin\theta)$
+
+Vì $M\in CD$ với $CD: x = 4$
+$$\begin{align*}
+\Rightarrow r\cos\theta &= 4 \\ \iff r &= \frac{4}{\cos \theta}
+\end{align*}$$
+Ta lại có:
+
+$$
+\begin{cases}
+OM - ON = 2 \iff ON = OM - 2 \\
+O, N, M \text{ thẳng hàng}
+\end{cases} \\
+\Rightarrow N(r - 2;\theta)
+$$
+
+Vậy diện tích phần giới hạn bởi $(L)$ và hai đường thẳng $OC: \theta = \frac{\pi}{4}$ và $Ox: \theta=0$ là:
+$$
+S = \int_{0}^{\pi / 4}{\frac{1}{2}.\left( \frac{4}{\cos\theta}-2\right)^2}d\theta
+$$
+Nên kết quả mà đề bài yêu cầu sẽ là:
+$$
+8^2-8S (dm^2) \approx 4384 (cm^2)
+$$

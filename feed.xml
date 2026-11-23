@@ -6,7 +6,14 @@
     <atom:link href="https://tranhaidang14.github.io/feed.xml" rel="self" type="application/rss+xml" />
     <description>Một cuốn bách khoa cá nhân về toán học, ảnh chụp, và những ngày đáng nhớ.</description>
     <language>vi</language>
-    <lastBuildDate>Mon, 23 Nov 2026 05:24:05 GMT</lastBuildDate>
-
+    <lastBuildDate>Mon, 23 Nov 2026 06:30:15 GMT</lastBuildDate>
+    <item>
+      <title>Hệ tọa độ cực(Polar Coordinates) và ứng dụng vào bài toán diện tích hình phẳng</title>
+      <link>https://tranhaidang14.github.io/article.html?p=he-toa-do-cuc-polar-coordinates-va-ung-dung-vao-bai-toan-dien-tich-hinh-phang</link>
+      <guid isPermaLink="true">https://tranhaidang14.github.io/article.html?p=he-toa-do-cuc-polar-coordinates-va-ung-dung-vao-bai-toan-dien-tich-hinh-phang</guid>
+      <pubDate>Sat, 21 Nov 2026 12:00:00 GMT</pubDate>
+      <category>Giải tích</category>
+      <description>Đây là một dạng kiến thức khá đặc thù mà chỉ áp dụng được cho một số bài đặc biệt. Tuy nhiên, nếu thành thạo nó sẽ là một công cụ đắc lực giảm đi nhiều phần sai xót cho những bài toán tưởng chừng phức tạp.</description>
+    </item>
   </channel>
 </rss>
