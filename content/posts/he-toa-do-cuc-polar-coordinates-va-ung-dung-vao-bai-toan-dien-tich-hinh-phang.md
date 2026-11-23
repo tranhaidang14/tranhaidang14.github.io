@@ -136,3 +136,9 @@ Nên kết quả mà đề bài yêu cầu sẽ là:
 $$
 8^2-8S (dm^2) \approx 4384 (cm^2)
 $$
+## Kết luận
+Kiến thức về hệ tọa độ cực thật ra còn rất rộng(và có vẻ ứng dụng chính vào tích phân lồng nhau). Tuy nhiên, với góc nhìn hạn hẹp, trình độ chưa cao và thời gian bỏ ra còn ít, tôi chỉ có thể khai thác một góc rất nhỏ này thôi. Rất khuyến khích các bạn đọc tự tìm tòi mở rộng, cũng như gửi [email](/about.html) cho tôi nếu có điều gì tôi có thể làm cho bạn, hoặc bài viết này.
+
+Đây là bài viết đầu tiên mà tôi thực sự quan tâm sâu sắc, cũng như dành thời gian nghiên cứu và viết bài về môn Toán. Mặc dù chắc chắn còn nhiều thiếu xót, đây cũng là một dấu mốc đáng nhớ trong cuộc đời tôi.
+
+## Phụ lục: Một số bài toán luyện tập

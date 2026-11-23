@@ -1,8 +1,8 @@
 {
-  "generated": "2026-11-23T06:30:15.980Z",
+  "generated": "2026-11-23T06:40:59.948Z",
   "counts": {
     "posts": 1,
-    "words": 860,
+    "words": 1000,
     "categories": 1,
     "tags": 2
   },
@@ -54,8 +54,8 @@
       ],
       "summary": "Đây là một dạng kiến thức khá đặc thù mà chỉ áp dụng được cho một số bài đặc biệt. Tuy nhiên, nếu thành thạo nó sẽ là một công cụ đắc lực giảm đi nhiều phần sai xót cho những bài toán tưởng chừng phức tạp.",
       "featured": false,
-      "words": 860,
-      "minutes": 4,
+      "words": 1000,
+      "minutes": 5,
       "headings": [
         {
           "level": 2,
@@ -80,6 +80,14 @@
         {
           "level": 2,
           "text": "Lời giải bài toán mở đầu"
+        },
+        {
+          "level": 2,
+          "text": "Kết luận"
+        },
+        {
+          "level": 2,
+          "text": "Phụ lục: Một số bài toán luyện tập"
         }
       ],
       "excerpt": "Kiến thức cần biết Lượng giác Hình học giải tích và hệ trục tọa độ chữ nhật(Descartes) Nguyên hàm tích phân Trong lúc làm bài tập, tôi đã bắt gặp bài một toán thú vị. Ấn tượng đầu tiên khi đặt bút giải là: hệ tọa độ cực. Lí do rất đơn giản: tôi muốn tô màu. Quan sát tia OM cùng tính đối xứng hình học của bài, trực giác bảo tôi rằng nó xoay một vòng và quét ra hình phẳng trên. Theo quan điểm của tôi, đó là cốt lõi của hệ tọa độ cực: phép xoay. Tuy nhiên, việc biết đến và thật sự vận dụng được hệ tọa độ cực là khác nhau. Vì thế mà bài viết này ra đời, và mục tiêu cuối cùng mà nó muốn đạt được chính là đưa ra một lời giải đẹp cho bài toán trên. Hệ tọa độ cực Một cách tổng quát, một hệ trục tọa ",
