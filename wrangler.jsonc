@@ -1,0 +1,12 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "tranhaidang",
+  "compatibility_date": "2026-11-26",
+  "assets": {
+    "directory": "./_site",
+    // Serves /post-slug from post-slug.html and redirects /post-slug.html.
+    "html_handling": "auto-trailing-slash",
+    // Serve the site's own 404.html for unknown paths.
+    "not_found_handling": "404-page"
+  }
+}

@@ -7,6 +7,7 @@
   "scripts": {
     "build": "node tools/build.mjs",
     "build:pages": "node tools/build.mjs && node tools/stage.mjs",
+    "deploy": "npm run build:pages && wrangler deploy",
     "stage": "node tools/stage.mjs",
     "new": "node tools/new-post.mjs",
     "start": "node tools/build.mjs && node tools/serve.mjs",
@@ -16,5 +17,8 @@
   },
   "dependencies": {
     "marked": "^12.0.2"
+  },
+  "devDependencies": {
+    "wrangler": "^4.168.0"
   }
 }

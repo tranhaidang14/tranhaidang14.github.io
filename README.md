@@ -217,7 +217,7 @@ matter, ready for you to write in your Markdown editor. If the site is already
 running with `npm start`, just reload the page. See `dashboard/README.md` for
 configuration and for moving the dashboard to a different folder or repository.
 
-The dashboard is not part of `_site/`, and the Cloudflare Pages build does not
+The dashboard is not part of `_site/`, and the Cloudflare deploy does not
 copy it, so it stays off the public site.
 
 ## Site identity
@@ -265,21 +265,54 @@ reference the key from the page or script.
 The `lang` attribute on `<html>` is fixed to `vi`, and the RSS feed language is
 set in `tools/build.mjs`.
 
-## Deploying to Cloudflare Pages
+## Deploying to Cloudflare Workers
 
 The site is live at <https://tranhaidang.cc.cd/>. GitHub Pages is no longer used;
 the GitHub repository is kept as the source of truth.
 
-### Cloudflare Pages settings
+The Cloudflare project is a **Worker with static assets**, not a Pages project.
+Workers Builds has no “Build output directory” field: the folder is declared in
+`wrangler.jsonc`.
+
+### Workers Builds settings
 
 - **Build command**: `npm run build:pages`
-- **Build output directory**: `_site`
+- **Deploy command**: `npx wrangler deploy`
+- **Root directory**: `/`
 - **Node version**: 22 (or 20+)
+
+`wrangler.jsonc` points Wrangler at the generated `_site/` directory:
+
+```jsonc
+{
+  "name": "tranhaidang",
+  "compatibility_date": "2026-11-26",
+  "assets": {
+    "directory": "./_site",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}
+```
+
+The live Worker is named `tranhaidang` (also reachable at
+`tranhaidang.dang-nhac-dev.workers.dev`). Change `name` only if you rename the
+Worker in Cloudflare. `html_handling` serves `/<slug>` from `<slug>.html` and
+redirects the `.html` form; `not_found_handling` serves `404.html`.
+
+**Keep this file.** Without a Wrangler config, `wrangler deploy` can fall back to
+the repository root and expose `content/*.md`, `tools/`, `package.json`, and
+other source files. With `assets.directory` set to `./_site`, only the staged
+site is public.
 
 `npm run build:pages` runs `tools/build.mjs` (indexes, feed, sitemap, bundles,
 and one static HTML page per post) and then `tools/stage.mjs`, which copies only
 the deployable files into `_site/`. The dashboard, tools, `node_modules/`, and
 the Markdown sources are never published.
+
+If you use a classic **Pages** project instead, its settings are build command
+`npm run build:pages` and output directory `_site`. The repository is configured
+for Workers Builds.
 
 Update `url` in `content/site.json` whenever the domain changes, then run
 `npm run build` so canonical URLs, Open Graph tags, the sitemap, and the feed all
@@ -288,7 +321,7 @@ use the new address.
 ### Static, crawlable post pages
 
 Every published post also exists as a standalone HTML file at the repository
-root (`<slug>.html`). Cloudflare Pages serves it at `/<slug>` and redirects the
+root (`<slug>.html`). Cloudflare serves it at `/<slug>` and redirects the
 `.html` form, so internal links, canonical URLs, and the sitemap all use the
 clean URL. `article.html?p=…` remains as a legacy shell and is marked `noindex`.
 
@@ -300,14 +333,19 @@ step.
 ### Turning off GitHub Pages
 
 1. Open the repository on GitHub → **Settings** → **Pages**.
-2. Set **Build and deployment → Source** to **None** (or click **Disable**).
-3. Remove any **Custom domain** configured there so it cannot conflict with
-   Cloudflare DNS.
+2. Click **Unpublish site** in the “Your site is live at …” box and confirm.
+   (Current GitHub UI has no “Source: None” option; unpublishing is the way to
+   disable Pages.)
+3. If a **Custom domain** was configured there, remove it first so it cannot
+   conflict with Cloudflare DNS.
 4. Optionally delete the `github-pages` environment under **Settings →
    Environments**.
+5. The old workflow has been deleted from the repository, so future pushes will
+   not redeploy to GitHub Pages.
 
 The repository and its history stay intact; only
-`https://<user>.github.io/` stops serving.
+`https://<user>.github.io/` stops serving. GitHub’s CDN may keep the old URL
+briefly cached, then return 404.
 
 ### Search engines
 

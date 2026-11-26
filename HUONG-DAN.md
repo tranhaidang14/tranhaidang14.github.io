@@ -1,6 +1,6 @@
 # Hướng dẫn deploy và đăng nội dung
 
-Tài liệu này hướng dẫn cách deploy trang web lên **Cloudflare Pages** (đang chạy
+Tài liệu này hướng dẫn cách deploy trang web lên **Cloudflare Workers** (đang chạy
 tại <https://tranhaidang.cc.cd/>), sau đó cách đăng bài viết mới và thêm ảnh/PDF
 vào thư viện.
 
@@ -56,7 +56,7 @@ Mở <http://127.0.0.1:4174>. Dashboard giúp bạn:
 
 Nó **không sửa nội dung bài viết, ảnh hay PDF**. Sau mỗi thao tác, dashboard tự
 build lại site; nếu site đang chạy bằng `npm start`, chỉ cần tải lại trang.
-Dashboard chỉ nghe trên `127.0.0.1`, không được deploy lên Cloudflare Pages. Chi
+Dashboard chỉ nghe trên `127.0.0.1`, không được deploy lên Cloudflare. Chi
 tiết và cách chuyển sang thư mục/repo khác: xem `dashboard/README.md`.
 
 Cách nhanh nhất để mở cả hai: chạy `npm run dev` ở thư mục gốc — dashboard và
@@ -64,31 +64,63 @@ site cùng khởi động, hai link được in ra một lần.
 
 ---
 
-## 2. Deploy miễn phí bằng Cloudflare Pages
+## 2. Deploy miễn phí bằng Cloudflare Workers
 
 Trang đang chạy tại **<https://tranhaidang.cc.cd/>**. GitHub Pages đã được gỡ
 khỏi quy trình deploy; repo GitHub vẫn được giữ làm nơi lưu mã nguồn.
 
-### 2.1. Cấu hình Cloudflare Pages
+Cloudflare project đang dùng **Worker + static assets**, không phải Pages.
+Workers Builds **không có ô “Build output directory”**; thư mục deploy được khai
+báo trong `wrangler.jsonc`.
 
-Trong dashboard Cloudflare → **Workers & Pages** → project của bạn →
+### 2.1. Cấu hình Workers Builds
+
+Trong dashboard Cloudflare → **Workers & Pages** → Worker của bạn →
 **Settings → Build**:
 
 - **Build command**: `npm run build:pages`
-- **Build output directory**: `_site`
+- **Deploy command**: `npx wrangler deploy`
+- **Root directory**: `/`
 - **Node version**: 22 (hoặc 20+)
+
+File `wrangler.jsonc` trỏ Wrangler vào thư mục `_site/`:
+
+```jsonc
+{
+  "name": "tranhaidang",
+  "compatibility_date": "2026-11-26",
+  "assets": {
+    "directory": "./_site",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}
+```
+
+Worker đang chạy tên `tranhaidang` (cũng truy cập được ở
+`tranhaidang.dang-nhac-dev.workers.dev`). Chỉ đổi `name` nếu bạn đổi tên Worker
+trong Cloudflare. `html_handling` giúp `/<slug>` phục vụ `<slug>.html` và
+chuyển hướng URL `.html`; `404-page` dùng `404.html` của site.
+
+**Đừng xóa file này.** Nếu không có cấu hình Wrangler, `wrangler deploy` có thể
+lấy thư mục gốc của repo và làm lộ `content/*.md`, `tools/`, `package.json` cùng
+các file nguồn khác. Với `assets.directory` là `./_site`, chỉ site đã stage được
+công khai.
 
 `npm run build:pages` chạy `tools/build.mjs` (tạo index, RSS, sitemap, bundle
 và các trang bài viết tĩnh) rồi `tools/stage.mjs` (gom file cần deploy vào
 `_site/`). Không đưa `dashboard/`, `tools/`, `node_modules/` hay file Markdown
 nguồn lên hosting.
 
-Mỗi lần push lên nhánh `main`, Cloudflare Pages tự build và deploy lại. Nếu
-Cloudflare đang trỏ vào repo GitHub, không cần thêm workflow GitHub Actions.
+Nếu bạn dùng **Pages** cổ điển thay vì Worker, cấu hình là build command
+`npm run build:pages` và output directory `_site`.
+
+Mỗi lần push lên nhánh `main`, Workers Builds tự build và deploy lại. Không cần
+workflow GitHub Actions.
 
 ### 2.2. Tên miền
 
-1. **Workers & Pages** → project → **Custom domains**.
+1. **Workers & Pages** → Worker → **Settings → Domains & Routes**.
 2. Thêm `tranhaidang.cc.cd` (và `www` nếu muốn).
 3. Cloudflare tự tạo bản ghi DNS khi tên miền nằm trong cùng tài khoản.
 4. Đảm bảo `content/site.json` có:
@@ -102,18 +134,18 @@ Cloudflare đang trỏ vào repo GitHub, không cần thêm workflow GitHub Acti
 ### 2.3. Tắt GitHub Pages (giữ repo)
 
 1. Mở repo trên GitHub → **Settings** → **Pages**.
-2. Mục **Build and deployment** → **Source**: chọn **None** (hoặc bấm
-   **Disable** nếu có).
-3. Nếu đã từng đặt **Custom domain** ở GitHub Pages, xóa tên miền đó để tránh
-   xung đột DNS với Cloudflare.
+2. Bấm **Unpublish site** trong ô “Your site is live at …” rồi xác nhận. Giao
+   diện GitHub hiện tại không có mục **Source: None**; unpublish là cách tắt.
+3. Nếu đã từng đặt **Custom domain** ở GitHub Pages, xóa tên miền đó trước để
+   tránh xung đột DNS với Cloudflare.
 4. Vào **Settings → Environments** → xóa môi trường `github-pages` (không bắt
    buộc, nhưng giúp dọn dẹp).
 5. Workflow `.github/workflows/pages.yml` đã được xóa khỏi repo, nên các lần
    push sau không còn deploy lên GitHub Pages.
 
 Repo, commit, issue và GitHub Pages cũ không mất dữ liệu; chỉ website
-`https://tranhaidang14.github.io/` ngừng được phục vụ (có thể cần vài phút để
-DNS/CDN của GitHub cập nhật).
+`https://tranhaidang14.github.io/` ngừng được phục vụ (GitHub CDN có thể còn
+cache một lúc, sau đó trả 404).
 
 ### 2.4. Sau khi đổi nội dung
 
@@ -124,7 +156,7 @@ git commit -m "Thêm bài viết mới"
 git push
 ```
 
-Cloudflare Pages tự build lại. Có thể chạy `npm run build:pages` để kiểm tra
+Cloudflare tự build lại. Có thể chạy `npm run build:pages` để kiểm tra
 `_site/` trước khi push.
 
 ### 2.5. SEO sau khi deploy
@@ -550,7 +582,7 @@ Hoặc tắt tiến trình đang giữ cổng:
 fuser -k 4173/tcp
 ```
 
-### Cloudflare Pages build báo lỗi
+### Cloudflare Workers build báo lỗi
 
 1. Mở Cloudflare → **Workers & Pages** → project → **Deployments** → chọn lần
    deploy lỗi → xem log của bước build.
@@ -561,8 +593,9 @@ fuser -k 4173/tcp
    ```
 
 3. Sửa lỗi nếu có, commit và push lại.
-4. Kiểm tra **Settings → Build**: build command là `npm run build:pages`, output
-   directory là `_site`.
+4. Kiểm tra **Settings → Build**: build command là `npm run build:pages`, deploy
+   command là `npx wrangler deploy`; kiểm tra `wrangler.jsonc` trỏ đúng
+   `./_site` và đúng tên Worker.
 
 ### Push bị từ chối (`rejected`, `fetch first`)
 
@@ -603,13 +636,12 @@ sẽ biến mất khỏi site.
 
 ## 7. Giới hạn miễn phí cần biết
 
-Cloudflare Pages (gói Free) có giới hạn mềm:
+Cloudflare Workers (gói Free) rất thoải mái cho site tĩnh:
 
-- **500 lần build/tháng** cho mỗi project.
-- Băng thông không giới hạn.
-- Tối đa **20.000 tệp** mỗi site.
-- Mỗi tệp tối đa **25 MiB**.
-- Mỗi lần build tối đa 20 phút.
+- Request tới static assets **miễn phí, không giới hạn**.
+- Không tốn thêm phí lưu trữ asset.
+- Build và deploy chạy trên hạ tầng Cloudflare.
+- Site rất lớn mới chạm giới hạn số tệp/kích thước tệp của nền tảng.
 
 Với một site cá nhân vài chục bài, các giới hạn này rất rộng rãi.
 
@@ -637,6 +669,6 @@ git commit -m "Mô tả thay đổi"
 git push
 ```
 
-Sau khi push, Cloudflare Pages tự build và deploy. Theo dõi trong
-**Workers & Pages → project → Deployments**. Site thật:
+Sau khi push, Workers Builds tự build và deploy. Theo dõi trong
+**Workers & Pages → Worker → Deployments**. Site thật:
 **<https://tranhaidang.cc.cd/>**

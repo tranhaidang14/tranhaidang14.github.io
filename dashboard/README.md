@@ -92,5 +92,5 @@ PREVIEW_URL=http://localhost:4175 PORT=4176 npm start
 - Không tự xóa hàng loạt; chỉ xóa đúng tệp khi bạn bấm nút và xác nhận.
 - Không có tính năng ghi đè: tệp trùng tên được đặt tên mới thay vì thay thế.
 - Dashboard không nằm trong `_site/` và không được bước stage của Cloudflare
-  Pages đưa lên mạng. Nếu muốn giữ nó hoàn toàn riêng, có thể chép thư mục này
+  đưa lên mạng. Nếu muốn giữ nó hoàn toàn riêng, có thể chép thư mục này
   sang một repo khác rồi dùng `SITE_ROOT`.
