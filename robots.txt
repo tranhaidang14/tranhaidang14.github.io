@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /dashboard/
 
-Sitemap: https://tranhaidang14.github.io/sitemap.xml
+Sitemap: https://tranhaidang.cc.cd/sitemap.xml

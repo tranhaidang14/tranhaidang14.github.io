@@ -131,7 +131,7 @@
           link.href = data.url;
           link.innerHTML = `<span class="suggestion__title">${escapeHTML(data.title)}</span><span class="suggestion__meta">${escapeHTML(data.category)} · ${escapeHTML(formatDateShort(data.date, getLang()))}</span>`;
         } else {
-          link.href = `library.html#${encodeURIComponent(data.id)}`;
+          link.href = `/library#${encodeURIComponent(data.id)}`;
           const kind = t(data.type === "document" ? "library.documentKicker" : "library.plateKicker");
           link.innerHTML = `<span class="suggestion__title">${escapeHTML(data.title)}</span><span class="suggestion__meta">${escapeHTML(kind)} · ${escapeHTML(data.collection)} · ${escapeHTML(formatDateShort(data.date, getLang()))}</span>`;
         }
@@ -212,8 +212,8 @@
           all.className = "suggestion suggestion--all";
           const hasPosts = scored.some((match) => match.entry.kind === "post");
           all.href = hasPosts
-            ? `writing.html?q=${encodeURIComponent(query)}`
-            : `library.html?q=${encodeURIComponent(query)}`;
+            ? `/writing?q=${encodeURIComponent(query)}`
+            : `/library?q=${encodeURIComponent(query)}`;
           all.textContent = t("search.seeAll", { query });
           panel.appendChild(all);
       
@@ -294,7 +294,7 @@
         form.addEventListener("submit", (event) => {
           event.preventDefault();
           const query = input.value.trim();
-          window.location.href = query ? `writing.html?q=${encodeURIComponent(query)}` : "writing.html";
+          window.location.href = query ? `/writing?q=${encodeURIComponent(query)}` : "/writing";
         });
       }
       
@@ -355,14 +355,14 @@
           try {
             const posts = await loadRandomPool();
             if (!posts.length) {
-              window.location.href = "writing.html";
+              window.location.href = "/writing";
               return;
             }
             const current = new URLSearchParams(window.location.search).get("p");
             const pick = pickRandom(posts, current);
             window.location.href = pick.url;
           } catch {
-            window.location.href = "writing.html";
+            window.location.href = "/writing";
           }
         });
       
@@ -620,7 +620,7 @@
         "footer.license": "Văn bản theo",
         "footer.photos": "ảnh và bản vẽ thuộc về tác giả.",
         "footer.lastEdited": "Trang này được sửa lần cuối vào",
-        "footer.colophon": "Trình bày bằng EB Garamond & UnifrakturMaguntia · HTML, CSS & JavaScript thuần · Lưu trữ trên GitHub Pages",
+        "footer.colophon": "Trình bày bằng EB Garamond & UnifrakturMaguntia · HTML, CSS & JavaScript thuần · Lưu trữ trên Cloudflare Pages",
       
         "home.title": "Trần Hải Đăng — Bách khoa cá nhân",
         "home.description": "Một cuốn bách khoa cá nhân về toán học, ảnh chụp, và những ngày đáng nhớ.",
@@ -792,7 +792,7 @@
         "about.software": "Phần mềm",
         "about.softwareText": "HTML, CSS và JavaScript thuần. Marked cho Markdown. Không framework, không cơ sở dữ liệu, không theo dõi.",
         "about.hosting": "Lưu trữ",
-        "about.hostingText": "GitHub Pages, dựng từ một kho tệp vẫn còn dễ hiểu sau hai mươi năm.",
+        "about.hostingText": "Cloudflare Pages, dựng từ một kho tệp vẫn còn dễ hiểu sau hai mươi năm.",
         "about.editing": "Biên tập",
         "about.editingText": "Mỗi bài một tệp Markdown, mỗi kệ thư viện một thư mục. Dựng lại bằng một lệnh.",
         "about.license": "Giấy phép",
@@ -1295,7 +1295,7 @@
             <p class="kicker">${t("home.emptyFeatureKicker")}</p>
             <p class="shelf-feature__title">${t("home.emptyFeatureTitle")}</p>
             <p class="shelf-feature__summary">${t("home.emptyFeatureText")}</p>
-            <a class="arrow-link" href="writing.html">${t("home.emptyFeatureLink")} <span aria-hidden="true">→</span></a>`;
+            <a class="arrow-link" href="/writing">${t("home.emptyFeatureLink")} <span aria-hidden="true">→</span></a>`;
           return;
         }
       
@@ -1338,7 +1338,7 @@
           .slice(0, 4)
           .map(
             (item) => `
-            <a class="shelf-plate" href="library.html#${encodeURIComponent(item.id)}">
+            <a class="shelf-plate" href="/library#${encodeURIComponent(item.id)}">
               <span class="shelf-plate__frame"><img src="${escapeHTML(item.src)}" alt="${escapeHTML(item.title)}" decoding="async"></span>
               <span class="shelf-plate__caption">${escapeHTML(item.title)}</span>
               <span class="shelf-plate__meta">${t("home.plateMeta", { date: formatDateShort(item.date, getLang()) })}</span>
@@ -1376,7 +1376,7 @@
           .slice(0, 3)
           .map(
             (item) => `
-            <a class="mini-plate" href="library.html#${encodeURIComponent(item.id)}">
+            <a class="mini-plate" href="/library#${encodeURIComponent(item.id)}">
               <img src="${escapeHTML(item.src)}" alt="${escapeHTML(item.title)}" decoding="async">
               <span>${escapeHTML(item.title)}</span>
             </a>`

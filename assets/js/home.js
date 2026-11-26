@@ -348,7 +348,7 @@ function renderFeature(container, post) {
       <p class="kicker">${t("home.emptyFeatureKicker")}</p>
       <p class="shelf-feature__title">${t("home.emptyFeatureTitle")}</p>
       <p class="shelf-feature__summary">${t("home.emptyFeatureText")}</p>
-      <a class="arrow-link" href="writing.html">${t("home.emptyFeatureLink")} <span aria-hidden="true">→</span></a>`;
+      <a class="arrow-link" href="/writing">${t("home.emptyFeatureLink")} <span aria-hidden="true">→</span></a>`;
     return;
   }
 
@@ -391,7 +391,7 @@ function renderGallery(container, items) {
     .slice(0, 4)
     .map(
       (item) => `
-      <a class="shelf-plate" href="library.html#${encodeURIComponent(item.id)}">
+      <a class="shelf-plate" href="/library#${encodeURIComponent(item.id)}">
         <span class="shelf-plate__frame"><img src="${escapeHTML(item.src)}" alt="${escapeHTML(item.title)}" decoding="async"></span>
         <span class="shelf-plate__caption">${escapeHTML(item.title)}</span>
         <span class="shelf-plate__meta">${t("home.plateMeta", { date: formatDateShort(item.date, getLang()) })}</span>
@@ -429,7 +429,7 @@ function renderMiniGallery(container, photos) {
     .slice(0, 3)
     .map(
       (item) => `
-      <a class="mini-plate" href="library.html#${encodeURIComponent(item.id)}">
+      <a class="mini-plate" href="/library#${encodeURIComponent(item.id)}">
         <img src="${escapeHTML(item.src)}" alt="${escapeHTML(item.title)}" decoding="async">
         <span>${escapeHTML(item.title)}</span>
       </a>`

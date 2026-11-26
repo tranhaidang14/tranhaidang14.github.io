@@ -8,6 +8,37 @@
   <meta property="og:title" content="Trần Hải Đăng — Bách khoa cá nhân">
   <meta property="og:description" content="Ghi chú, chứng minh và những ngày đáng nhớ, được giữ như một thư viện nhỏ.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tranhaidang.cc.cd/">
+  <meta property="og:site_name" content="Trần Hải Đăng">
+  <meta property="og:locale" content="vi_VN">
+  <meta property="og:image" content="https://tranhaidang.cc.cd/assets/og-default.png">
+  <meta property="og:image:alt" content="Trần Hải Đăng — Bách khoa cá nhân">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Trần Hải Đăng — Bách khoa cá nhân">
+  <meta name="twitter:description" content="Một cuốn bách khoa cá nhân về toán học, ảnh chụp, và những ngày đáng nhớ.">
+  <meta name="twitter:image" content="https://tranhaidang.cc.cd/assets/og-default.png">
+  <link rel="canonical" href="https://tranhaidang.cc.cd/">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Trần Hải Đăng — Bách khoa cá nhân",
+    "url": "https://tranhaidang.cc.cd/",
+    "description": "Một cuốn bách khoa cá nhân về toán học, ảnh chụp, và những ngày đáng nhớ.",
+    "inLanguage": "vi",
+    "publisher": {
+      "@type": "Person",
+      "name": "Trần Hải Đăng",
+      "url": "https://tranhaidang.cc.cd/about"
+    },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://tranhaidang.cc.cd/writing?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="alternate" type="application/rss+xml" title="Bài viết — RSS" href="feed.xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,7 +57,7 @@
 
   <header class="masthead">
     <div class="wrap masthead__bar">
-      <a class="brand" href="index.html" aria-label="Trang chủ" data-i18n-aria-label="nav.home">
+      <a class="brand" href="/" aria-label="Trang chủ" data-i18n-aria-label="nav.home">
         <span class="brand__seal" data-site="seal" aria-hidden="true">H</span>
         <span class="brand__text">
           <span class="brand__name" data-site="wordmark">Hai Dang</span>
@@ -35,13 +66,13 @@
       </a>
 
       <nav class="nav" aria-label="Chính" data-i18n-aria-label="nav.primary">
-        <a href="writing.html" data-i18n="nav.writing">Bài viết</a>
-        <a href="library.html" data-i18n="nav.library">Thư viện</a>
-        <a href="about.html" data-i18n="nav.about">Giới thiệu</a>
-        <a href="writing.html" data-random><span data-i18n="nav.random">Ngẫu nhiên</span> <span aria-hidden="true">↻</span></a>
+        <a href="/writing" data-i18n="nav.writing">Bài viết</a>
+        <a href="/library" data-i18n="nav.library">Thư viện</a>
+        <a href="/about" data-i18n="nav.about">Giới thiệu</a>
+        <a href="/writing" data-random><span data-i18n="nav.random">Ngẫu nhiên</span> <span aria-hidden="true">↻</span></a>
       </nav>
 
-      <form class="quick-search" role="search" action="writing.html" data-search-form>
+      <form class="quick-search" role="search" action="/writing" data-search-form>
         <svg class="quick-search__icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="m13 13 4 4" stroke="currentColor" stroke-width="1.5"/></svg>
         <input type="search" name="q" placeholder="Tìm trong bách khoa…" aria-label="Tìm trong bách khoa" data-i18n-placeholder="search.placeholder" data-i18n-aria-label="search.label" autocomplete="off" data-search-input>
         <kbd aria-hidden="true">/</kbd>
@@ -52,15 +83,15 @@
 
     <div class="mobile-nav" id="mobile-nav" hidden data-mobile-nav>
       <div class="wrap mobile-nav__inner">
-        <form class="quick-search quick-search--mobile" role="search" action="writing.html" data-search-form>
+        <form class="quick-search quick-search--mobile" role="search" action="/writing" data-search-form>
           <svg class="quick-search__icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="m13 13 4 4" stroke="currentColor" stroke-width="1.5"/></svg>
           <input type="search" name="q" placeholder="Tìm trong bách khoa…" aria-label="Tìm trong bách khoa" data-i18n-placeholder="search.placeholder" data-i18n-aria-label="search.label" autocomplete="off" data-search-input>
         </form>
         <nav class="mobile-nav__links" aria-label="Di động" data-i18n-aria-label="nav.mobile">
-          <a href="writing.html" data-i18n="nav.writing">Bài viết</a>
-          <a href="library.html" data-i18n="nav.library">Thư viện</a>
-          <a href="about.html" data-i18n="nav.about">Giới thiệu</a>
-          <a href="writing.html" data-random><span data-i18n="nav.randomPage">Trang ngẫu nhiên</span></a>
+          <a href="/writing" data-i18n="nav.writing">Bài viết</a>
+          <a href="/library" data-i18n="nav.library">Thư viện</a>
+          <a href="/about" data-i18n="nav.about">Giới thiệu</a>
+          <a href="/writing" data-random><span data-i18n="nav.randomPage">Trang ngẫu nhiên</span></a>
         </nav>
       </div>
     </div>
@@ -78,7 +109,7 @@
         <p class="eyebrow"><span data-i18n="home.eyebrow">Bách khoa cá nhân</span> <span class="dot">·</span> <span data-i18n="common.since">từ</span> <span data-site="since">2026</span></p>
         <h1><span data-i18n="home.titleLead">Những bài học khó quên &amp;</span><br><em data-i18n="home.titleEm"> những ngày đáng nhớ.</em></h1>
         <p class="hero__lead" data-i18n="home.lead">Một cuốn bách khoa nhỏ.</p>
-        <form class="hero-search" role="search" action="writing.html" data-search-form>
+        <form class="hero-search" role="search" action="/writing" data-search-form>
           <label class="sr-only" for="hero-q" data-i18n="search.label">Tìm kiếm</label>
           <input id="hero-q" type="search" name="q" placeholder="Tìm trong bách khoa…" aria-label="Tìm trong bách khoa" data-i18n-placeholder="search.placeholder" data-i18n-aria-label="search.label" autocomplete="off" data-search-input>
           <button type="submit" data-i18n="search.go">Tìm</button>
@@ -96,7 +127,7 @@
             <p class="eyebrow" data-i18n="home.shelfEyebrow">Từ các kệ sách</p>
             <h2 data-i18n="home.shelfTitle">Duyệt bộ sưu tập</h2>
           </div>
-          <a class="text-link" href="writing.html"><span data-i18n="home.everything">Tất cả, A–Z</span> <span aria-hidden="true">→</span></a>
+          <a class="text-link" href="/writing"><span data-i18n="home.everything">Tất cả, A–Z</span> <span aria-hidden="true">→</span></a>
         </div>
 
         <div class="shelf" data-shelf>
@@ -138,19 +169,19 @@
           </div>
         </div>
         <div class="portals">
-          <a class="portal" href="writing.html">
+          <a class="portal" href="/writing">
             <span class="portal__glyph" aria-hidden="true">∑</span>
             <h3 data-i18n="home.portalWritingTitle">Phần bài viết</h3>
             <p data-i18n="home.portalWritingText">Tiểu luận, chứng minh, và đôi khi là một ngày đáng nhớ.</p>
             <span class="portal__more"><span data-i18n="home.portalWritingMore">Vào kho lưu trữ</span> <span aria-hidden="true">→</span></span>
           </a>
-          <a class="portal" href="library.html">
+          <a class="portal" href="/library">
             <span class="portal__glyph" aria-hidden="true">▤</span>
             <h3 data-i18n="home.portalLibraryTitle">Thư viện</h3>
             <p data-i18n="home.portalLibraryText">Ảnh chụp và PDF</p>
             <span class="portal__more"><span data-i18n="home.portalLibraryMore">Mở các ngăn kéo</span> <span aria-hidden="true">→</span></span>
           </a>
-          <a class="portal" href="writing.html" data-random>
+          <a class="portal" href="/writing" data-random>
             <span class="portal__glyph" aria-hidden="true">↻</span>
             <h3 data-i18n="home.portalRandomTitle">Một trang ngẫu nhiên</h3>
             <p data-i18n="home.portalRandomText">Bởi vì, tại sao lại không?</p>
@@ -167,14 +198,14 @@
             <p class="eyebrow" data-i18n="home.recentEyebrow">Thay đổi gần đây</p>
             <h2 data-i18n="home.recentTitle">Gần đây, bên lề</h2>
           </div>
-          <a class="text-link" href="writing.html"><span data-i18n="home.allArticles">Tất cả bài viết</span> <span aria-hidden="true">→</span></a>
+          <a class="text-link" href="/writing"><span data-i18n="home.allArticles">Tất cả bài viết</span> <span aria-hidden="true">→</span></a>
         </div>
         <div class="recent-grid">
           <ol class="changes" data-changes><li class="loading-line" data-i18n="common.loadingIndex">Đang đọc mục lục…</li></ol>
           <div class="recent-library">
             <h3 class="side-title" data-i18n="home.newInLibrary">Mới trong thư viện</h3>
             <div class="mini-gallery" data-mini-gallery></div>
-            <a class="text-link" href="library.html"><span data-i18n="home.openLibrary">Mở thư viện</span> <span aria-hidden="true">→</span></a>
+            <a class="text-link" href="/library"><span data-i18n="home.openLibrary">Mở thư viện</span> <span aria-hidden="true">→</span></a>
           </div>
         </div>
       </div>
@@ -189,7 +220,7 @@
         <div class="about-strip__body">
           <p data-i18n="home.aboutP1">Đây là nơi để tôi tạo dựng nên mình, bằng những thứ giúp tôi nhớ tới mình, và nhận ra mình.</p>
           <p data-i18n="home.aboutP2">Văn bản được trình bày bằng EB Garamond, hoa văn bằng UnifrakturMaguntia, và toán học bằng LaTeX. Không framework, không cơ sở dữ liệu, không tài khoản.</p>
-          <p><a class="arrow-link" href="about.html"><span data-i18n="home.aboutLink">Đọc lời bạt</span> <span aria-hidden="true">→</span></a></p>
+          <p><a class="arrow-link" href="/about"><span data-i18n="home.aboutLink">Đọc lời bạt</span> <span aria-hidden="true">→</span></a></p>
         </div>
       </div>
     </section>
@@ -199,20 +230,20 @@
     <div class="wrap">
       <div class="footer__ornament" aria-hidden="true">❦</div>
       <p class="footer__note">
-        <span data-i18n="footer.keptBy">Một cuốn bách khoa cá nhân do</span> <a href="about.html" data-site="name">Trần Hải Đăng</a>.
+        <span data-i18n="footer.keptBy">Một cuốn bách khoa cá nhân do</span> <a href="/about" data-site="name">Trần Hải Đăng</a>.
         <span data-i18n="footer.license">Văn bản theo</span> <a data-site-license-link href="https://creativecommons.org/licenses/by-sa/4.0/"><span data-site="license">CC BY-SA 4.0</span></a>;
         <span data-i18n="footer.photos">ảnh và bản vẽ thuộc về tác giả.</span>
       </p>
       <p class="footer__note footer__note--last"><span data-i18n="footer.lastEdited">Trang này được sửa lần cuối vào</span> <span data-last-edited>Tháng 11, 2026</span>.</p>
       <nav class="footer__nav footer__nav--pages" aria-label="Chân trang" data-i18n-aria-label="nav.footer">
-        <a href="index.html" data-i18n="nav.home">Trang chủ</a>
-        <a href="writing.html" data-i18n="nav.writing">Bài viết</a>
-        <a href="library.html" data-i18n="nav.library">Thư viện</a>
-        <a href="about.html" data-i18n="nav.about">Giới thiệu</a>
+        <a href="/" data-i18n="nav.home">Trang chủ</a>
+        <a href="/writing" data-i18n="nav.writing">Bài viết</a>
+        <a href="/library" data-i18n="nav.library">Thư viện</a>
+        <a href="/about" data-i18n="nav.about">Giới thiệu</a>
         <a href="feed.xml" data-i18n="common.rss">RSS</a>
       </nav>
       <nav class="footer__nav footer__nav--elsewhere" aria-label="Nơi khác" data-i18n-aria-label="nav.elsewhere" data-site-links></nav>
-      <p class="footer__colophon" data-i18n="footer.colophon">Trình bày bằng EB Garamond &amp; UnifrakturMaguntia · HTML, CSS &amp; JavaScript thuần · Lưu trữ trên GitHub Pages</p>
+      <p class="footer__colophon" data-i18n="footer.colophon">Trình bày bằng EB Garamond &amp; UnifrakturMaguntia · HTML, CSS &amp; JavaScript thuần · Lưu trữ trên Cloudflare Pages</p>
     </div>
   </footer>
 </body>

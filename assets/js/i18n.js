@@ -51,7 +51,7 @@ const STRINGS = {
   "footer.license": "Văn bản theo",
   "footer.photos": "ảnh và bản vẽ thuộc về tác giả.",
   "footer.lastEdited": "Trang này được sửa lần cuối vào",
-  "footer.colophon": "Trình bày bằng EB Garamond & UnifrakturMaguntia · HTML, CSS & JavaScript thuần · Lưu trữ trên GitHub Pages",
+  "footer.colophon": "Trình bày bằng EB Garamond & UnifrakturMaguntia · HTML, CSS & JavaScript thuần · Lưu trữ trên Cloudflare Pages",
 
   "home.title": "Trần Hải Đăng — Bách khoa cá nhân",
   "home.description": "Một cuốn bách khoa cá nhân về toán học, ảnh chụp, và những ngày đáng nhớ.",
@@ -223,7 +223,7 @@ const STRINGS = {
   "about.software": "Phần mềm",
   "about.softwareText": "HTML, CSS và JavaScript thuần. Marked cho Markdown. Không framework, không cơ sở dữ liệu, không theo dõi.",
   "about.hosting": "Lưu trữ",
-  "about.hostingText": "GitHub Pages, dựng từ một kho tệp vẫn còn dễ hiểu sau hai mươi năm.",
+  "about.hostingText": "Cloudflare Pages, dựng từ một kho tệp vẫn còn dễ hiểu sau hai mươi năm.",
   "about.editing": "Biên tập",
   "about.editingText": "Mỗi bài một tệp Markdown, mỗi kệ thư viện một thư mục. Dựng lại bằng một lệnh.",
   "about.license": "Giấy phép",

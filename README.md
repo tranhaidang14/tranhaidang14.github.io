@@ -217,7 +217,7 @@ matter, ready for you to write in your Markdown editor. If the site is already
 running with `npm start`, just reload the page. See `dashboard/README.md` for
 configuration and for moving the dashboard to a different folder or repository.
 
-The dashboard is not part of `_site/`, and the GitHub Pages workflow does not
+The dashboard is not part of `_site/`, and the Cloudflare Pages build does not
 copy it, so it stays off the public site.
 
 ## Site identity
@@ -232,7 +232,7 @@ Edit `content/site.json` before publishing:
   "tagline": "Bách khoa cá nhân",
   "description": "Một cuốn bách khoa cá nhân về toán học, ảnh chụp, và những ngày đáng nhớ.",
   "since": 2026,
-  "url": "https://tranhaidang14.github.io",
+  "url": "https://tranhaidang.cc.cd",
   "email": "tranhaidangg2@gmail.com",
   "license": "CC BY-SA 4.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
@@ -265,24 +265,56 @@ reference the key from the page or script.
 The `lang` attribute on `<html>` is fixed to `vi`, and the RSS feed language is
 set in `tools/build.mjs`.
 
-## Deploying to GitHub Pages
+## Deploying to Cloudflare Pages
 
-The included workflow at `.github/workflows/pages.yml` builds the indexes and
-publishes the site whenever `main` is pushed.
+The site is live at <https://tranhaidang.cc.cd/>. GitHub Pages is no longer used;
+the GitHub repository is kept as the source of truth.
 
-1. Create a user-site repository named `yourname.github.io`, and push this
-   folder to it. (A project repository also works; see the note below.)
-2. In **Settings → Pages**, choose **GitHub Actions** as the source.
-3. Update `url`, `repo`, `email`, and `links` in `content/site.json`.
-4. Add your own posts and library files (see above), then run `npm run build`.
-5. Push to `main`.
+### Cloudflare Pages settings
 
-The generated indexes, `feed.xml`, `sitemap.xml`, data scripts, and
-`assets/js/app/` bundles are committed as well. That means the site can also be
-served directly from a branch without running a build step. Run `npm run build`
-before committing if you have changed content locally.
+- **Build command**: `npm run build:pages`
+- **Build output directory**: `_site`
+- **Node version**: 22 (or 20+)
 
-`.nojekyll` is present so GitHub Pages serves the content folders unchanged.
+`npm run build:pages` runs `tools/build.mjs` (indexes, feed, sitemap, bundles,
+and one static HTML page per post) and then `tools/stage.mjs`, which copies only
+the deployable files into `_site/`. The dashboard, tools, `node_modules/`, and
+the Markdown sources are never published.
+
+Update `url` in `content/site.json` whenever the domain changes, then run
+`npm run build` so canonical URLs, Open Graph tags, the sitemap, and the feed all
+use the new address.
+
+### Static, crawlable post pages
+
+Every published post also exists as a standalone HTML file at the repository
+root (`<slug>.html`). Cloudflare Pages serves it at `/<slug>` and redirects the
+`.html` form, so internal links, canonical URLs, and the sitemap all use the
+clean URL. `article.html?p=…` remains as a legacy shell and is marked `noindex`.
+
+After changing content, run `npm run build` before committing. The generated
+indexes, `feed.xml`, `sitemap.xml`, data scripts, post pages, and
+`assets/js/app/` bundles are committed so the site also works without a build
+step.
+
+### Turning off GitHub Pages
+
+1. Open the repository on GitHub → **Settings** → **Pages**.
+2. Set **Build and deployment → Source** to **None** (or click **Disable**).
+3. Remove any **Custom domain** configured there so it cannot conflict with
+   Cloudflare DNS.
+4. Optionally delete the `github-pages` environment under **Settings →
+   Environments**.
+
+The repository and its history stay intact; only
+`https://<user>.github.io/` stops serving.
+
+### Search engines
+
+Submit `https://tranhaidang.cc.cd/sitemap.xml` in Google Search Console and Bing
+Webmaster Tools, verify the domain, and use URL Inspection to request indexing
+for new posts. Each post ships with a unique title, description, canonical URL,
+Open Graph/Twitter card, and `BlogPosting` JSON-LD.
 
 ## Notes on the design
 

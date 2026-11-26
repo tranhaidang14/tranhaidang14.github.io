@@ -1,13 +1,14 @@
 # Hướng dẫn deploy và đăng nội dung
 
-Tài liệu này hướng dẫn cách đưa trang web lên **GitHub Pages miễn phí**, sau đó
-cách đăng bài viết mới và thêm ảnh/PDF vào thư viện.
+Tài liệu này hướng dẫn cách deploy trang web lên **Cloudflare Pages** (đang chạy
+tại <https://tranhaidang.cc.cd/>), sau đó cách đăng bài viết mới và thêm ảnh/PDF
+vào thư viện.
 
 Trang web là site tĩnh: không có cơ sở dữ liệu, không cần server riêng. Mọi thứ
-được tạo từ các file trong thư mục này và tự động build lại trên GitHub.
+được tạo từ các file trong thư mục này và tự động build lại trên Cloudflare.
 
-> File hướng dẫn này không được deploy lên trang web. Workflow chỉ copy các file
-> cần thiết của site.
+> File hướng dẫn này không được deploy lên trang web. `tools/stage.mjs` chỉ copy
+> các file cần thiết của site vào `_site/`.
 
 ---
 
@@ -55,7 +56,7 @@ Mở <http://127.0.0.1:4174>. Dashboard giúp bạn:
 
 Nó **không sửa nội dung bài viết, ảnh hay PDF**. Sau mỗi thao tác, dashboard tự
 build lại site; nếu site đang chạy bằng `npm start`, chỉ cần tải lại trang.
-Dashboard chỉ nghe trên `127.0.0.1`, không được deploy lên GitHub Pages. Chi
+Dashboard chỉ nghe trên `127.0.0.1`, không được deploy lên Cloudflare Pages. Chi
 tiết và cách chuyển sang thư mục/repo khác: xem `dashboard/README.md`.
 
 Cách nhanh nhất để mở cả hai: chạy `npm run dev` ở thư mục gốc — dashboard và
@@ -63,120 +64,79 @@ site cùng khởi động, hai link được in ra một lần.
 
 ---
 
-## 2. Deploy miễn phí bằng GitHub Pages
+## 2. Deploy miễn phí bằng Cloudflare Pages
 
-### 2.1. Điều kiện
+Trang đang chạy tại **<https://tranhaidang.cc.cd/>**. GitHub Pages đã được gỡ
+khỏi quy trình deploy; repo GitHub vẫn được giữ làm nơi lưu mã nguồn.
 
-- Tài khoản GitHub miễn phí.
-- Repository phải là **public** (gói Free của GitHub Pages không hỗ trợ repo
-  private).
-- Site này đã cấu hình cho địa chỉ:
-  **<https://tranhaidang14.github.io/>**
+### 2.1. Cấu hình Cloudflare Pages
 
-### 2.2. Tạo repository
+Trong dashboard Cloudflare → **Workers & Pages** → project của bạn →
+**Settings → Build**:
 
-1. Vào <https://github.com/new>.
-2. Đặt tên repo chính xác là:
+- **Build command**: `npm run build:pages`
+- **Build output directory**: `_site`
+- **Node version**: 22 (hoặc 20+)
 
-   ```text
-   tranhaidang14.github.io
+`npm run build:pages` chạy `tools/build.mjs` (tạo index, RSS, sitemap, bundle
+và các trang bài viết tĩnh) rồi `tools/stage.mjs` (gom file cần deploy vào
+`_site/`). Không đưa `dashboard/`, `tools/`, `node_modules/` hay file Markdown
+nguồn lên hosting.
+
+Mỗi lần push lên nhánh `main`, Cloudflare Pages tự build và deploy lại. Nếu
+Cloudflare đang trỏ vào repo GitHub, không cần thêm workflow GitHub Actions.
+
+### 2.2. Tên miền
+
+1. **Workers & Pages** → project → **Custom domains**.
+2. Thêm `tranhaidang.cc.cd` (và `www` nếu muốn).
+3. Cloudflare tự tạo bản ghi DNS khi tên miền nằm trong cùng tài khoản.
+4. Đảm bảo `content/site.json` có:
+
+   ```json
+   { "url": "https://tranhaidang.cc.cd" }
    ```
 
-   Tên này tạo **user site**, cho URL gốc `https://tranhaidang14.github.io/`.
+   Sau đó chạy `npm run build` để canonical, sitemap và RSS dùng đúng tên miền.
 
-3. Chọn **Public**.
-4. **Không** tick “Add a README file”, “Add .gitignore” hay “Choose a license”
-   để tránh phải xử lý conflict khi push lần đầu.
-5. Bấm **Create repository**.
+### 2.3. Tắt GitHub Pages (giữ repo)
 
-### 2.3. Đưa code lên GitHub
+1. Mở repo trên GitHub → **Settings** → **Pages**.
+2. Mục **Build and deployment** → **Source**: chọn **None** (hoặc bấm
+   **Disable** nếu có).
+3. Nếu đã từng đặt **Custom domain** ở GitHub Pages, xóa tên miền đó để tránh
+   xung đột DNS với Cloudflare.
+4. Vào **Settings → Environments** → xóa môi trường `github-pages` (không bắt
+   buộc, nhưng giúp dọn dẹp).
+5. Workflow `.github/workflows/pages.yml` đã được xóa khỏi repo, nên các lần
+   push sau không còn deploy lên GitHub Pages.
 
-Thư mục hiện tại chưa phải git repo. Chạy lần lượt:
+Repo, commit, issue và GitHub Pages cũ không mất dữ liệu; chỉ website
+`https://tranhaidang14.github.io/` ngừng được phục vụ (có thể cần vài phút để
+DNS/CDN của GitHub cập nhật).
 
-```bash
-cd /media/Data/Workspace/Project/tranhaidang
-
-git init
-git add .
-git commit -m "Initial personal encyclopedia"
-git branch -M main
-
-# Dùng SSH (khuyến nghị nếu đã cấu hình SSH key)
-git remote add origin git@github.com:tranhaidang14/tranhaidang14.github.io.git
-
-# Hoặc dùng HTTPS (mật khẩu phải là Personal Access Token, không phải mật khẩu GitHub)
-# git remote add origin https://github.com/tranhaidang14/tranhaidang14.github.io.git
-
-git push -u origin main
-```
-
-Nếu chưa cấu hình git identity:
+### 2.4. Sau khi đổi nội dung
 
 ```bash
-git config --global user.name "Trần Hải Đăng"
-git config --global user.email "tranhaidangg2@gmail.com"
-```
-
-Nếu chưa có SSH key hoặc token, cách nhanh nhất là dùng **GitHub Desktop** hoặc
-chạy `gh auth login` (GitHub CLI).
-
-### 2.4. Bật GitHub Pages
-
-Trên GitHub, vào repository:
-
-1. **Settings** → **Pages**.
-2. Mục **Build and deployment** → **Source**: chọn **GitHub Actions**.
-3. Không cần chọn branch hay thư mục.
-
-Workflow có sẵn tại `.github/workflows/pages.yml` sẽ tự chạy mỗi khi push lên
-nhánh `main`.
-
-Nếu workflow chạy lần đầu trước khi bật Pages và bị lỗi:
-
-1. Vào tab **Actions**.
-2. Chọn workflow **Deploy to GitHub Pages**.
-3. Bấm **Re-run all jobs**.
-
-### 2.5. Kiểm tra kết quả
-
-1. Vào tab **Actions**, đợi workflow **Deploy to GitHub Pages** có dấu ✅ xanh.
-2. Mở:
-
-   **<https://tranhaidang14.github.io/>**
-
-Lần deploy đầu có thể mất 1–2 phút. Nếu vẫn thấy 404, đợi thêm vài phút rồi
-refresh.
-
-### 2.6. Cập nhật site về sau
-
-Mỗi lần sửa nội dung hoặc code:
-
-```bash
-npm run build        # tạo lại dữ liệu và bundle
+npm run build        # tạo lại index, RSS, sitemap, bundle và trang bài viết
 git add .
 git commit -m "Thêm bài viết mới"
 git push
 ```
 
-GitHub Actions sẽ tự build và deploy lại. Không cần chạy lệnh deploy thủ công.
+Cloudflare Pages tự build lại. Có thể chạy `npm run build:pages` để kiểm tra
+`_site/` trước khi push.
 
-### 2.7. Nếu đổi tên repo hoặc dùng tên miền riêng
+### 2.5. SEO sau khi deploy
 
-Mở `content/site.json` và cập nhật:
-
-```json
-{
-  "url": "https://tranhaidang14.github.io",
-  "repo": "https://github.com/tranhaidang14/tranhaidang14.github.io",
-  "email": "tranhaidangg2@gmail.com"
-}
-```
-
-- Repo tên khác `<username>.github.io` sẽ có URL dạng
-  `https://<username>.github.io/<ten-repo>/`. Khi đó phải đổi `url` cho đúng.
-- Muốn dùng tên miền riêng: **Settings → Pages → Custom domain**, sau đó trỏ DNS
-  (CNAME cho `www`, hoặc bản ghi A cho tên miền gốc) và cập nhật `url`.
-  Tên miền phải mua, còn phần hosting của GitHub Pages vẫn miễn phí.
+- Mở **Google Search Console** → thêm property `tranhaidang.cc.cd` → xác minh
+  (DNS hoặc thẻ HTML) → **Sitemaps** → gửi
+  `https://tranhaidang.cc.cd/sitemap.xml`.
+- Làm tương tự với **Bing Webmaster Tools**.
+- Dùng **URL Inspection** để yêu cầu Google index từng bài mới.
+- Mỗi bài có URL sạch dạng `https://tranhaidang.cc.cd/<slug>`, title/meta riêng,
+  Open Graph/Twitter card và JSON-LD `BlogPosting`; nội dung đã nằm trong HTML
+  nên crawler đọc được ngay cả khi không chạy JavaScript.
 
 ---
 
@@ -590,17 +550,19 @@ Hoặc tắt tiến trình đang giữ cổng:
 fuser -k 4173/tcp
 ```
 
-### GitHub Actions báo lỗi
+### Cloudflare Pages build báo lỗi
 
-1. Vào tab **Actions** → chọn lần chạy lỗi → mở bước bị đỏ.
-2. Chạy lại locally:
+1. Mở Cloudflare → **Workers & Pages** → project → **Deployments** → chọn lần
+   deploy lỗi → xem log của bước build.
+2. Chạy lại locally để thấy lỗi đầy đủ:
 
    ```bash
-   npm run build
+   npm run build:pages
    ```
 
 3. Sửa lỗi nếu có, commit và push lại.
-4. Kiểm tra **Settings → Pages → Source** đã là **GitHub Actions** chưa.
+4. Kiểm tra **Settings → Build**: build command là `npm run build:pages`, output
+   directory là `_site`.
 
 ### Push bị từ chối (`rejected`, `fetch first`)
 
@@ -620,7 +582,7 @@ git push
 
 - Đường dẫn phải tính từ thư mục gốc của site, ví dụ
   `content/library/photos/anh.jpg`.
-- GitHub chạy trên Linux nên phân biệt chữ hoa/chữ thường:
+- Máy build chạy Linux nên phân biệt chữ hoa/chữ thường:
   `Anh.JPG` khác `anh.jpg`.
 - Tên file có dấu cách hoặc ký tự đặc biệt dễ gây lỗi; nên đổi sang chữ thường,
   không dấu, dùng dấu gạch ngang.
@@ -641,14 +603,15 @@ sẽ biến mất khỏi site.
 
 ## 7. Giới hạn miễn phí cần biết
 
-GitHub Pages miễn phí nhưng có giới hạn mềm:
+Cloudflare Pages (gói Free) có giới hạn mềm:
 
-- Repository nên dưới **1 GB**.
-- Site đã deploy nên dưới **1 GB**.
-- Băng thông khoảng **100 GB/tháng**.
-- Mỗi file trong Git tối đa **100 MB**.
+- **500 lần build/tháng** cho mỗi project.
+- Băng thông không giới hạn.
+- Tối đa **20.000 tệp** mỗi site.
+- Mỗi tệp tối đa **25 MiB**.
+- Mỗi lần build tối đa 20 phút.
 
-Workflow dùng GitHub Actions, miễn phí với repository public.
+Với một site cá nhân vài chục bài, các giới hạn này rất rộng rãi.
 
 Vì vậy:
 
@@ -674,5 +637,6 @@ git commit -m "Mô tả thay đổi"
 git push
 ```
 
-Sau khi push, mở tab **Actions** trên GitHub để theo dõi deploy. Site thật:
-**<https://tranhaidang14.github.io/>**
+Sau khi push, Cloudflare Pages tự build và deploy. Theo dõi trong
+**Workers & Pages → project → Deployments**. Site thật:
+**<https://tranhaidang.cc.cd/>**

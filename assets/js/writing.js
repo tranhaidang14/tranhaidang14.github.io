@@ -192,7 +192,7 @@ function entryMarkup(post) {
     .slice(0, 3)
     .map(
       (tag, index) =>
-        `<a class="tag" href="writing.html?tag=${encodeURIComponent(post.tagSlugs[index])}">${escapeHTML(tag)}</a>`
+        `<a class="tag" href="/writing?tag=${encodeURIComponent(post.tagSlugs[index])}">${escapeHTML(tag)}</a>`
     )
     .join("");
 
@@ -206,7 +206,7 @@ function entryMarkup(post) {
         <h2><a href="${post.url}">${escapeHTML(post.title)}</a></h2>
         <p class="entry__summary">${escapeHTML(post.summary)}</p>
         <div class="entry__meta">
-          <a href="writing.html?cat=${encodeURIComponent(post.categorySlug)}">${escapeHTML(post.category)}</a>
+          <a href="/writing?cat=${encodeURIComponent(post.categorySlug)}">${escapeHTML(post.category)}</a>
           <span>${t("common.minRead", { n: post.minutes })}</span>
           <span>${t("common.wordsCount", { n: post.words.toLocaleString(getLang() === "vi" ? "vi-VN" : "en-GB") })}</span>
           ${tags}

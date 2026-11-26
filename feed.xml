@@ -2,17 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Trần Hải Đăng — Bách khoa cá nhân</title>
-    <link>https://tranhaidang14.github.io/</link>
-    <atom:link href="https://tranhaidang14.github.io/feed.xml" rel="self" type="application/rss+xml" />
+    <link>https://tranhaidang.cc.cd/</link>
+    <atom:link href="https://tranhaidang.cc.cd/feed.xml" rel="self" type="application/rss+xml" />
     <description>Một cuốn bách khoa cá nhân về toán học, ảnh chụp, và những ngày đáng nhớ.</description>
     <language>vi</language>
-    <lastBuildDate>Mon, 23 Nov 2026 22:30:30 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 26 Nov 2026 05:07:19 GMT</lastBuildDate>
     <item>
       <title>Hệ tọa độ cực(Polar Coordinates) và ứng dụng vào bài toán diện tích hình phẳng</title>
-      <link>https://tranhaidang14.github.io/article.html?p=he-toa-do-cuc-polar-coordinates-va-ung-dung-vao-bai-toan-dien-tich-hinh-phang</link>
-      <guid isPermaLink="true">https://tranhaidang14.github.io/article.html?p=he-toa-do-cuc-polar-coordinates-va-ung-dung-vao-bai-toan-dien-tich-hinh-phang</guid>
+      <link>https://tranhaidang.cc.cd/he-toa-do-cuc-polar-coordinates-va-ung-dung-vao-bai-toan-dien-tich-hinh-phang</link>
+      <guid isPermaLink="true">https://tranhaidang.cc.cd/he-toa-do-cuc-polar-coordinates-va-ung-dung-vao-bai-toan-dien-tich-hinh-phang</guid>
       <pubDate>Sat, 21 Nov 2026 12:00:00 GMT</pubDate>
       <category>Giải tích</category>
+      <category>Hình học giải tích</category>
+      <category>Nguyên hàm - tích phân</category>
       <description>Đây là một dạng kiến thức khá đặc thù mà chỉ áp dụng được cho một số bài đặc biệt. Tuy nhiên, nếu thành thạo nó sẽ là một công cụ đắc lực giảm đi nhiều phần sai xót cho những bài toán tưởng chừng phức tạp.</description>
     </item>
   </channel>

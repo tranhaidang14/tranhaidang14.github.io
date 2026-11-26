@@ -15,7 +15,10 @@ import {
 import { t, getLang, onLanguageChange } from "./i18n.js";
 
 const params = new URLSearchParams(location.search);
-const slug = params.get("p");
+/* Static post pages carry the slug on <html>; article.html?p=… keeps working
+ * for older links and for the dashboard preview. */
+const slug = params.get("p") || document.documentElement.dataset.postSlug || null;
+const prerendered = document.documentElement.dataset.prerendered === "true";
 
 let currentPost = null;
 let currentSite = null;
@@ -86,6 +89,20 @@ function setMeta(attribute, name, content) {
     document.head.appendChild(tag);
   }
   tag.setAttribute("content", content);
+}
+
+/* Some tags (article:tag) legitimately repeat, so they need their own node. */
+function appendMeta(attribute, name, content) {
+  if (!content) return;
+  const tag = document.createElement("meta");
+  tag.setAttribute(attribute, name);
+  tag.setAttribute("content", content);
+  document.head.appendChild(tag);
+}
+
+function firstImageInMarkdown(markdown) {
+  const match = String(markdown || "").match(/!\[[^\]]*\]\(\s*([^)\s]+)(?:\s+["'][^"']*["'])?\s*\)/);
+  return match ? match[1] : "";
 }
 
 function setText(element, value) {
@@ -190,7 +207,7 @@ function modifierPressed(event) {
 
 function imageHref(link) {
   try {
-    const url = new URL(link.getAttribute("href"), location.href);
+    const url = new URL(link.getAttribute("href"), document.baseURI);
     return /\.(png|jpe?g|gif|webp|avif|svg)$/i.test(url.pathname) ? url.href : null;
   } catch {
     return null;
@@ -257,7 +274,7 @@ function decodeHash(value) {
 function pdfTarget(link) {
   let url;
   try {
-    url = new URL(link.getAttribute("href"), location.href);
+    url = new URL(link.getAttribute("href"), document.baseURI);
   } catch {
     return null;
   }
@@ -270,11 +287,11 @@ function pdfTarget(link) {
 function libraryDocumentTarget(link) {
   let url;
   try {
-    url = new URL(link.getAttribute("href"), location.href);
+    url = new URL(link.getAttribute("href"), document.baseURI);
   } catch {
     return null;
   }
-  if (url.origin !== location.origin || !/\/library\.html$/.test(url.pathname) || !url.hash) {
+  if (url.origin !== location.origin || !/\/library(?:\.html)?$/.test(url.pathname) || !url.hash) {
     return null;
   }
   return { id: decodeHash(url.hash.slice(1)), href: url.href };
@@ -305,7 +322,7 @@ function initDocumentLinks(body) {
           location.href = library.href;
           return;
         }
-        openDocument(new URL(item.src, location.href).href, item.title || library.id);
+        openDocument(new URL(item.src, document.baseURI).href, item.title || library.id);
       } catch {
         location.href = library.href;
       }
@@ -373,7 +390,7 @@ function postProcess(body) {
   /* External links open in a new tab. */
   qsa('a[href^="http"]', body).forEach((link) => {
     try {
-      const url = new URL(link.getAttribute("href"), location.href);
+      const url = new URL(link.getAttribute("href"), document.baseURI);
       if (url.origin !== location.origin) {
         link.target = "_blank";
         link.rel = "noopener noreferrer";
@@ -392,6 +409,7 @@ function postProcess(body) {
 
   /* Code blocks get a label and a copy button. */
   qsa("pre", body).forEach((pre) => {
+    if (pre.closest(".code-block")) return;
     const code = pre.querySelector("code");
     const languageClass = [...(code?.classList || [])].find((name) => name.startsWith("language-"));
     const language = languageClass ? languageClass.replace("language-", "") : "Code";
@@ -477,7 +495,7 @@ function renderInfobox(post, site) {
     ? post.tags
         .map(
           (tag, index) =>
-            `<a href="writing.html?tag=${encodeURIComponent(post.tagSlugs[index])}">${escapeHTML(tag)}</a>`
+            `<a href="/writing?tag=${encodeURIComponent(post.tagSlugs[index])}">${escapeHTML(tag)}</a>`
         )
         .join("")
     : "<span>—</span>";
@@ -486,11 +504,11 @@ function renderInfobox(post, site) {
     <div class="infobox__title">${escapeHTML(post.title)}</div>
     <div class="infobox__sub">${t("article.infoboxSub")}</div>
     <div class="infobox__row"><span>${t("article.published")}</span><span>${escapeHTML(formatDateLong(post.date, getLang()))}</span></div>
-    <div class="infobox__row"><span>${t("article.category")}</span><span><a href="writing.html?cat=${encodeURIComponent(post.categorySlug)}">${escapeHTML(post.category)}</a></span></div>
+    <div class="infobox__row"><span>${t("article.category")}</span><span><a href="/writing?cat=${encodeURIComponent(post.categorySlug)}">${escapeHTML(post.category)}</a></span></div>
     <div class="infobox__row"><span>${t("article.reading")}</span><span>${t("common.minRead", { n: post.minutes })} · ${t("common.wordsCount", { n: post.words.toLocaleString(getLang() === "vi" ? "vi-VN" : "en-GB") })}</span></div>
     <div class="infobox__row"><span>${t("article.tags")}</span><span class="infobox__tags">${tags}</span></div>
     <div class="infobox__row"><span>${t("article.permalink")}</span><span><code>${escapeHTML(post.url)}</code></span></div>
-    <div class="infobox__foot"><a href="feed.xml">${t("common.rss")}</a> · <a href="writing.html" data-random>${t("article.randomEntry")}</a> · <a href="writing.html?cat=${encodeURIComponent(post.categorySlug)}">${t("article.moreIn", { category: escapeHTML(post.category) })}</a></div>`;
+    <div class="infobox__foot"><a href="feed.xml">${t("common.rss")}</a> · <a href="/writing" data-random>${t("article.randomEntry")}</a> · <a href="/writing?cat=${encodeURIComponent(post.categorySlug)}">${t("article.moreIn", { category: escapeHTML(post.category) })}</a></div>`;
 }
 
 function renderRelated(post, index) {
@@ -551,13 +569,13 @@ function renderCatbar(post, site) {
   const tags = post.tags
     .map(
       (tag, index) =>
-        `<a href="writing.html?tag=${encodeURIComponent(post.tagSlugs[index])}">#${escapeHTML(tag)}</a>`
+        `<a href="/writing?tag=${encodeURIComponent(post.tagSlugs[index])}">#${escapeHTML(tag)}</a>`
     )
     .join("");
 
   elements.catbar.innerHTML = `
     <span class="catbar__label">${t("article.catbarLabel")}</span>
-    <a href="writing.html?cat=${encodeURIComponent(post.categorySlug)}">${escapeHTML(post.category)}</a>
+    <a href="/writing?cat=${encodeURIComponent(post.categorySlug)}">${escapeHTML(post.category)}</a>
     ${tags}
     <span class="catbar__license">${t("article.licenseLine", { license: site?.license || "CC BY-SA 4.0" })}</span>`;
 }
@@ -755,19 +773,23 @@ async function init() {
   }
 
   let markdown = "";
-  try {
-    const built = window.__ENCYCLOPEDIA__?.sources?.[post.slug];
-    if (typeof built === "string") {
-      markdown = built;
-    } else {
-      const response = await fetch(post.source, { cache: "no-cache" });
-      if (!response.ok) throw new Error(`Could not load ${post.source}`);
-      markdown = await response.text();
+
+  /* Static post pages already contain the rendered article and its metadata. */
+  if (!prerendered) {
+    try {
+      const built = window.__ENCYCLOPEDIA__?.sources?.[post.slug];
+      if (typeof built === "string") {
+        markdown = built;
+      } else {
+        const response = await fetch(post.source, { cache: "no-cache" });
+        if (!response.ok) throw new Error(`Could not load ${post.source}`);
+        markdown = await response.text();
+      }
+      markdown = markdown.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, "");
+    } catch {
+      showMissing(t("article.sourceError"));
+      return;
     }
-    markdown = markdown.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, "");
-  } catch {
-    showMissing(t("article.sourceError"));
-    return;
   }
 
   currentPost = post;
@@ -776,40 +798,64 @@ async function init() {
 
   const pageTitle = `${post.title} — ${site?.name || "A Personal Encyclopedia"}`;
   document.title = pageTitle;
-  setMeta("name", "description", post.summary);
-  setMeta("property", "og:title", post.title);
-  setMeta("property", "og:description", post.summary);
-  setMeta("property", "og:type", "article");
-  setMeta("property", "article:published_time", post.date);
 
-  if (site?.url) {
-    const canonicalUrl = `${site.url.replace(/\/+$/, "")}/${post.url}`;
-    const canonical = document.createElement("link");
-    canonical.rel = "canonical";
-    canonical.href = canonicalUrl;
-    document.head.appendChild(canonical);
+  if (!prerendered) {
+    const base = (site?.url || "").replace(/\/+$/, "");
+    const canonicalUrl = base ? `${base}/${post.url}` : post.url;
+    const embedded = firstImageInMarkdown(markdown);
+    const imageUrl = embedded
+      ? new URL(embedded, document.baseURI).href
+      : `${base}/assets/og-default.png`;
 
-    const structured = document.createElement("script");
-    structured.type = "application/ld+json";
-    structured.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "BlogPosting",
-      headline: post.title,
-      description: post.summary,
-      datePublished: post.date,
-      dateModified: post.date,
-      inLanguage: "vi",
-      author: { "@type": "Person", name: site.name },
-      publisher: { "@type": "Person", name: site.name },
-      url: canonicalUrl,
-      mainEntityOfPage: canonicalUrl,
-      keywords: post.tags.join(", "),
-    });
-    document.head.appendChild(structured);
+    setMeta("name", "description", post.summary);
+    setMeta("property", "og:title", post.title);
+    setMeta("property", "og:description", post.summary);
+    setMeta("property", "og:type", "article");
+    setMeta("property", "og:url", canonicalUrl);
+    setMeta("property", "og:image", imageUrl);
+    setMeta("property", "og:site_name", site?.name);
+    setMeta("property", "og:locale", "vi_VN");
+    setMeta("property", "article:published_time", post.date);
+    setMeta("property", "article:modified_time", post.updated || post.date);
+    setMeta("property", "article:section", post.category);
+    post.tags.forEach((tag) => appendMeta("property", "article:tag", tag));
+    setMeta("name", "twitter:card", "summary_large_image");
+    setMeta("name", "twitter:title", post.title);
+    setMeta("name", "twitter:description", post.summary);
+    setMeta("name", "twitter:image", imageUrl);
+
+    if (site?.url) {
+      let canonical = document.head.querySelector('link[rel="canonical"]');
+      if (!canonical) {
+        canonical = document.createElement("link");
+        canonical.rel = "canonical";
+        document.head.appendChild(canonical);
+      }
+      canonical.href = canonicalUrl;
+
+      const structured = document.createElement("script");
+      structured.type = "application/ld+json";
+      structured.textContent = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        headline: post.title,
+        description: post.summary,
+        image: [imageUrl],
+        datePublished: post.date,
+        dateModified: post.updated || post.date,
+        inLanguage: "vi",
+        author: { "@type": "Person", name: site.name, url: `${base}/about` },
+        publisher: { "@type": "Person", name: site.name },
+        url: canonicalUrl,
+        mainEntityOfPage: { "@type": "WebPage", "@id": canonicalUrl },
+        articleSection: post.category,
+        keywords: post.tags.join(", "),
+        wordCount: post.words,
+        isAccessibleForFree: true,
+      });
+      document.head.appendChild(structured);
+    }
   }
-
-  setMeta("property", "og:site_name", site?.name);
-  setMeta("property", "og:locale", "vi_VN");
 
   setText(elements.title, post.title);
   if (elements.subtitle) {
@@ -818,24 +864,27 @@ async function init() {
   }
   setText(elements.category, post.category);
   if (elements.categoryLink) {
-    elements.categoryLink.href = `writing.html?cat=${encodeURIComponent(post.categorySlug)}`;
+    elements.categoryLink.href = `/writing?cat=${encodeURIComponent(post.categorySlug)}`;
   }
   setText(elements.date, formatDateLong(post.date, getLang()));
   setText(elements.reading, t("common.minRead", { n: post.minutes }));
   setText(elements.words, t("common.wordsCount", { n: post.words.toLocaleString(getLang() === "vi" ? "vi-VN" : "en-GB") }));
   setText(elements.crumb, post.title);
 
-  await waitFor(() => window.marked && typeof window.marked.parse === "function", 5000).catch(() => {});
+  if (!prerendered) {
+    await waitFor(() => window.marked && typeof window.marked.parse === "function", 5000).catch(() => {});
 
-  const math = protectMath(markdown);
-  const html = window.marked
-    ? restoreMath(
-        window.marked.parse(math.text, { gfm: true, breaks: false }),
-        math.blocks
-      )
-    : `<p class="note"><span class="note__title">${t("article.markdownUnavailable")}</span>${t("article.markdownFallback")}</p><pre>${escapeHTML(markdown)}</pre>`;
+    const math = protectMath(markdown);
+    const html = window.marked
+      ? restoreMath(
+          window.marked.parse(math.text, { gfm: true, breaks: false }),
+          math.blocks
+        )
+      : `<p class="note"><span class="note__title">${t("article.markdownUnavailable")}</span>${t("article.markdownFallback")}</p><pre>${escapeHTML(markdown)}</pre>`;
 
-  elements.body.innerHTML = html;
+    elements.body.innerHTML = html;
+  }
+
   postProcess(elements.body);
 
   const headings = buildContents(elements.body);

@@ -11,6 +11,7 @@
 import { readFile, writeFile, readdir, stat, open, unlink } from "node:fs/promises";
 import path from "node:path";
 import { bundleScripts, BUNDLE_ENTRIES } from "./bundle.mjs";
+import { renderArticlePage } from "./render-post.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const POSTS_DIR = path.join(ROOT, "content", "posts");
@@ -24,6 +25,14 @@ const MONTHS = [
 const IMAGE_EXT = new Set([".jpg", ".jpeg", ".png", ".webp", ".avif", ".gif", ".svg"]);
 const DOC_EXT = new Set([".pdf"]);
 const SKIP_FILES = new Set(["index.json", "index.js", "sources.js", "meta.json", "readme.md", "thumbs.db", ".ds_store"]);
+
+/* Post pages are written to the site root so every relative asset URL keeps
+ * working. These names belong to the site itself and must not be shadowed. */
+const RESERVED_SLUGS = new Set([
+  "index", "writing", "library", "about", "article", "404",
+  "feed", "sitemap", "robots", "dashboard", "assets", "content",
+  "tools", "bai-viet", "package", "readme", "huong-dan",
+]);
 
 /* -------------------------------------------------------------------------- */
 /* small helpers                                                              */
@@ -242,6 +251,10 @@ async function buildPosts() {
       throw new Error(`Missing "title" in front matter: content/posts/${file}`);
     }
 
+    if (RESERVED_SLUGS.has(slug)) {
+      throw new Error(`Post slug "${slug}" collides with a site page. Rename the file.`);
+    }
+
     const date = toISODate(data.date, info.mtime.toISOString().slice(0, 10));
     const updated = toISODate(data.updated, date);
     const plain = markdownToPlain(body);
@@ -273,7 +286,7 @@ async function buildPosts() {
       headings,
       excerpt: plain.slice(0, 700),
       plain: plain.slice(0, 2400),
-      url: `article.html?p=${encodeURIComponent(slug)}`,
+      url: slug,
       source: `content/posts/${encodeURIComponent(file)}`,
     });
   }
@@ -333,7 +346,7 @@ async function buildPosts() {
     namespace + `window.__ENCYCLOPEDIA__.sources = ${JSON.stringify(sources)};\n`
   );
 
-  return { index, skipped, categories, tags, years, posts };
+  return { index, skipped, categories, tags, years, posts, sources };
 }
 
 /* -------------------------------------------------------------------------- */
@@ -520,7 +533,7 @@ async function buildFeed(site, posts) {
       <link>${escapeXML(link)}</link>
       <guid isPermaLink="true">${escapeXML(link)}</guid>
       <pubDate>${new Date(`${post.date}T12:00:00Z`).toUTCString()}</pubDate>
-      <category>${escapeXML(post.category)}</category>
+${[post.category, ...post.tags].map((name) => `      <category>${escapeXML(name)}</category>`).join("\n")}
       <description>${escapeXML(post.summary)}</description>
     </item>`;
     })
@@ -544,9 +557,13 @@ ${items}
 
 async function buildSitemap(site, posts) {
   const base = (site.url || "https://example.com").replace(/\/+$/, "");
-  const pages = ["", "writing.html", "library.html", "about.html"];
+  /* Cloudflare Pages serves `/writing` for `writing.html` (and 308-redirects
+   * the `.html` form), so the sitemap uses the clean, canonical URLs. */
+  const pages = ["", "writing", "library", "about"];
   const urls = [
-    ...pages.map((page) => ({ loc: `${base}/${page}`, lastmod: new Date().toISOString().slice(0, 10) })),
+    /* Static pages deliberately omit <lastmod>: it is more honest to leave it
+     * out than to claim they changed on every build. */
+    ...pages.map((page) => ({ loc: `${base}/${page}` })),
     ...posts.map((post) => ({ loc: `${base}/${post.url}`, lastmod: post.updated || post.date })),
   ];
 
@@ -555,14 +572,45 @@ async function buildSitemap(site, posts) {
 ${urls
   .map(
     (entry) => `  <url>
-    <loc>${escapeXML(entry.loc)}</loc>
-    <lastmod>${entry.lastmod}</lastmod>
+    <loc>${escapeXML(entry.loc)}</loc>${entry.lastmod ? `\n    <lastmod>${entry.lastmod}</lastmod>` : ""}
   </url>`
   )
   .join("\n")}
 </urlset>`;
 
   await writeFile(path.join(ROOT, "sitemap.xml"), xml + "\n");
+}
+
+/* -------------------------------------------------------------------------- */
+/* static post pages                                                          */
+/* -------------------------------------------------------------------------- */
+
+async function buildArticlePages(site, index, sources) {
+  const template = await readFile(path.join(ROOT, "article.html"), "utf8");
+  const written = new Set();
+
+  for (const post of index.posts) {
+    const markdown = sources[post.slug];
+    if (typeof markdown !== "string") continue;
+
+    const html = renderArticlePage(template, { post, site, index, markdown });
+    const filename = `${post.slug}.html`;
+    await writeFile(path.join(ROOT, filename), html);
+    written.add(filename);
+  }
+
+  /* Remove pages left behind by deleted or unpublished posts. Only files the
+   * build itself marked are considered. */
+  for (const entry of await readdir(ROOT)) {
+    if (!entry.endsWith(".html") || written.has(entry)) continue;
+    const fullPath = path.join(ROOT, entry);
+    const info = await stat(fullPath);
+    if (!info.isFile()) continue;
+    const head = (await readFile(fullPath, "utf8")).slice(0, 400);
+    if (head.includes("generated-post")) await unlink(fullPath);
+  }
+
+  return written.size;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -577,7 +625,7 @@ async function main() {
     console.warn("! content/site.json not found or invalid — using defaults");
   }
 
-  const { index, skipped, posts, categories, tags } = await buildPosts();
+  const { index, skipped, posts, categories, tags, sources } = await buildPosts();
   const library = await buildLibrary();
 
   await writeFile(
@@ -588,12 +636,13 @@ async function main() {
 
   await buildFeed(site, posts);
   await buildSitemap(site, posts);
+  const articlePages = await buildArticlePages(site, index, sources);
   await bundleScripts(BUNDLE_ENTRIES);
 
   console.log("");
   console.log("  Encyclopedia built");
   console.log("  ──────────────────────────────────────────");
-  console.log(`  articles     ${String(posts.length).padStart(4)}`);
+  console.log(`  articles     ${String(posts.length).padStart(4)}   ${articlePages} static page${articlePages === 1 ? "" : "s"}`);
   console.log(`  words        ${String(index.counts.words).padStart(4)}`);
   console.log(`  categories   ${String(categories.length).padStart(4)}   ${categories.map((c) => c.name).join(", ")}`);
   console.log(`  tags         ${String(tags.length).padStart(4)}`);

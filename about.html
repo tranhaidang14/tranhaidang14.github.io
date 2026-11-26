@@ -9,6 +9,49 @@
       content="Về người giữ cuốn bách khoa cá nhân này và cách nó được làm ra."
       data-i18n-meta="about.description"
     />
+    <link rel="canonical" href="https://tranhaidang.cc.cd/about" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://tranhaidang.cc.cd/about" />
+    <meta property="og:site_name" content="Trần Hải Đăng" />
+    <meta property="og:locale" content="vi_VN" />
+    <meta property="og:title" content="Giới thiệu — Trần Hải Đăng" />
+    <meta
+      property="og:description"
+      content="Về người giữ cuốn bách khoa cá nhân này và cách nó được làm ra."
+    />
+    <meta
+      property="og:image"
+      content="https://tranhaidang.cc.cd/assets/og-default.png"
+    />
+    <meta property="og:image:alt" content="Giới thiệu — Trần Hải Đăng" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Giới thiệu — Trần Hải Đăng" />
+    <meta
+      name="twitter:description"
+      content="Về người giữ cuốn bách khoa cá nhân này và cách nó được làm ra."
+    />
+    <meta
+      name="twitter:image"
+      content="https://tranhaidang.cc.cd/assets/og-default.png"
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        "name": "Giới thiệu — Trần Hải Đăng",
+        "url": "https://tranhaidang.cc.cd/about",
+        "description": "Về người giữ cuốn bách khoa cá nhân này và cách nó được làm ra.",
+        "inLanguage": "vi",
+        "mainEntity": {
+          "@type": "Person",
+          "name": "Trần Hải Đăng",
+          "url": "https://tranhaidang.cc.cd/",
+          "email": "tranhaidangg2@gmail.com",
+          "sameAs": ["https://github.com/tranhaidang14"]
+        }
+      }
+    </script>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
     <link
       rel="alternate"
@@ -42,7 +85,7 @@
       <div class="wrap masthead__bar">
         <a
           class="brand"
-          href="index.html"
+          href="/"
           aria-label="Trang chủ"
           data-i18n-aria-label="nav.home"
         >
@@ -55,12 +98,12 @@
           </span>
         </a>
         <nav class="nav" aria-label="Chính" data-i18n-aria-label="nav.primary">
-          <a href="writing.html" data-i18n="nav.writing">Bài viết</a>
-          <a href="library.html" data-i18n="nav.library">Thư viện</a>
-          <a href="about.html" aria-current="page" data-i18n="nav.about"
+          <a href="/writing" data-i18n="nav.writing">Bài viết</a>
+          <a href="/library" data-i18n="nav.library">Thư viện</a>
+          <a href="/about" aria-current="page" data-i18n="nav.about"
             >Giới thiệu</a
           >
-          <a href="writing.html" data-random
+          <a href="/writing" data-random
             ><span data-i18n="nav.random">Ngẫu nhiên</span>
             <span aria-hidden="true">↻</span></a
           >
@@ -68,7 +111,7 @@
         <form
           class="quick-search"
           role="search"
-          action="writing.html"
+          action="/writing"
           data-search-form
         >
           <svg
@@ -114,7 +157,7 @@
           <form
             class="quick-search quick-search--mobile"
             role="search"
-            action="writing.html"
+            action="/writing"
             data-search-form
           >
             <svg
@@ -148,12 +191,12 @@
             aria-label="Di động"
             data-i18n-aria-label="nav.mobile"
           >
-            <a href="writing.html" data-i18n="nav.writing">Bài viết</a>
-            <a href="library.html" data-i18n="nav.library">Thư viện</a>
-            <a href="about.html" aria-current="page" data-i18n="nav.about"
+            <a href="/writing" data-i18n="nav.writing">Bài viết</a>
+            <a href="/library" data-i18n="nav.library">Thư viện</a>
+            <a href="/about" aria-current="page" data-i18n="nav.about"
               >Giới thiệu</a
             >
-            <a href="writing.html" data-random
+            <a href="/writing" data-random
               ><span data-i18n="nav.randomPage">Trang ngẫu nhiên</span></a
             >
           </nav>
@@ -165,7 +208,7 @@
       <header class="page-head page-head--user">
         <div class="wrap">
           <nav class="crumbs" aria-label="Breadcrumb">
-            <a href="index.html" data-i18n="nav.home">Trang chủ</a
+            <a href="/" data-i18n="nav.home">Trang chủ</a
             ><span aria-hidden="true">/</span
             ><span data-i18n="nav.about">Giới thiệu</span>
           </nav>
@@ -284,7 +327,7 @@
             </div>
             <div class="infobox__foot">
               <a href="feed.xml" data-i18n="common.rssFeed">Dòng RSS</a> ·
-              <a href="writing.html" data-random
+              <a href="/writing" data-random
                 ><span data-i18n="nav.randomPage">Trang ngẫu nhiên</span></a
               >
             </div>
@@ -339,7 +382,7 @@
         <div class="footer__ornament" aria-hidden="true">❦</div>
         <p class="footer__note">
           <span data-i18n="footer.keptBy">Một cuốn bách khoa cá nhân do</span>
-          <a href="about.html" data-site="name">Trần Hải Đăng</a>.
+          <a href="/about" data-site="name">Trần Hải Đăng</a>.
           <span data-i18n="footer.license">Văn bản theo</span>
           <a
             data-site-license-link
@@ -359,10 +402,10 @@
           aria-label="Chân trang"
           data-i18n-aria-label="nav.footer"
         >
-          <a href="index.html" data-i18n="nav.home">Trang chủ</a>
-          <a href="writing.html" data-i18n="nav.writing">Bài viết</a>
-          <a href="library.html" data-i18n="nav.library">Thư viện</a>
-          <a href="about.html" data-i18n="nav.about">Giới thiệu</a>
+          <a href="/" data-i18n="nav.home">Trang chủ</a>
+          <a href="/writing" data-i18n="nav.writing">Bài viết</a>
+          <a href="/library" data-i18n="nav.library">Thư viện</a>
+          <a href="/about" data-i18n="nav.about">Giới thiệu</a>
           <a href="feed.xml" data-i18n="common.rss">RSS</a>
         </nav>
         <nav
@@ -373,7 +416,7 @@
         ></nav>
         <p class="footer__colophon" data-i18n="footer.colophon">
           Trình bày bằng EB Garamond &amp; UnifrakturMaguntia · HTML, CSS &amp;
-          JavaScript thuần · Lưu trữ trên GitHub Pages
+          JavaScript thuần · Lưu trữ trên Cloudflare Pages
         </p>
       </div>
     </footer>

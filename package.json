@@ -6,13 +6,15 @@
   "description": "A Wikipedia-inspired personal encyclopedia for mathematics, photographs, and remembered days.",
   "scripts": {
     "build": "node tools/build.mjs",
+    "build:pages": "node tools/build.mjs && node tools/stage.mjs",
+    "stage": "node tools/stage.mjs",
     "new": "node tools/new-post.mjs",
     "start": "node tools/build.mjs && node tools/serve.mjs",
     "dev": "node tools/dev.mjs",
     "serve": "node tools/serve.mjs",
     "dashboard": "node dashboard/server.mjs"
   },
-  "devDependencies": {
+  "dependencies": {
     "marked": "^12.0.2"
   }
 }

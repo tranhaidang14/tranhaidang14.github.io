@@ -1,0 +1,15 @@
+# Cloudflare Pages headers for the personal encyclopedia.
+# HTML is revalidated; assets are cached for a day.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+
+/assets/*
+  Cache-Control: public, max-age=86400
+
+/content/*
+  Cache-Control: public, max-age=300
+
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate

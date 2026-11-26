@@ -63,6 +63,15 @@ async function resolveFile(urlPath) {
     if (info.isDirectory()) return resolveFile(pathname.replace(/\/?$/, "/") + "index.html");
     return fullPath;
   } catch {
+    /* Cloudflare Pages serves /slug from slug.html, so preview the same way. */
+    if (!path.extname(pathname)) {
+      try {
+        const info = await stat(`${fullPath}.html`);
+        if (info.isFile()) return `${fullPath}.html`;
+      } catch {
+        /* fall through to 404 */
+      }
+    }
     return null;
   }
 }

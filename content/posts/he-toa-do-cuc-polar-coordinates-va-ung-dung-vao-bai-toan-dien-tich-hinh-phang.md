@@ -137,7 +137,7 @@ $$
 8^2-8S \ (\text{dm}^2) \approx 4384 \ (\text{cm}^2)
 $$
 ## Kết luận
-Kiến thức về hệ tọa độ cực thật ra còn rất rộng (và có vẻ ứng dụng chính là vào tích phân bội/tích phân lồng nhau). Tuy nhiên, với góc nhìn hạn hẹp, trình độ chưa cao và thời gian bỏ ra còn ít, tôi chỉ có thể khai thác một góc rất nhỏ này thôi. Rất khuyến khích các bạn đọc tự tìm tòi mở rộng, cũng như gửi [email](/about.html) cho tôi nếu có điều gì tôi có thể làm cho bạn, hoặc cho bài viết này.
+Kiến thức về hệ tọa độ cực thật ra còn rất rộng (và có vẻ ứng dụng chính là vào tích phân bội/tích phân lồng nhau). Tuy nhiên, với góc nhìn hạn hẹp, trình độ chưa cao và thời gian bỏ ra còn ít, tôi chỉ có thể khai thác một góc rất nhỏ này thôi. Rất khuyến khích các bạn đọc tự tìm tòi mở rộng, cũng như gửi [email](/about) cho tôi nếu có điều gì tôi có thể làm cho bạn, hoặc cho bài viết này.
 
 Đây là bài viết đầu tiên mà tôi thực sự quan tâm sâu sắc, cũng như dành thời gian nghiên cứu và viết bài (trong lĩnh vực Toán học). Mặc dù chắc chắn còn nhiều thiếu sót, đây cũng là một dấu mốc đáng nhớ trong cuộc đời tôi.
 

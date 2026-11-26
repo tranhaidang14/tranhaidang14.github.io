@@ -198,7 +198,7 @@ function renderPostEditor() {
   }
 
   const meta = post.meta;
-  const link = previewHref(`/article.html?p=${encodeURIComponent(post.slug)}`);
+  const link = previewHref(`/${encodeURIComponent(post.slug)}`);
   const missingFrontMatter = post.hasMeta
     ? ""
     : `<p class="notice">Bài viết chưa có front matter. Lần lưu đầu tiên sẽ tạo phần metadata ở đầu tệp; nội dung bên dưới được giữ nguyên.</p>`;

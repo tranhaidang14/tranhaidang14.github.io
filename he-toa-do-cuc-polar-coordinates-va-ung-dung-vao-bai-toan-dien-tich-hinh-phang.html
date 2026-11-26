@@ -1,0 +1,419 @@
+<!doctype html>
+<!-- generated-post -->
+<html lang="vi" data-prerendered="true" data-post-slug="he-toa-do-cuc-polar-coordinates-va-ung-dung-vao-bai-toan-dien-tich-hinh-phang">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hệ tọa độ cực(Polar Coordinates) và ứng dụng vào bài toán diện tích hình phẳng — Trần Hải Đăng</title>
+  <meta name="description" content="Đây là một dạng kiến thức khá đặc thù mà chỉ áp dụng được cho một số bài đặc biệt. Tuy nhiên, nếu thành thạo nó sẽ là một công cụ đắc lực giảm đi nhiều phần sai xót cho những bài toán tưởng chừng phức tạp.">
+  <link rel="canonical" href="https://tranhaidang.cc.cd/he-toa-do-cuc-polar-coordinates-va-ung-dung-vao-bai-toan-dien-tich-hinh-phang">
+  <link rel="alternate" hreflang="vi" href="https://tranhaidang.cc.cd/he-toa-do-cuc-polar-coordinates-va-ung-dung-vao-bai-toan-dien-tich-hinh-phang">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <meta name="author" content="Trần Hải Đăng">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Trần Hải Đăng">
+  <meta property="og:locale" content="vi_VN">
+  <meta property="og:title" content="Hệ tọa độ cực(Polar Coordinates) và ứng dụng vào bài toán diện tích hình phẳng">
+  <meta property="og:description" content="Đây là một dạng kiến thức khá đặc thù mà chỉ áp dụng được cho một số bài đặc biệt. Tuy nhiên, nếu thành thạo nó sẽ là một công cụ đắc lực giảm đi nhiều phần sai xót cho những bài toán tưởng chừng phức tạp.">
+  <meta property="og:url" content="https://tranhaidang.cc.cd/he-toa-do-cuc-polar-coordinates-va-ung-dung-vao-bai-toan-dien-tich-hinh-phang">
+  <meta property="og:image" content="https://tranhaidang.cc.cd/content/library/photos/polarcoord/21.jpg">
+  <meta property="og:image:alt" content="Hệ tọa độ cực(Polar Coordinates) và ứng dụng vào bài toán diện tích hình phẳng">
+  <meta property="article:published_time" content="2026-11-21">
+  <meta property="article:modified_time" content="2026-11-21">
+  <meta property="article:section" content="Giải tích">
+  <meta property="article:author" content="Trần Hải Đăng">
+  <meta property="article:tag" content="Hình học giải tích">
+  <meta property="article:tag" content="Nguyên hàm - tích phân">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Hệ tọa độ cực(Polar Coordinates) và ứng dụng vào bài toán diện tích hình phẳng">
+  <meta name="twitter:description" content="Đây là một dạng kiến thức khá đặc thù mà chỉ áp dụng được cho một số bài đặc biệt. Tuy nhiên, nếu thành thạo nó sẽ là một công cụ đắc lực giảm đi nhiều phần sai xót cho những bài toán tưởng chừng phức tạp.">
+  <meta name="twitter:image" content="https://tranhaidang.cc.cd/content/library/photos/polarcoord/21.jpg">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Hệ tọa độ cực(Polar Coordinates) và ứng dụng vào bài toán diện tích hình phẳng",
+  "description": "Đây là một dạng kiến thức khá đặc thù mà chỉ áp dụng được cho một số bài đặc biệt. Tuy nhiên, nếu thành thạo nó sẽ là một công cụ đắc lực giảm đi nhiều phần sai xót cho những bài toán tưởng chừng phức tạp.",
+  "image": [
+    "https://tranhaidang.cc.cd/content/library/photos/polarcoord/21.jpg"
+  ],
+  "datePublished": "2026-11-21",
+  "dateModified": "2026-11-21",
+  "inLanguage": "vi",
+  "author": {
+    "@type": "Person",
+    "name": "Trần Hải Đăng",
+    "url": "https://tranhaidang.cc.cd/about"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Trần Hải Đăng",
+    "url": "https://tranhaidang.cc.cd/about"
+  },
+  "url": "https://tranhaidang.cc.cd/he-toa-do-cuc-polar-coordinates-va-ung-dung-vao-bai-toan-dien-tich-hinh-phang",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://tranhaidang.cc.cd/he-toa-do-cuc-polar-coordinates-va-ung-dung-vao-bai-toan-dien-tich-hinh-phang"
+  },
+  "articleSection": "Giải tích",
+  "keywords": "Hình học giải tích, Nguyên hàm - tích phân",
+  "wordCount": 1293,
+  "isAccessibleForFree": true,
+  "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "copyrightNotice": "Trần Hải Đăng · CC BY-SA 4.0"
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Trang chủ",
+      "item": "https://tranhaidang.cc.cd/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Bài viết",
+      "item": "https://tranhaidang.cc.cd/writing"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Hệ tọa độ cực(Polar Coordinates) và ứng dụng vào bài toán diện tích hình phẳng",
+      "item": "https://tranhaidang.cc.cd/he-toa-do-cuc-polar-coordinates-va-ung-dung-vao-bai-toan-dien-tich-hinh-phang"
+    }
+  ]
+}
+  </script>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" type="application/rss+xml" title="Bài viết — RSS" href="feed.xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/pages.css">
+  <script defer src="content/site.js"></script>
+  <script defer src="content/posts/index.js"></script>
+  <script defer src="content/library/index.js"></script>
+  <script defer src="assets/js/app/article.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="skip">Tới nội dung</a>
+  <noscript><p class="no-script">Trang này cần JavaScript để hiển thị nội dung. Vui lòng bật JavaScript.</p></noscript>
+  <div class="reading-progress" data-progress aria-hidden="true"></div>
+
+  <header class="masthead">
+    <div class="wrap masthead__bar">
+      <a class="brand" href="/" aria-label="Trang chủ" data-i18n-aria-label="nav.home">
+        <span class="brand__seal" data-site="seal" aria-hidden="true">H</span>
+        <span class="brand__text">
+          <span class="brand__name" data-site="wordmark">Hai Dang</span>
+          <span class="brand__sub" data-i18n="brand.sub">Bách khoa cá nhân</span>
+        </span>
+      </a>
+      <nav class="nav" aria-label="Chính" data-i18n-aria-label="nav.primary">
+        <a href="/writing" aria-current="page" data-i18n="nav.writing">Bài viết</a>
+        <a href="/library" data-i18n="nav.library">Thư viện</a>
+        <a href="/about" data-i18n="nav.about">Giới thiệu</a>
+        <a href="/writing" data-random><span data-i18n="nav.random">Ngẫu nhiên</span> <span aria-hidden="true">↻</span></a>
+      </nav>
+      <form class="quick-search" role="search" action="/writing" data-search-form>
+        <svg class="quick-search__icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="m13 13 4 4" stroke="currentColor" stroke-width="1.5"/></svg>
+        <input type="search" name="q" placeholder="Tìm trong bách khoa…" aria-label="Tìm trong bách khoa" data-i18n-placeholder="search.placeholder" data-i18n-aria-label="search.label" autocomplete="off" data-search-input>
+        <kbd aria-hidden="true">/</kbd>
+      </form>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" data-nav-toggle data-i18n="nav.menu">Mục lục</button>
+    </div>
+    <div class="mobile-nav" id="mobile-nav" hidden data-mobile-nav>
+      <div class="wrap mobile-nav__inner">
+        <form class="quick-search quick-search--mobile" role="search" action="/writing" data-search-form>
+          <svg class="quick-search__icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="m13 13 4 4" stroke="currentColor" stroke-width="1.5"/></svg>
+          <input type="search" name="q" placeholder="Tìm trong bách khoa…" aria-label="Tìm trong bách khoa" data-i18n-placeholder="search.placeholder" data-i18n-aria-label="search.label" autocomplete="off" data-search-input>
+        </form>
+        <nav class="mobile-nav__links" aria-label="Di động" data-i18n-aria-label="nav.mobile">
+          <a href="/writing" aria-current="page" data-i18n="nav.writing">Bài viết</a>
+          <a href="/library" data-i18n="nav.library">Thư viện</a>
+          <a href="/about" data-i18n="nav.about">Giới thiệu</a>
+          <a href="/writing" data-random><span data-i18n="nav.randomPage">Trang ngẫu nhiên</span></a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/" data-i18n="nav.home">Trang chủ</a><span aria-hidden="true">/</span><a href="/writing" data-i18n="nav.writing">Bài viết</a><span aria-hidden="true">/</span><span data-crumb-title>Hệ tọa độ cực(Polar Coordinates) và ứng dụng vào bài toán diện tích hình phẳng</span>
+      </nav>
+
+      <div data-article-root>
+        <header class="article-head">
+          <p class="eyebrow"><a data-article-category-link href="/writing?cat=giai-tich"><span data-article-category>Giải tích</span></a></p>
+          <h1 data-article-title>Hệ tọa độ cực(Polar Coordinates) và ứng dụng vào bài toán diện tích hình phẳng</h1>
+          <p class="article-sub" data-article-subtitle hidden></p>
+          <div class="article-meta">
+            <span data-i18n="article.fromEncyclopedia">Từ bách khoa</span>
+            <span class="dot" aria-hidden="true">·</span>
+            <time data-article-date datetime="2026-11-21">21 tháng 11, 2026</time>
+            <span class="dot" aria-hidden="true">·</span>
+            <span data-article-reading>6 phút đọc</span>
+            <span class="dot" aria-hidden="true">·</span>
+            <span data-article-words>1.293 từ</span>
+            <span class="article-tools">
+              <button type="button" data-print data-i18n="article.print">In</button>
+              <button type="button" data-copy-link data-i18n="article.copyLink">Sao chép liên kết</button>
+            </span>
+          </div>
+        </header>
+
+        <div class="article-layout">
+          <aside class="article-toc" aria-label="Mục lục" data-i18n-aria-label="article.contents">
+            <details class="toc-box" open>
+              <summary data-i18n="article.contents">Mục lục</summary>
+              <ol class="toc" data-toc><li class=""><a href="#he-toa-do-cuc">Hệ tọa độ cực</a></li><li class=""><a href="#mot-so-van-de-nen-tang-voi-he-toa-do-cuc">Một số vấn đề nền tảng với hệ tọa độ cực</a></li><li class="toc--h3"><a href="#a-chuyen-doi-giua-he-descartes-va-he-cuc">a. Chuyển đổi giữa hệ Descartes và hệ cực.</a></li><li class="toc--h3"><a href="#b-duong-tron-tam-cuc-tia-va-duong-thang-qua-cuc">b. Đường tròn tâm cực, tia và đường thẳng qua cực</a></li><li class="toc--h3"><a href="#c-tich-phan-trong-he-cuc">c. Tích phân trong hệ cực</a></li><li class=""><a href="#loi-giai-bai-toan-mo-dau">Lời giải bài toán mở đầu</a></li><li class=""><a href="#ket-luan">Kết luận</a></li><li class=""><a href="#phu-luc-mot-so-bai-toan-luyen-tap">Phụ lục: Một số bài toán luyện tập</a></li><li class="toc--h3"><a href="#bai-toan-1">Bài toán 1</a></li><li class="toc--h3"><a href="#bai-toan-2">Bài toán 2</a></li><li class="toc--h3"><a href="#loi-giai">Lời giải</a></li></ol>
+            </details>
+            <p class="toc-hint" data-i18n="article.tocHint">Chuyên mục và thẻ ở cuối trang.</p>
+          </aside>
+
+          <article class="prose" data-article-body>
+<div class="note">
+<p class="note__title">Kiến thức cần biết</p>
+<ul>
+    <li>Lượng giác</li>
+    <li>Hình học giải tích và hệ trục tọa độ chữ nhật (Descartes)</li>
+    <li>Nguyên hàm tích phân</li>
+</ul>
+</div>
+
+<figure><img src="content/library/photos/polarcoord/21.jpg" alt="Bài toán mở đầu - lấy từ sách Hành trình chinh phục Tập 2 của thầy Đỗ Văn Đức" decoding="async"><figcaption>Bài toán mở đầu - lấy từ sách Hành trình chinh phục Tập 2 của thầy Đỗ Văn Đức</figcaption></figure>
+<p>Trong lúc làm bài tập, tôi đã bắt gặp một bài toán thú vị. Ấn tượng đầu tiên khi đặt bút giải là: hệ tọa độ cực. Lí do rất đơn giản: tôi muốn tô màu. Quan sát tia OM cùng với tính đối xứng hình học của bài, trực giác bảo tôi rằng nó xoay một vòng và quét ra hình phẳng trên. Theo quan điểm của tôi, đó là cốt lõi của hệ tọa độ cực: phép xoay.</p>
+<p>Tuy nhiên, việc biết đến và thật sự vận dụng được hệ tọa độ cực là khác nhau. Vì thế mà bài viết này ra đời, và mục tiêu cuối cùng mà nó muốn đạt được chính là đưa ra một lời giải đẹp cho bài toán trên.</p>
+<h2 id="he-toa-do-cuc">Hệ tọa độ cực</h2>
+<p>Một cách tổng quát, một hệ trục tọa độ thực hiện duy nhất một nhiệm vụ: xác định vị trí của một điểm bằng các quan hệ của điểm tới các trục. Ví dụ như trong hệ Descartes, ta xác định một điểm bằng đường đi đến nó theo hai tia Ox và Oy. Còn với hệ tọa độ cực, ta xác định điểm bằng độ dài và một phép xoay.</p>
+<p>Gần gũi nhất, bạn đọc hẳn đã biết về đường tròn lượng giác: Một đường tròn bán kính bằng 1, tâm nằm tại gốc tọa độ trong hệ Oxy và một điểm A là giao điểm của đường tròn với tia Ox.</p>
+<figure><img src="content/library/photos/polarcoord/%C4%90TLG.jpg" alt="Đường tròn lượng giác" decoding="async"><figcaption>Đường tròn lượng giác</figcaption></figure>
+<p>Giả dụ như OA không còn bằng 1 nữa, ta xét đến một đường tròn tổng quát bán kính OA.</p>
+<p>Xét điểm M(x, y) nằm trên đường tròn như hình vẽ. Ta có được $OM = OA$. Đặt $\alpha=\angle{AOM}$</p>
+<p>Vận dụng các công thức lượng giác trong tam giác OAM với góc $\alpha$, ta có thể xác định tọa độ điểm M theo OM như sau:
+$$
+\begin{align}
+\begin{cases}
+x = OM\cos\alpha \\
+y = OM\sin\alpha
+\end{cases}
+\end{align}
+$$
+Nói cách khác, ta xác định được điểm M trên đường tròn bằng độ dài bán kính và số đo góc giữa OM với đường chuẩn.</p>
+<p>Đó cũng là phương pháp mà hệ tọa độ cực sử dụng: góc và bán kính. Về cơ bản, nếu coi cái ẩn sau hệ Descartes là lưới ô vuông, nền tảng của hệ tọa độ cực là vô hạn những đường tròn đồng tâm.</p>
+<div class="note">
+<p class="note__title">Hệ tọa độ cực</p>
+<p><strong>Hệ tọa độ cực</strong> là hệ trục tọa độ trong mặt phẳng, bao gồm một gốc cực O và một trục cực Ox, trong đó một điểm M được xác định bằng khoảng cách $r = OM$ và góc $\alpha=\angle{xOM}$, hay: M(r; $\alpha$). Ta quy ước: $M&#39;(-r;\theta)$ là điểm đối xứng với $M(r;\theta)$ qua gốc tọa độ.</p>
+</div>
+
+<figure><img src="content/library/photos/polarcoord/polar_graph.png" alt="Hệ tọa độ cực" decoding="async"><figcaption>Hệ tọa độ cực</figcaption></figure>
+<h2 id="mot-so-van-de-nen-tang-voi-he-toa-do-cuc">Một số vấn đề nền tảng với hệ tọa độ cực</h2>
+<h3 id="a-chuyen-doi-giua-he-descartes-va-he-cuc">a. Chuyển đổi giữa hệ Descartes và hệ cực.</h3>
+<p>Xét điểm $M(r; \theta)$ trong hệ tọa độ cực. Để tìm được tọa độ M tương ứng trong hệ Descartes, ta đơn giản là vẽ một đường tròn tâm O bán kính r và làm ngược lại quá trình suy ra công thức (1).</p>
+<div class="note">
+<p class="note__title">Công thức chuyển đổi giữa hệ Descartes và hệ tọa độ cực</p>
+<p>Xét điểm $M(r;\theta)$ trong hệ tọa độ cực, tọa độ tương ứng $M(x;y)$ của điểm đó trong hệ Descartes là:
+$$
+		\begin{cases}
+			x = r\cos\theta \\
+			y = r\sin\theta
+		\end{cases}$$
+</p>
+</div>
+
+<h3 id="b-duong-tron-tam-cuc-tia-va-duong-thang-qua-cuc">b. Đường tròn tâm cực, tia và đường thẳng qua cực</h3>
+<figure><img src="content/library/photos/polarcoord/%C4%90thquatam.jpg" alt="Tia qua cực" decoding="async"><figcaption>Tia qua cực</figcaption></figure>
+<div class="note">
+<p class="note__title">Tia qua cực</p>
+<p>$$\theta = \alpha \quad (r \ge 0)$$ với $\alpha$ là góc định hướng với trục cực.</p>
+<p>Nếu cho phép $r$ nhận giá trị âm (theo quy ước $M&#39;(-r;\theta)$ đối xứng với $M(r;\theta)$ qua cực), thì $\theta = \alpha$ biểu diễn toàn bộ đường thẳng qua cực.</p>
+</div>
+<div class="note">
+<p class="note__title">Đường tròn tâm cực</p>
+<p>$$r = R$$ với R là bán kính đường tròn</p>
+</div>
+
+<p>Ngắn gọn thật nhỉ? Đúng vậy, tuy nhiên đường tròn và đường thẳng <strong>không</strong> qua cực lại là một câu chuyện khác. Nhưng để giữ bài viết không lan man, tôi sẽ tránh giới thiệu và chứng minh chúng ở đây, thay vào đó, bạn đọc có thể xem qua <a href="https://vi.wikipedia.org/wiki/H%E1%BB%87_t%E1%BB%8Da_%C4%91%E1%BB%99_c%E1%BB%B1c" target="_blank" rel="noopener noreferrer" class="external">Wikipedia</a>.</p>
+<h3 id="c-tich-phan-trong-he-cuc">c. Tích phân trong hệ cực</h3>
+<div class="note">
+<p class="note__title">Diện tích hình phẳng trong hệ cực</p>
+<p>$$
+S = \int_a^b{\frac{1}{2}f^2(\theta)}d\theta
+$$
+
+<p>với S là diện tích hình được giới hạn bởi hai tia qua cực $\theta = a, \theta = b$ và đồ thị hàm số $r = f(\theta)$.</p></p>
+</div>
+
+<p>Ta đã biết, công thức tính diện tích của một hình quạt tròn là $S = \frac{1}{2}r^2\theta$  với $r$ là bán kính, $\theta$ là số đo góc ở tâm ứng với cung tròn.</p>
+<p>Bây giờ, ta áp dụng cách tư duy tương tự như khái niệm tích phân đã biết: chia hình thành rất nhiều phần nhỏ. Trong hệ tọa độ Descartes, tích phân là tổng của rất nhiều <strong>hình chữ nhật</strong> nhỏ; còn trong hệ tọa độ cực, tích phân là tổng của vô số <strong>quạt tròn</strong> nhỏ, quét từ tia này sang tia khác.
+<img src="content/library/photos/polarcoord/Cungtron.png" alt="Cung tròn vi phân">
+Nếu diện tích mỗi hình chữ nhật nhỏ là $f(x)dx$, tức chiều cao nhân chiều rộng, thì diện tích mỗi quạt tròn nhỏ tương ứng là $$\frac{1}{2}f^2(\theta)d\theta$$</p>
+<h2 id="loi-giai-bai-toan-mo-dau">Lời giải bài toán mở đầu</h2>
+<figure><img src="content/library/photos/polarcoord/21.jpg" alt="Bài toán mở đầu - lấy từ sách Hành trình chinh phục Tập 2 của thầy Đỗ Văn Đức" decoding="async"><figcaption>Bài toán mở đầu - lấy từ sách Hành trình chinh phục Tập 2 của thầy Đỗ Văn Đức</figcaption></figure>
+<p>Đặt hình vào hệ tọa độ cực:</p>
+<figure><img src="content/library/photos/polarcoord/BTMD.jpg" alt="Hình vẽ" decoding="async"><figcaption>Hình vẽ</figcaption></figure>
+<p>Vì tính đối xứng, ta chỉ cần tìm phần diện tích giới hạn bởi $(L)$ và hai tia $Ox, OC$ (rồi nhân lên 8).</p>
+<p>Xét điểm $M(r; \theta) (r = OM)$ có tọa độ tương ứng trong hệ Descartes là $M(r\cos\theta; r\sin\theta)$</p>
+<p>Vì $M\in CD$ với $CD: x = 4$
+$$\begin{align*}
+\Rightarrow r\cos\theta &amp;= 4 \\ \iff r &amp;= \frac{4}{\cos \theta}
+\end{align*}$$
+Ta lại có:</p>
+<p>$$
+\begin{cases}
+OM - ON = 2 \iff ON = OM - 2 \\
+O, N, M \text{ thẳng hàng}
+\end{cases} \\
+\Rightarrow N(r - 2;\theta)
+$$</p>
+<p>Vậy diện tích phần giới hạn bởi $(L)$ và hai tia $OC: \theta = \frac{\pi}{4}$ và $Ox: \theta=0$ là:
+$$
+S = \int_{0}^{\pi / 4}{\frac{1}{2}.\left( \frac{4}{\cos\theta}-2\right)^2}d\theta
+$$
+Nên kết quả mà đề bài yêu cầu sẽ là:
+$$
+8^2-8S \ (\text{dm}^2) \approx 4384 \ (\text{cm}^2)
+$$</p>
+<h2 id="ket-luan">Kết luận</h2>
+<p>Kiến thức về hệ tọa độ cực thật ra còn rất rộng (và có vẻ ứng dụng chính là vào tích phân bội/tích phân lồng nhau). Tuy nhiên, với góc nhìn hạn hẹp, trình độ chưa cao và thời gian bỏ ra còn ít, tôi chỉ có thể khai thác một góc rất nhỏ này thôi. Rất khuyến khích các bạn đọc tự tìm tòi mở rộng, cũng như gửi <a href="/about">email</a> cho tôi nếu có điều gì tôi có thể làm cho bạn, hoặc cho bài viết này.</p>
+<p>Đây là bài viết đầu tiên mà tôi thực sự quan tâm sâu sắc, cũng như dành thời gian nghiên cứu và viết bài (trong lĩnh vực Toán học). Mặc dù chắc chắn còn nhiều thiếu sót, đây cũng là một dấu mốc đáng nhớ trong cuộc đời tôi.</p>
+<h2 id="phu-luc-mot-so-bai-toan-luyen-tap">Phụ lục: Một số bài toán luyện tập</h2>
+<h3 id="bai-toan-1">Bài toán 1</h3>
+<p><strong>Đề bài:</strong> Có một bông hoa được giới hạn bởi hai hàm số $r=\sin^2\theta, r=\cos^2\theta$ trong hệ tọa độ cực. Hãy tính diện tích phần gạch chéo trong hình vẽ (làm tròn đến hàng phần chục nghìn).
+<img src="content/library/photos/polarcoord/BT1.png" alt="Cung tròn vi phân"></p>
+<h3 id="bai-toan-2">Bài toán 2</h3>
+<p><strong>Đề bài:</strong> Tính diện tích miền phẳng D được giới hạn bởi hệ điều kiện:
+$$
+\begin{cases}
+1 \leq xy \leq 4 \\
+1 \leq \frac{y}{x} \leq \sqrt{ 3 }
+\end{cases}
+$$
+(làm tròn đến hàng phần trăm).</p>
+<h3 id="loi-giai">Lời giải</h3>
+<p><strong>Bài toán 1:</strong></p>
+<p>Ta dễ dàng thấy được bốn cánh hoa là giống hệt nhau, nên chỉ cần tính diện tích một phần giao rồi nhân 4.</p>
+<p>Xét điểm $M(\sin^2\theta; \theta)$ (trong hệ tọa độ cực) là giao điểm ở góc phần tư thứ nhất của hai hàm số. Ta có OM chia phần giao thành hai phần bằng nhau nên chỉ cần tính phần từ Ox đến OM rồi nhân 2. Ta có:
+$$\cos^2\theta = \sin^2\theta \implies \tan^2\theta = 1 \implies \theta = \frac{\pi}{4} \text{ (vì } \theta \in [0, \frac{\pi}{2}])$$
+Nên $M\left( \frac{1}{2};\frac{\pi}{4} \right)$. Biên của đồ thị là hàm số $r = \sin^2\theta$, đường thẳng $Ox, OM$. Vì vậy:
+$$
+S = \int_{0}^{\pi/4}{\frac{1}{2} \sin^4\theta}d\theta
+$$
+Vậy diện tích cần tìm là $8S\approx0,1781$</p>
+<p><strong>Bài toán 2:</strong>
+Nhận thấy rằng điều kiện thứ hai:
+$$
+\begin{align*}
+&amp;1\leq \frac{y}{x} \leq \sqrt{3} \\
+\iff &amp; \begin{cases}
+x \leq y \leq x\sqrt{3} \quad (x \geq0) \\
+x \geq y \geq x\sqrt{3} \quad (x &lt; 0)
+\end{cases}
+\end{align*}
+$$
+Tức miền phẳng giới hạn bởi đường này là hai đường thẳng đi qua gốc tọa độ: $y = x$ và $y = x\sqrt3$ (tương ứng với các tia nằm trong góc phần tư thứ nhất và thứ ba).</p>
+<p>Ta xét bài toán trong hệ tọa độ cực. Hệ điều kiện tương đương:
+$$
+\begin{align*}
+&amp;\begin{cases}
+1\leq xy\leq 4 \\
+x \leq y \leq x\sqrt{ 3 }
+\end{cases} \\
+\iff&amp;\begin{cases}
+1 \leq \frac{1}{2}r^2\sin 2\theta \leq 4 \\
+\theta \in \left[ \frac{\pi}{4}; \frac{\pi}{3} \right] \cup\left[\frac{5\pi}{4}; \frac{4\pi}{3} \right]
+\end{cases}
+\end{align*}
+$$
+Do tính đối xứng, ta chỉ cần tính diện tích trong góc phần tư thứ nhất ($\theta \in [\pi/4, \pi/3]$) rồi nhân đôi. Hình phẳng trong góc phần tư thứ nhất được giới hạn bởi các đường:
+$$
+\begin{cases}
+\theta = \frac{\pi}{4} \\
+\theta = \frac{\pi}{3} \\
+\frac{1}{2} r^2\sin2\theta = 1 \iff r = \sqrt{\frac{2}{\sin2\theta}} \\
+\frac{1}{2} r^2\sin2\theta = 4 \iff r = \sqrt{\frac{8}{\sin2\theta}}
+\end{cases}
+$$
+Diện tích trong góc phần tư thứ nhất là:
+$$
+S = \int_{\pi / 4}^{\pi/3}{\frac{1}{2}\left( \frac{8}{\sin2\theta} - \frac{2}{\sin2\theta} \right)} d\theta
+$$
+Khi đó, diện tích cần tìm là: $2S \approx 1,65$.</p>
+
+          </article>
+
+          <aside class="article-side" aria-label="Thông tin bài viết" data-i18n-aria-label="article.infoAria">
+            <div class="infobox" data-infobox>
+    <div class="infobox__title">Hệ tọa độ cực(Polar Coordinates) và ứng dụng vào bài toán diện tích hình phẳng</div>
+    <div class="infobox__sub">Từ bách khoa</div>
+    <div class="infobox__row"><span>Đăng ngày</span><span>21 tháng 11, 2026</span></div>
+    <div class="infobox__row"><span>Chuyên mục</span><span><a href="/writing?cat=giai-tich">Giải tích</a></span></div>
+    <div class="infobox__row"><span>Thời gian đọc</span><span>6 phút đọc · 1.293 từ</span></div>
+    <div class="infobox__row"><span>Thẻ</span><span class="infobox__tags"><a href="/writing?tag=hinh-hoc-giai-tich">Hình học giải tích</a><a href="/writing?tag=nguyen-ham-tich-phan">Nguyên hàm - tích phân</a></span></div>
+    <div class="infobox__row"><span>Liên kết</span><span><code>he-toa-do-cuc-polar-coordinates-va-ung-dung-vao-bai-toan-dien-tich-hinh-phang</code></span></div>
+    <div class="infobox__foot"><a href="feed.xml">RSS</a> · <a href="/writing" data-random>Bài ngẫu nhiên</a> · <a href="/writing?cat=giai-tich">Thêm trong Giải tích</a></div></div>
+            <div class="side-box" data-related hidden></div>
+          </aside>
+        </div>
+
+        <nav class="article-pager" aria-label="Điều hướng bài viết" data-i18n-aria-label="article.pagerAria" data-pager hidden></nav>
+        <div class="catbar" data-catbar>
+    <span class="catbar__label">Chuyên mục</span>
+    <a href="/writing?cat=giai-tich">Giải tích</a>
+    <a href="/writing?tag=hinh-hoc-giai-tich">#Hình học giải tích</a><a href="/writing?tag=nguyen-ham-tich-phan">#Nguyên hàm - tích phân</a>
+    <span class="catbar__license">Văn bản: CC BY-SA 4.0 · Bản vẽ thuộc về tác giả</span></div>
+      </div>
+
+      <div class="article-missing" data-article-error hidden>
+        <p class="eyebrow" data-i18n="article.missingEyebrow">Không có bài này</p>
+        <h1 data-i18n="article.missingTitle">Trang này không tồn tại — hoặc chưa được viết.</h1>
+        <p class="article-missing__lead" data-i18n="article.missingLead">Tựa đề có thể bị gõ sai, hoặc bài viết vẫn còn là bản nháp trong sổ tay. Hãy thử tìm kiếm, hoặc mở một trang ngẫu nhiên xem nó dẫn tới đâu.</p>
+        <form class="hero-search" role="search" action="/writing" data-search-form>
+          <label class="sr-only" for="missing-q" data-i18n="search.label">Tìm trong bách khoa</label>
+          <input id="missing-q" type="search" name="q" placeholder="Tìm trong bách khoa…" aria-label="Tìm trong bách khoa" data-i18n-placeholder="search.placeholder" data-i18n-aria-label="search.label" autocomplete="off" data-search-input>
+          <button type="submit" data-i18n="search.go">Tìm</button>
+        </form>
+        <p class="article-missing__links">
+          <a href="/writing" data-i18n="article.allArticles">Tất cả bài viết</a>
+          <span aria-hidden="true">·</span>
+          <a href="/library" data-i18n="article.library">Thư viện</a>
+          <span aria-hidden="true">·</span>
+          <a href="/writing" data-random><span data-i18n="nav.randomPage">Trang ngẫu nhiên</span></a>
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer__ornament" aria-hidden="true">❦</div>
+      <p class="footer__note">
+        <span data-i18n="footer.keptBy">Một cuốn bách khoa cá nhân do</span> <a href="/about" data-site="name">Trần Hải Đăng</a>.
+        <span data-i18n="footer.license">Văn bản theo</span> <a data-site-license-link href="https://creativecommons.org/licenses/by-sa/4.0/"><span data-site="license">CC BY-SA 4.0</span></a>;
+        <span data-i18n="footer.photos">ảnh và bản vẽ thuộc về tác giả.</span>
+      </p>
+      <p class="footer__note footer__note--last"><span data-i18n="footer.lastEdited">Trang này được sửa lần cuối vào</span> <span data-last-edited>Tháng 11, 2026</span>.</p>
+      <nav class="footer__nav footer__nav--pages" aria-label="Chân trang" data-i18n-aria-label="nav.footer">
+        <a href="/" data-i18n="nav.home">Trang chủ</a>
+        <a href="/writing" data-i18n="nav.writing">Bài viết</a>
+        <a href="/library" data-i18n="nav.library">Thư viện</a>
+        <a href="/about" data-i18n="nav.about">Giới thiệu</a>
+        <a href="feed.xml" data-i18n="common.rss">RSS</a>
+      </nav>
+      <nav class="footer__nav footer__nav--elsewhere" aria-label="Nơi khác" data-i18n-aria-label="nav.elsewhere" data-site-links></nav>
+      <p class="footer__colophon" data-i18n="footer.colophon">Trình bày bằng EB Garamond &amp; UnifrakturMaguntia · HTML, CSS &amp; JavaScript thuần · Lưu trữ trên Cloudflare Pages</p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -136,7 +136,7 @@ function searchEntryMarkup(entry, index, panelId) {
     link.href = data.url;
     link.innerHTML = `<span class="suggestion__title">${escapeHTML(data.title)}</span><span class="suggestion__meta">${escapeHTML(data.category)} · ${escapeHTML(formatDateShort(data.date, getLang()))}</span>`;
   } else {
-    link.href = `library.html#${encodeURIComponent(data.id)}`;
+    link.href = `/library#${encodeURIComponent(data.id)}`;
     const kind = t(data.type === "document" ? "library.documentKicker" : "library.plateKicker");
     link.innerHTML = `<span class="suggestion__title">${escapeHTML(data.title)}</span><span class="suggestion__meta">${escapeHTML(kind)} · ${escapeHTML(data.collection)} · ${escapeHTML(formatDateShort(data.date, getLang()))}</span>`;
   }
@@ -217,8 +217,8 @@ function initSearchForm(form) {
     all.className = "suggestion suggestion--all";
     const hasPosts = scored.some((match) => match.entry.kind === "post");
     all.href = hasPosts
-      ? `writing.html?q=${encodeURIComponent(query)}`
-      : `library.html?q=${encodeURIComponent(query)}`;
+      ? `/writing?q=${encodeURIComponent(query)}`
+      : `/library?q=${encodeURIComponent(query)}`;
     all.textContent = t("search.seeAll", { query });
     panel.appendChild(all);
 
@@ -299,7 +299,7 @@ function initSearchForm(form) {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     const query = input.value.trim();
-    window.location.href = query ? `writing.html?q=${encodeURIComponent(query)}` : "writing.html";
+    window.location.href = query ? `/writing?q=${encodeURIComponent(query)}` : "/writing";
   });
 }
 
@@ -360,14 +360,14 @@ function initRandom() {
     try {
       const posts = await loadRandomPool();
       if (!posts.length) {
-        window.location.href = "writing.html";
+        window.location.href = "/writing";
         return;
       }
       const current = new URLSearchParams(window.location.search).get("p");
       const pick = pickRandom(posts, current);
       window.location.href = pick.url;
     } catch {
-      window.location.href = "writing.html";
+      window.location.href = "/writing";
     }
   });
 
